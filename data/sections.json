@@ -1,0 +1,60 @@
+{
+    "sections": [
+        {
+            "id": "about",
+            "categoryId": "home",
+            "profileId": "all",
+            "jsonPath": "/data/sections/cover.json",
+            "faIcon": "fa-solid fa-address-card"
+        },
+        {
+            "id": "education",
+            "categoryId": "background",
+            "profileId": "all",
+            "jsonPath": "/data/sections/education.json",
+            "faIcon": "fa-solid fa-graduation-cap"
+        },
+        {
+            "id": "dev-skills",
+            "categoryId": "showcase",
+            "profileId": "dev",
+            "jsonPath": "/data/sections/dev-skills.json",
+            "faIcon": "fa-solid fa-code"
+        },
+        {
+            "id": "dev-portfolio",
+            "categoryId": "showcase",
+            "profileId": "dev",
+            "jsonPath": "/data/sections/dev-portfolio.json",
+            "faIcon": "fa-solid fa-folder-open"
+        },
+        {
+            "id": "netsec-skills",
+            "categoryId": "showcase",
+            "profileId": "netsec",
+            "jsonPath": "/data/sections/netsec-skills.json",
+            "faIcon": "fa-solid fa-network-wired"
+        },
+        {
+            "id": "netsec-portfolio",
+            "categoryId": "showcase",
+            "profileId": "netsec",
+            "jsonPath": "/data/sections/netsec-portfolio.json",
+            "faIcon": "fa-solid fa-shield-halved"
+        },
+        {
+            "id": "achievements",
+            "categoryId": "more",
+            "profileId": "all",
+            "jsonPath": "/data/sections/achievements.json",
+            "faIcon": "fa-solid fa-trophy"
+        },
+        {
+            "id": "contact",
+            "categoryId": "more",
+            "profileId": "all",
+            "jsonPath": "/data/sections/contact.json",
+            "faIcon": "fa-solid fa-pen-to-square"
+        }
+    ]
+}

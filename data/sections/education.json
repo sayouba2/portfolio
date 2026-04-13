@@ -1,0 +1,116 @@
+{
+    "title": {
+        "locales": {
+            "fr": {
+                "title_short": "Formation",
+                "title_short_nav": "Formation",
+                "title_long_prefix": "Mon",
+                "title_long": "{{Parcours}} Académique"
+            },
+            "en": {
+                "title_short": "Education",
+                "title_short_nav": "Education",
+                "title_long_prefix": "My",
+                "title_long": "{{Academic}} Background"
+            }
+        }
+    },
+
+    "articles": [
+        {
+            "id": 1,
+            "component": "ArticleTimeline",
+            "locales": {},
+            "settings": {
+                "order_items_by": "dateStart",
+                "order_items_sort": "desc"
+            },
+            "items": [
+                {
+                    "id": 1,
+                    "img": "",
+                    "faIcon": "fa-solid fa-graduation-cap",
+                    "faIconColors": {"bg": "#1a73e8", "fill": "#fff"},
+                    "dateStart": {"year": 2024, "month": 9},
+                    "dateEnd": {"year": 2027, "month": 8},
+                    "locales": {
+                        "fr": {
+                            "title": "Cycle Ingénieur en {{Réseaux et Systèmes d'Information}}",
+                            "province": "",
+                            "country": "Marrakech, Maroc",
+                            "institution": "Faculté des Sciences et Techniques",
+                            "text": "Formation d'ingénieur axée sur les réseaux informatiques, les systèmes distribués et la sécurité de l'information. Apprentissage pratique de la configuration réseau, de l'administration système et du développement logiciel.",
+                            "list": [],
+                            "tags": ["Réseaux", "Cybersécurité", "Développement", "IA"]
+                        },
+                        "en": {
+                            "title": "Engineering Degree in {{Networks and Information Systems}}",
+                            "province": "",
+                            "country": "Marrakech, Morocco",
+                            "institution": "Faculty of Sciences and Techniques",
+                            "text": "Engineering program focused on computer networks, distributed systems and information security. Hands-on learning in network configuration, system administration and software development.",
+                            "list": [],
+                            "tags": ["Networking", "Cybersecurity", "Development", "AI"]
+                        }
+                    }
+                },
+                {
+                    "id": 2,
+                    "img": "",
+                    "faIcon": "fa-solid fa-flask",
+                    "faIconColors": {"bg": "#34a853", "fill": "#fff"},
+                    "dateStart": {"year": 2022, "month": 9},
+                    "dateEnd": {"year": 2024, "month": 6},
+                    "locales": {
+                        "fr": {
+                            "title": "Diplôme d'Études Universitaires en {{Sciences et Techniques}}",
+                            "province": "",
+                            "country": "Settat, Maroc",
+                            "institution": "FST Settat",
+                            "text": "Formation scientifique et technique généraliste couvrant les mathématiques, l'informatique et les sciences de l'ingénieur. Base solide pour la poursuite en cycle ingénieur.",
+                            "list": [],
+                            "tags": ["Mathématiques", "Informatique", "Sciences"]
+                        },
+                        "en": {
+                            "title": "Diploma of Studies in {{Sciences and Techniques}}",
+                            "province": "",
+                            "country": "Settat, Morocco",
+                            "institution": "FST Settat",
+                            "text": "General scientific and technical training covering mathematics, computer science and engineering sciences. Solid foundation for continuing into the engineering program.",
+                            "list": [],
+                            "tags": ["Mathematics", "Computer Science", "Sciences"]
+                        }
+                    }
+                },
+                {
+                    "id": 3,
+                    "img": "",
+                    "faIcon": "fa-solid fa-school",
+                    "faIconColors": {"bg": "#fbbc04", "fill": "#333"},
+                    "dateStart": {"year": 2019, "month": 9},
+                    "dateEnd": {"year": 2022, "month": 6},
+                    "locales": {
+                        "fr": {
+                            "title": "Baccalauréat Technique série {{C}} – Maths & Sciences Physiques",
+                            "province": "",
+                            "country": "Bobo Dioulasso, Burkina Faso",
+                            "institution": "Lycée Scientifique National (LSN)",
+                            "text": "Baccalauréat avec spécialisation en mathématiques et sciences physiques. Formation scientifique rigoureuse ayant permis de développer un esprit analytique et un goût pour la résolution de problèmes.",
+                            "list": [],
+                            "tags": ["Mathématiques", "Physique", "Sciences"]
+                        },
+                        "en": {
+                            "title": "Technical Baccalaureate Series {{C}} – Maths & Physical Sciences",
+                            "province": "",
+                            "country": "Bobo Dioulasso, Burkina Faso",
+                            "institution": "Lycée Scientifique National (LSN)",
+                            "text": "Baccalaureate specializing in mathematics and physical sciences. Rigorous scientific training that built analytical thinking and problem-solving skills.",
+                            "list": [],
+                            "tags": ["Mathematics", "Physics", "Sciences"]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

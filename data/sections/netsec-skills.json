@@ -1,0 +1,230 @@
+{
+    "title": {
+        "locales": {
+            "fr": {
+                "title_short": "Compétences",
+                "title_short_nav": "Compétences",
+                "title_long_prefix": "Explorez",
+                "title_long": "Mes {{Compétences}} Réseau"
+            },
+            "en": {
+                "title_short": "Skills",
+                "title_short_nav": "Skills",
+                "title_long_prefix": "Explore",
+                "title_long": "My {{Network}} Skills"
+            }
+        }
+    },
+
+    "articles": [
+        {
+            "id": 1,
+            "component": "ArticleCards",
+            "locales": {
+                "fr": {"title": "Domaines de {{compétence}}"},
+                "en": {"title": "Areas of {{expertise}}"}
+            },
+            "settings": {
+                "order_items_by": "id",
+                "order_items_sort": "asc"
+            },
+            "items": [
+                {
+                    "id": 1,
+                    "img": "",
+                    "faIcon": "fa-solid fa-network-wired",
+                    "faIconColors": {"bg": "#0078d4", "fill": "#fff"},
+                    "date": {"year": null, "month": null},
+                    "link": {"href": "", "tooltipString": ""},
+                    "locales": {
+                        "fr": {
+                            "title": "{{Réseaux}} & Infrastructure",
+                            "text": "TCP/IP, Subnetting, Routage, Switching, dépannage réseau et simulation avec OMNeT++."
+                        },
+                        "en": {
+                            "title": "{{Networking}} & Infrastructure",
+                            "text": "TCP/IP, Subnetting, Routing, Switching, network troubleshooting and simulation with OMNeT++."
+                        }
+                    }
+                },
+                {
+                    "id": 2,
+                    "img": "",
+                    "faIcon": "fa-solid fa-shield-halved",
+                    "faIconColors": {"bg": "#d13438", "fill": "#fff"},
+                    "date": {"year": null, "month": null},
+                    "link": {"href": "", "tooltipString": ""},
+                    "locales": {
+                        "fr": {
+                            "title": "{{Cybersécurité}} & Tests d'intrusion",
+                            "text": "Évaluation de vulnérabilités, exploitation CVE, Remote Code Execution, techniques de privilège et DFIR basique."
+                        },
+                        "en": {
+                            "title": "{{Cybersecurity}} & Penetration Testing",
+                            "text": "Vulnerability assessment, CVE exploitation, Remote Code Execution, privilege escalation and basic DFIR."
+                        }
+                    }
+                },
+                {
+                    "id": 3,
+                    "img": "",
+                    "faIcon": "fa-solid fa-fire-flame-curved",
+                    "faIconColors": {"bg": "#e05a2b", "fill": "#fff"},
+                    "date": {"year": null, "month": null},
+                    "link": {"href": "", "tooltipString": ""},
+                    "locales": {
+                        "fr": {
+                            "title": "Configuration {{Cisco}} & Fortinet",
+                            "text": "Configuration d'équipements réseau Cisco (Packet Tracer), configuration basique de pare-feu Fortinet."
+                        },
+                        "en": {
+                            "title": "{{Cisco}} & Fortinet Configuration",
+                            "text": "Cisco network equipment configuration (Packet Tracer), basic Fortinet firewall configuration."
+                        }
+                    }
+                },
+                {
+                    "id": 4,
+                    "img": "",
+                    "faIcon": "fa-brands fa-linux",
+                    "faIconColors": {"bg": "#333", "fill": "#fff"},
+                    "date": {"year": null, "month": null},
+                    "link": {"href": "", "tooltipString": ""},
+                    "locales": {
+                        "fr": {
+                            "title": "Administration {{Systèmes}}",
+                            "text": "Linux CLI, Windows Server 2019 : gestion des rôles, politiques d'accès et services réseau."
+                        },
+                        "en": {
+                            "title": "{{Systems}} Administration",
+                            "text": "Linux CLI, Windows Server 2019: role management, access policies and network services."
+                        }
+                    }
+                },
+                {
+                    "id": 5,
+                    "img": "",
+                    "faIcon": "fa-solid fa-flag",
+                    "faIconColors": {"bg": "#107c10", "fill": "#fff"},
+                    "date": {"year": null, "month": null},
+                    "link": {"href": "", "tooltipString": ""},
+                    "locales": {
+                        "fr": {
+                            "title": "CTF & {{Environnements Lab}}",
+                            "text": "Compétitions CTF (Forensics, DFIR, PWN, Network), exploitation en environnements multi-machines."
+                        },
+                        "en": {
+                            "title": "CTF & {{Lab Environments}}",
+                            "text": "CTF competitions (Forensics, DFIR, PWN, Network), exploitation in multi-machine environments."
+                        }
+                    }
+                },
+                {
+                    "id": 6,
+                    "img": "",
+                    "faIcon": "fa-solid fa-magnifying-glass-chart",
+                    "faIconColors": {"bg": "#005a9e", "fill": "#fff"},
+                    "date": {"year": null, "month": null},
+                    "link": {"href": "", "tooltipString": ""},
+                    "locales": {
+                        "fr": {
+                            "title": "Analyse {{Réseau}} & Trafic",
+                            "text": "Analyse de paquets, inspection du trafic, simulation de topologies et étude des surfaces d'attaque."
+                        },
+                        "en": {
+                            "title": "{{Network}} & Traffic Analysis",
+                            "text": "Packet analysis, traffic inspection, topology simulation and attack surface study."
+                        }
+                    }
+                }
+            ]
+        },
+
+        {
+            "id": 2,
+            "component": "ArticleStack",
+            "locales": {
+                "fr": {"title": "Outils & {{Technologies}}"},
+                "en": {"title": "Tools & {{Technologies}}"}
+            },
+            "settings": {
+                "order_items_by": "id",
+                "order_items_sort": "asc"
+            },
+            "items": [
+                {
+                    "id": 1,
+                    "faIcon": "fa-solid fa-network-wired",
+                    "faIconColors": {"bg": "#0078d4", "fill": "#fff"},
+                    "locales": {
+                        "fr": {"title": "Cisco Packet Tracer"},
+                        "en": {"title": "Cisco Packet Tracer"}
+                    }
+                },
+                {
+                    "id": 2,
+                    "faIcon": "fa-solid fa-diagram-project",
+                    "faIconColors": {"bg": "#6b2fa0", "fill": "#fff"},
+                    "locales": {
+                        "fr": {"title": "OMNeT++"},
+                        "en": {"title": "OMNeT++"}
+                    }
+                },
+                {
+                    "id": 3,
+                    "faIcon": "fa-brands fa-linux",
+                    "faIconColors": {"bg": "#333", "fill": "#fff"},
+                    "locales": {
+                        "fr": {"title": "Linux CLI"},
+                        "en": {"title": "Linux CLI"}
+                    }
+                },
+                {
+                    "id": 4,
+                    "faIcon": "fa-brands fa-windows",
+                    "faIconColors": {"bg": "#0078d4", "fill": "#fff"},
+                    "locales": {
+                        "fr": {"title": "Windows Server"},
+                        "en": {"title": "Windows Server"}
+                    }
+                },
+                {
+                    "id": 5,
+                    "faIcon": "fa-solid fa-fire-flame-curved",
+                    "faIconColors": {"bg": "#e05a2b", "fill": "#fff"},
+                    "locales": {
+                        "fr": {"title": "Fortinet Firewall"},
+                        "en": {"title": "Fortinet Firewall"}
+                    }
+                },
+                {
+                    "id": 6,
+                    "faIcon": "fa-brands fa-python",
+                    "faIconColors": {"bg": "#3572A5", "fill": "#fff"},
+                    "locales": {
+                        "fr": {"title": "Python / Scripting"},
+                        "en": {"title": "Python / Scripting"}
+                    }
+                },
+                {
+                    "id": 7,
+                    "faIcon": "fa-solid fa-shield-halved",
+                    "faIconColors": {"bg": "#d13438", "fill": "#fff"},
+                    "locales": {
+                        "fr": {"title": "CTF Environnements"},
+                        "en": {"title": "CTF Environments"}
+                    }
+                },
+                {
+                    "id": 8,
+                    "faIcon": "fa-brands fa-git-alt",
+                    "faIconColors": {"bg": "#f05032", "fill": "#fff"},
+                    "locales": {
+                        "fr": {"title": "Git / GitHub"},
+                        "en": {"title": "Git / GitHub"}
+                    }
+                }
+            ]
+        }
+    ]
+}

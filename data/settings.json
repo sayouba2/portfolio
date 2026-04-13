@@ -1,0 +1,83 @@
+{
+    "developerSettings": {
+        "debugMode": false,
+        "fakeEmailRequests": false,
+        "stayOnThePreloaderScreen": false,
+        "version": "2.0.3"
+    },
+
+    "preloaderSettings": {
+        "enabled": true,
+        "title": "Sayouba <strong>Ouedraogo</strong>",
+        "subtitle": "Portfolio",
+        "logoOffset": {
+            "right": 14,
+            "top": 2,
+            "bottom": 0
+        }
+    },
+
+    "templateSettings": {
+        "animatedCursorEnabled": true,
+        "backgroundStyle": "animated",
+        "defaultLanguageId": "fr",
+        "defaultThemeId": "dark",
+        "fullscreenEnabled": true,
+        "showSpinnerOnThemeChange": false
+    },
+
+    "supportedLanguages": [
+        {
+            "name": "Français",
+            "id": "fr",
+            "flagUrl": "images/flags/fr.png"
+        },
+        {
+            "name": "English",
+            "id": "en",
+            "flagUrl": "images/flags/en-us.png"
+        }
+    ],
+
+    "supportedThemes": [
+        {
+            "id": "dark",
+            "icon": "fa-solid fa-moon",
+            "dark": true,
+            "locales": {
+                "fr": {"name": "Mode Sombre"},
+                "en": {"name": "Dark Mode"}
+            }
+        },
+        {
+            "id": "light",
+            "icon": "fa-solid fa-sun",
+            "dark": false,
+            "locales": {
+                "fr": {"name": "Mode Clair"},
+                "en": {"name": "Light Mode"}
+            }
+        }
+    ],
+
+    "consoleMessageForDevelopers": {
+        "title": "Sayouba Ouedraogo — Portfolio",
+        "items": [
+            {
+                "description": "Étudiant ingénieur en Réseaux et Systèmes d'Information, passionné par le développement full-stack et la cybersécurité.",
+                "list": [],
+                "listStyle": "none"
+            },
+            {
+                "description": "Contacts :",
+                "list": [
+                    "Email: saykoodg677@gmail.com",
+                    "GitHub: https://github.com/sayouba2"
+                ],
+                "listStyle": "bulleted"
+            }
+        ]
+    },
+
+    "imagesToCache": []
+}

@@ -1,0 +1,39 @@
+{
+    "name": "Sayouba Ouedraogo",
+
+    "profilePictureUrl": "images/pictures/profile-picture.jpg",
+    "resumePdfUrl": "",
+    "resumePdfUrls": {
+        "dev": "mescv/CV_OUEDRAOGO_SAYOUBA_DEV.pdf",
+        "netsec": "mescv/CV_OUEDRAOGO_SAYOUBA_Net.pdf"
+    },
+
+    "statusCircleVisible": true,
+    "statusCircleVariant": "available",
+    "statusCircleHoverMessage": "status_message_available_for_internship",
+
+    "locales": {
+        "fr": {
+            "localized_name": "Sayouba Ouedraogo",
+            "localized_name_stylized": "[[Sayouba]] {{Ouedraogo}}",
+            "status_message_available_for_internship": "Disponible pour un stage !",
+            "roles": [
+                "Dev Full Stack",
+                "Ingénieur Réseau",
+                "IA & Automatisation",
+                "Cybersécurité"
+            ]
+        },
+        "en": {
+            "localized_name": "Sayouba Ouedraogo",
+            "localized_name_stylized": "[[Sayouba]] {{Ouedraogo}}",
+            "status_message_available_for_internship": "Available for internship!",
+            "roles": [
+                "Full Stack Developer",
+                "Network Engineer",
+                "AI & Automation",
+                "Cybersecurity"
+            ]
+        }
+    }
+}

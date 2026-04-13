@@ -1,0 +1,203 @@
+{
+    "title": {
+        "locales": {
+            "fr": {
+                "title_short": "Bienvenue !",
+                "title_short_nav": "À propos",
+                "title_long_prefix": "Salut...",
+                "title_long": "Je suis {{Sayouba !}}"
+            },
+            "en": {
+                "title_short": "Welcome!",
+                "title_short_nav": "About me",
+                "title_long_prefix": "Hey there...",
+                "title_long": "I'm {{Sayouba!}}"
+            }
+        }
+    },
+
+    "articles": [
+        {
+            "id": 1,
+            "component": "ArticleInlineList",
+            "locales": {},
+            "settings": {
+                "order_items_by": "id",
+                "order_items_sort": "asc",
+                "display_as_list_if_width_is_lower_than": 380
+            },
+            "items": [
+                {
+                    "id": 1,
+                    "label": "Marrakech, Maroc",
+                    "link": {"href": "", "tooltipString": ""},
+                    "faIcon": "pi pi-map-marker"
+                },
+                {
+                    "id": 2,
+                    "label": "saykoodg677@gmail.com",
+                    "link": {"href": "mailto:saykoodg677@gmail.com", "tooltipString": "email_me"},
+                    "faIcon": "fa-regular fa-envelope"
+                },
+                {
+                    "id": 3,
+                    "label": "sayouba2",
+                    "link": {"href": "https://github.com/sayouba2", "tooltipString": "see_on_github"},
+                    "faIcon": "fa-brands fa-github"
+                }
+            ]
+        },
+
+        {
+            "id": 2,
+            "component": "ArticleText",
+            "locales": {
+                "fr": {"title": "{{Un peu}} sur moi..."},
+                "en": {"title": "{{A little bit}} about me..."}
+            },
+            "settings": {
+                "order_items_by": "id",
+                "order_items_sort": "asc"
+            },
+            "items": [
+                {
+                    "id": 1,
+                    "img": "",
+                    "faIcon": "",
+                    "faIconColors": {"bg": "", "fill": ""},
+                    "locales": {
+                        "fr": {
+                            "text": "<p>Je suis étudiant ingénieur en {{Réseaux et Systèmes d'Information}} à la Faculté des Sciences et Techniques de Marrakech, avec une forte passion pour l'[[intelligence artificielle]], l'automatisation et le développement logiciel.</p><p>J'ai une expérience concrète dans la création d'applications web et mobiles, de systèmes propulsés par l'IA, ainsi que dans la [[configuration réseau]] et la cybersécurité. Je participe activement à des compétitions CTF et hackathons, ce qui me permet de renforcer mes compétences techniques en conditions réelles.</p><p>Je recherche un stage de 2 à 3 mois à partir de juin 2026 pour contribuer à des projets concrets et continuer à progresser. [[N'hésitez pas à me contacter !]]</p>"
+                        },
+                        "en": {
+                            "text": "<p>I'm an engineering student in {{Computer Networks and Information Systems}} at the Faculty of Sciences and Techniques of Marrakech, with a strong passion for [[artificial intelligence]], automation and software development.</p><p>I have hands-on experience building web and mobile applications, AI-powered systems, as well as [[network configuration]] and cybersecurity. I actively participate in CTF competitions and hackathons to sharpen my technical skills in real conditions.</p><p>I'm seeking a 2–3 month internship starting June 2026 to contribute to impactful projects. [[Feel free to reach out!]]</p>"
+                        }
+                    }
+                }
+            ]
+        },
+
+        {
+            "id": 3,
+            "component": "ArticleInfoList",
+            "settings": {
+                "order_items_by": "id",
+                "order_items_sort": "asc"
+            },
+            "locales": {
+                "fr": {"title": "Centres d'{{intérêt}}"},
+                "en": {"title": "Personal {{interests}}"}
+            },
+            "items": [
+                {
+                    "id": 1,
+                    "faIcon": "fa-solid fa-robot",
+                    "faIconColors": {"bg": "", "fill": ""},
+                    "label": null,
+                    "link": {"href": null, "tooltipString": null},
+                    "copyToClipboardButton": false,
+                    "locales": {
+                        "fr": {
+                            "title": "{{IA}} & Automatisation",
+                            "text": "LLM, agents IA et conception de workflows intelligents."
+                        },
+                        "en": {
+                            "title": "{{AI}} & Automation",
+                            "text": "LLMs, AI agents and intelligent workflow design."
+                        }
+                    }
+                },
+                {
+                    "id": 2,
+                    "faIcon": "fa-solid fa-shield-halved",
+                    "faIconColors": {"bg": "", "fill": ""},
+                    "label": null,
+                    "link": {"href": null, "tooltipString": null},
+                    "copyToClipboardButton": false,
+                    "locales": {
+                        "fr": {
+                            "title": "{{Cybersécurité}} & CTF",
+                            "text": "Compétitions CTF, exploitation de vulnérabilités et forensics."
+                        },
+                        "en": {
+                            "title": "{{Cybersecurity}} & CTF",
+                            "text": "CTF competitions, vulnerability exploitation and forensics."
+                        }
+                    }
+                },
+                {
+                    "id": 3,
+                    "faIcon": "fa-solid fa-code",
+                    "faIconColors": {"bg": "", "fill": ""},
+                    "label": null,
+                    "link": {"href": null, "tooltipString": null},
+                    "copyToClipboardButton": false,
+                    "locales": {
+                        "fr": {
+                            "title": "Développement {{Full Stack}}",
+                            "text": "Applications web et mobiles modernes avec des stacks variées."
+                        },
+                        "en": {
+                            "title": "{{Full Stack}} Development",
+                            "text": "Modern web and mobile applications with diverse tech stacks."
+                        }
+                    }
+                },
+                {
+                    "id": 4,
+                    "faIcon": "fa-solid fa-network-wired",
+                    "faIconColors": {"bg": "", "fill": ""},
+                    "label": null,
+                    "link": {"href": null, "tooltipString": null},
+                    "copyToClipboardButton": false,
+                    "locales": {
+                        "fr": {
+                            "title": "Réseaux & {{Infrastructure}}",
+                            "text": "Simulation réseau, administration système et configuration Cisco."
+                        },
+                        "en": {
+                            "title": "Networks & {{Infrastructure}}",
+                            "text": "Network simulation, system administration and Cisco configuration."
+                        }
+                    }
+                },
+                {
+                    "id": 5,
+                    "faIcon": "fa-solid fa-trophy",
+                    "faIconColors": {"bg": "", "fill": ""},
+                    "label": null,
+                    "link": {"href": null, "tooltipString": null},
+                    "copyToClipboardButton": false,
+                    "locales": {
+                        "fr": {
+                            "title": "{{Hackathons}} & Compétitions",
+                            "text": "Participer, apprendre et se dépasser dans des environnements compétitifs."
+                        },
+                        "en": {
+                            "title": "{{Hackathons}} & Competitions",
+                            "text": "Competing, learning and pushing limits in competitive environments."
+                        }
+                    }
+                },
+                {
+                    "id": 6,
+                    "faIcon": "fa-solid fa-book-open",
+                    "faIconColors": {"bg": "", "fill": ""},
+                    "label": null,
+                    "link": {"href": null, "tooltipString": null},
+                    "copyToClipboardButton": false,
+                    "locales": {
+                        "fr": {
+                            "title": "Veille {{technologique}}",
+                            "text": "Se tenir informé des dernières tendances en tech et sécurité."
+                        },
+                        "en": {
+                            "title": "Tech {{Watch}}",
+                            "text": "Staying up to date with the latest trends in tech and security."
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
