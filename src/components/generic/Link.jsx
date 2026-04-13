@@ -17,6 +17,9 @@ function Link({ id = null, className = "", href, children, tooltip = null, metad
         `link-no-href` :
         ``
 
+    const isExternalLink = href && !href.startsWith("#") && !href.includes("mailto") && !href.includes("tel:")
+    const relAttribute = isExternalLink ? "noopener noreferrer" : undefined
+
     const _onMouseEnter = (e) => {
         onHoverStatus && onHoverStatus(true)
     }
@@ -87,7 +90,7 @@ function Link({ id = null, className = "", href, children, tooltip = null, metad
             language.getString("open_link"),
             text,
             "fa-solid fa-link",
-            () => { window.open(href, "blank") },
+            () => { window.open(href, "_blank") },
             language.getString("proceed"),
             null,
             language.getString("cancel"),
@@ -102,6 +105,7 @@ function Link({ id = null, className = "", href, children, tooltip = null, metad
            onMouseEnter={_onMouseEnter}
            onMouseLeave={_onMouseLeave}
            data-tooltip={tooltip}
+           rel={relAttribute}
            draggable={false}>
             {children}
         </a>
