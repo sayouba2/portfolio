@@ -6,6 +6,7 @@ import {useConstants} from "/src/hooks/constants.js"
 import {useUtils} from "/src/hooks/utils.js"
 import Preloader from "/src/components/loaders/Preloader.jsx"
 import DataProvider, {useData} from "/src/providers/DataProvider.jsx"
+import ProfileProvider, {useProfile} from "/src/providers/ProfileProvider.jsx"
 import LanguageProvider from "/src/providers/LanguageProvider.jsx"
 import ViewportProvider from "/src/providers/ViewportProvider.jsx"
 import ThemeProvider from "/src/providers/ThemeProvider.jsx"
@@ -33,11 +34,13 @@ document.addEventListener('DOMContentLoaded', function(event) {
  */
 const App = () => {
     return (
-        <AppEssentialsWrapper>
-            <AppCapabilitiesWrapper>
-                <Portfolio/>
-            </AppCapabilitiesWrapper>
-        </AppEssentialsWrapper>
+        <ProfileProvider>
+            <AppEssentialsWrapper>
+                <AppCapabilitiesWrapper>
+                    <Portfolio/>
+                </AppCapabilitiesWrapper>
+            </AppEssentialsWrapper>
+        </ProfileProvider>
     )
 }
 
@@ -114,19 +117,19 @@ const AppEssentialsWrapper = ({children}) => {
 
 /**
  * This stack will wrap the app capabilities - these will be initialized after the app has booted up and loaded its essential components.
+ * Sections and categories are filtered by the active profile before being passed to navigation providers.
  * @param children
  * @return {JSX.Element}
  * @constructor
  */
 const AppCapabilitiesWrapper = ({ children }) => {
     const data = useData()
+    const profile = useProfile()
 
     const [selectedThemeId, setSelectedThemeId] = useState(null)
 
     const appSettings = data.getSettings()
     const appStrings = data.getStrings()
-    const appSections = data.getSections()
-    const appCategories = data.getCategories()
 
     const supportedLanguages = appSettings["supportedLanguages"]
     const supportedThemes = appSettings["supportedThemes"]
@@ -134,6 +137,25 @@ const AppCapabilitiesWrapper = ({ children }) => {
     const defaultThemeId = appSettings["templateSettings"].defaultThemeId
     const animatedCursorEnabled = appSettings["templateSettings"].animatedCursorEnabled
     const showSpinnerOnThemeChange = appSettings["templateSettings"].showSpinnerOnThemeChange
+
+    const activeProfileId = profile.activeProfileId
+
+    // Filter sections and categories by active profile
+    const allSections = data.getSections()
+    const allCategories = data.getCategories()
+
+    const appSections = allSections.filter(s =>
+        !s.profileId || s.profileId === 'all' || s.profileId === activeProfileId
+    )
+
+    const appCategories = allCategories
+        .map(cat => ({
+            ...cat,
+            sections: cat.sections.filter(s =>
+                !s.profileId || s.profileId === 'all' || s.profileId === activeProfileId
+            )
+        }))
+        .filter(cat => cat.sections.length > 0)
 
     return (
         <LanguageProvider supportedLanguages={supportedLanguages}
@@ -147,9 +169,11 @@ const AppCapabilitiesWrapper = ({ children }) => {
                                        defaultThemeId={defaultThemeId}
                                        showSpinnerOnThemeChange={showSpinnerOnThemeChange}
                                        onThemeChanged={setSelectedThemeId}>
-                            <LocationProvider sections={appSections}
+                            <LocationProvider key={activeProfileId}
+                                              sections={appSections}
                                               categories={appCategories}>
-                                <NavigationProvider sections={appSections}
+                                <NavigationProvider key={activeProfileId}
+                                                    sections={appSections}
                                                     categories={appCategories}>
                                     {children}
                                 </NavigationProvider>

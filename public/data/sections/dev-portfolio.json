@@ -1,0 +1,283 @@
+{
+    "title": {
+        "locales": {
+            "fr": {
+                "title_short": "Projets",
+                "title_short_nav": "Projets",
+                "title_long_prefix": "Découvrez",
+                "title_long": "Mes {{Projets}} Dev"
+            },
+            "en": {
+                "title_short": "Projects",
+                "title_short_nav": "Projects",
+                "title_long_prefix": "Take a look at",
+                "title_long": "My {{Dev}} Projects"
+            }
+        }
+    },
+
+    "articles": [
+        {
+            "id": 1,
+            "component": "ArticlePortfolio",
+            "locales": {
+                "fr": {
+                    "category_all": "Tous",
+                    "category_web": "Web",
+                    "category_ai": "IA",
+                    "category_mobile": "Mobile"
+                },
+                "en": {
+                    "category_all": "All",
+                    "category_web": "Web",
+                    "category_ai": "AI",
+                    "category_mobile": "Mobile"
+                }
+            },
+            "settings": {
+                "order_items_by": "id",
+                "order_items_sort": "asc"
+            },
+            "items": [
+                {
+                    "id": 1,
+                    "img": "",
+                    "faIcon": "fa-solid fa-robot",
+                    "faIconColors": {"bg": "#6e2ebf", "fill": "#fff"},
+                    "categoryId": "ai",
+                    "link": {"href": "", "tooltipString": ""},
+                    "preview": {
+                        "screenshots": ["images/projects/smart_recruit.png"],
+                        "screenshotsAspectRatio": "16:9",
+                        "links": [
+                            {
+                                "href": "https://github.com/sayouba2/smart_recruit",
+                                "faIcon": "fa-brands fa-github",
+                                "tooltipString": "see_on_github"
+                            }
+                        ],
+                        "youtubeVideo": ""
+                    },
+                    "locales": {
+                        "fr": {
+                            "title": "Smart Recruit — {{Plateforme IA}} de Recrutement",
+                            "text": "Plateforme de recrutement propulsée par l'IA capable de mener des entretiens audio en temps réel. Intégration du traitement de la parole, de l'IA conversationnelle et de l'analyse des réponses des candidats. Vainqueur du Hackathon Ramadan IA.",
+                            "tags": ["Python", "IA", "LLM", "API", "1ère Place"]
+                        },
+                        "en": {
+                            "title": "Smart Recruit — {{AI}} Recruitment Platform",
+                            "text": "AI-powered recruitment platform capable of conducting real-time audio interviews. Integrated speech processing, conversational AI and candidate response analysis. Winner of the Ramadan AI Hackathon.",
+                            "tags": ["Python", "AI", "LLM", "API", "1st Place"]
+                        }
+                    }
+                },
+                {
+                    "id": 2,
+                    "img": "",
+                    "faIcon": "fa-solid fa-graduation-cap",
+                    "faIconColors": {"bg": "#1a73e8", "fill": "#fff"},
+                    "categoryId": "web",
+                    "link": {"href": "", "tooltipString": ""},
+                    "preview": {
+                        "screenshots": ["images/projects/smart_learning.png"],
+                        "screenshotsAspectRatio": "16:9",
+                        "links": [
+                            {
+                                "href": "https://github.com/sayouba2/smart_learning",
+                                "faIcon": "fa-brands fa-github",
+                                "tooltipString": "see_on_github"
+                            }
+                        ],
+                        "youtubeVideo": ""
+                    },
+                    "locales": {
+                        "fr": {
+                            "title": "Smart Learning — Plateforme {{E-learning}} Full Stack",
+                            "text": "Plateforme web complète développée avec Laravel et MySQL. Gestion des cours, suivi de la progression des étudiants, authentification et contrôle d'accès par rôles.",
+                            "tags": ["Laravel", "MySQL", "PHP", "Full Stack"]
+                        },
+                        "en": {
+                            "title": "Smart Learning — {{E-learning}} Full-Stack Platform",
+                            "text": "Complete web platform built with Laravel and MySQL. Course management, student progress tracking, authentication and role-based access control.",
+                            "tags": ["Laravel", "MySQL", "PHP", "Full Stack"]
+                        }
+                    }
+                },
+                {
+                    "id": 3,
+                    "img": "",
+                    "faIcon": "fa-solid fa-list-check",
+                    "faIconColors": {"bg": "#0553b1", "fill": "#fff"},
+                    "categoryId": "mobile",
+                    "link": {"href": "", "tooltipString": ""},
+                    "preview": {
+                        "screenshots": [],
+                        "screenshotsAspectRatio": "16:9",
+                        "links": [],
+                        "youtubeVideo": ""
+                    },
+                    "locales": {
+                        "fr": {
+                            "title": "Gestionnaire de Tâches {{Mobile}} (Flutter)",
+                            "text": "Application mobile cross-platform pour gérer les tâches quotidiennes avec des fonctionnalités de création, modification et suppression. Interface intuitive et réactive.",
+                            "tags": ["Flutter", "Dart", "Mobile", "Android"]
+                        },
+                        "en": {
+                            "title": "{{Mobile}} Task Manager (Flutter)",
+                            "text": "Cross-platform mobile application for managing daily tasks with create, edit and delete features. Intuitive and responsive interface.",
+                            "tags": ["Flutter", "Dart", "Mobile", "Android"]
+                        }
+                    }
+                },
+                {
+                    "id": 4,
+                    "img": "",
+                    "faIcon": "fa-solid fa-hotel",
+                    "faIconColors": {"bg": "#34a853", "fill": "#fff"},
+                    "categoryId": "web",
+                    "link": {"href": "", "tooltipString": ""},
+                    "preview": {
+                        "screenshots": [],
+                        "screenshotsAspectRatio": "16:9",
+                        "links": [],
+                        "youtubeVideo": ""
+                    },
+                    "locales": {
+                        "fr": {
+                            "title": "Plateforme de Réservation {{Hôtelière}}",
+                            "text": "Système de réservation web avec intégration base de données, logique de booking et gestion des utilisateurs. Interface client et panneau d'administration.",
+                            "tags": ["Web", "PHP", "MySQL", "Backend"]
+                        },
+                        "en": {
+                            "title": "{{Hotel}} Booking Platform",
+                            "text": "Web reservation system with database integration, booking logic and user management. Client interface and admin panel.",
+                            "tags": ["Web", "PHP", "MySQL", "Backend"]
+                        }
+                    }
+                },
+                {
+                    "id": 5,
+                    "img": "",
+                    "faIcon": "fa-solid fa-eye",
+                    "faIconColors": {"bg": "#ea4335", "fill": "#fff"},
+                    "categoryId": "ai",
+                    "link": {"href": "", "tooltipString": ""},
+                    "preview": {
+                        "screenshots": ["images/projects/glaucoma_detection.png"],
+                        "screenshotsAspectRatio": "16:9",
+                        "links": [
+                            {
+                                "href": "https://github.com/sayouba2/glaucoma_detection",
+                                "faIcon": "fa-brands fa-github",
+                                "tooltipString": "see_on_github"
+                            }
+                        ],
+                        "youtubeVideo": ""
+                    },
+                    "locales": {
+                        "fr": {
+                            "title": "Détection du {{Glaucome}} par IA",
+                            "text": "Système web de traitement d'images ophtalmologiques pour assister le diagnostic du glaucome à l'aide de données radiologiques et de modèles de vision par ordinateur.",
+                            "tags": ["Python", "IA", "Vision", "Santé", "Deep Learning"]
+                        },
+                        "en": {
+                            "title": "{{Glaucoma}} Detection with AI",
+                            "text": "Web-based system for processing ophthalmological images to assist glaucoma diagnosis using radiological data and computer vision models.",
+                            "tags": ["Python", "AI", "Vision", "Healthcare", "Deep Learning"]
+                        }
+                    }
+                },
+                {
+                    "id": 6,
+                    "img": "",
+                    "faIcon": "fa-solid fa-plane",
+                    "faIconColors": {"bg": "#fbbc04", "fill": "#333"},
+                    "categoryId": "web",
+                    "link": {"href": "", "tooltipString": ""},
+                    "preview": {
+                        "screenshots": [],
+                        "screenshotsAspectRatio": "16:9",
+                        "links": [],
+                        "youtubeVideo": ""
+                    },
+                    "locales": {
+                        "fr": {
+                            "title": "Système de Gestion {{Agence de Voyage}}",
+                            "text": "Conception de l'architecture système (UML) et implémentation d'une plateforme de gestion des clients, réservations et services pour une agence de voyage.",
+                            "tags": ["UML", "Web", "Java", "Spring Boot"]
+                        },
+                        "en": {
+                            "title": "{{Travel Agency}} Management System",
+                            "text": "Designed the system architecture (UML) and implemented a management platform for clients, reservations and services for a travel agency.",
+                            "tags": ["UML", "Web", "Java", "Spring Boot"]
+                        }
+                    }
+                },
+                {
+                    "id": 7,
+                    "img": "",
+                    "faIcon": "fa-solid fa-brain",
+                    "faIconColors": {"bg": "#0f9d58", "fill": "#fff"},
+                    "categoryId": "ai",
+                    "link": {"href": "", "tooltipString": ""},
+                    "preview": {
+                        "screenshots": [],
+                        "screenshotsAspectRatio": "16:9",
+                        "links": [
+                            {
+                                "href": "https://github.com/sayouba2/ai-rag-agent",
+                                "faIcon": "fa-brands fa-github",
+                                "tooltipString": "see_on_github"
+                            }
+                        ],
+                        "youtubeVideo": ""
+                    },
+                    "locales": {
+                        "fr": {
+                            "title": "Agent {{RAG}} IA",
+                            "text": "Agent IA basé sur l'architecture RAG (Retrieval-Augmented Generation) permettant d'interroger des documents et d'obtenir des réponses contextuelles grâce aux LLMs.",
+                            "tags": ["Python", "RAG", "LLM", "IA", "NLP"]
+                        },
+                        "en": {
+                            "title": "{{RAG}} AI Agent",
+                            "text": "AI agent based on the RAG (Retrieval-Augmented Generation) architecture enabling document querying and contextual answers using LLMs.",
+                            "tags": ["Python", "RAG", "LLM", "AI", "NLP"]
+                        }
+                    }
+                },
+                {
+                    "id": 8,
+                    "img": "",
+                    "faIcon": "fa-solid fa-comments",
+                    "faIconColors": {"bg": "#1a73e8", "fill": "#fff"},
+                    "categoryId": "web",
+                    "link": {"href": "", "tooltipString": ""},
+                    "preview": {
+                        "screenshots": [],
+                        "screenshotsAspectRatio": "16:9",
+                        "links": [
+                            {
+                                "href": "https://github.com/sayouba2/chat_app",
+                                "faIcon": "fa-brands fa-github",
+                                "tooltipString": "see_on_github"
+                            }
+                        ],
+                        "youtubeVideo": ""
+                    },
+                    "locales": {
+                        "fr": {
+                            "title": "Application de {{Chat}} en Temps Réel",
+                            "text": "Application de messagerie instantanée avec gestion des utilisateurs, salons de discussion et communication en temps réel.",
+                            "tags": ["Web", "Temps Réel", "JavaScript", "Backend"]
+                        },
+                        "en": {
+                            "title": "{{Real-Time}} Chat Application",
+                            "text": "Instant messaging application with user management, chat rooms and real-time communication.",
+                            "tags": ["Web", "Real-Time", "JavaScript", "Backend"]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

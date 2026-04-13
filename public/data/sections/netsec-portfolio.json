@@ -1,0 +1,175 @@
+{
+    "title": {
+        "locales": {
+            "fr": {
+                "title_short": "Projets",
+                "title_short_nav": "Projets",
+                "title_long_prefix": "Découvrez",
+                "title_long": "Mes {{Projets}} Réseau"
+            },
+            "en": {
+                "title_short": "Projects",
+                "title_short_nav": "Projects",
+                "title_long_prefix": "Take a look at",
+                "title_long": "My {{Network}} Projects"
+            }
+        }
+    },
+
+    "articles": [
+        {
+            "id": 1,
+            "component": "ArticlePortfolio",
+            "locales": {
+                "fr": {
+                    "category_all": "Tous",
+                    "category_network": "Réseau",
+                    "category_security": "Sécurité",
+                    "category_lab": "Lab"
+                },
+                "en": {
+                    "category_all": "All",
+                    "category_network": "Network",
+                    "category_security": "Security",
+                    "category_lab": "Lab"
+                }
+            },
+            "settings": {
+                "order_items_by": "id",
+                "order_items_sort": "asc"
+            },
+            "items": [
+                {
+                    "id": 1,
+                    "img": "",
+                    "faIcon": "fa-solid fa-diagram-project",
+                    "faIconColors": {"bg": "#0078d4", "fill": "#fff"},
+                    "categoryId": "network",
+                    "link": {"href": "", "tooltipString": ""},
+                    "preview": {
+                        "screenshots": [],
+                        "screenshotsAspectRatio": "16:9",
+                        "links": [],
+                        "youtubeVideo": ""
+                    },
+                    "locales": {
+                        "fr": {
+                            "title": "Simulation de Réseau Domestique {{OMNeT++}}",
+                            "text": "Conception et simulation d'une topologie réseau domestique pour analyser les performances et le comportement des paquets sous différentes charges de trafic. Étude des surfaces d'attaque potentielles.",
+                            "tags": ["OMNeT++", "Réseau", "Simulation", "Analyse"]
+                        },
+                        "en": {
+                            "title": "Home Network Simulation {{OMNeT++}}",
+                            "text": "Designed and simulated a home network topology to analyze performance and packet behavior under different traffic loads. Study of potential attack surfaces.",
+                            "tags": ["OMNeT++", "Networking", "Simulation", "Analysis"]
+                        }
+                    }
+                },
+                {
+                    "id": 2,
+                    "img": "",
+                    "faIcon": "fa-brands fa-windows",
+                    "faIconColors": {"bg": "#0078d4", "fill": "#fff"},
+                    "categoryId": "lab",
+                    "link": {"href": "", "tooltipString": ""},
+                    "preview": {
+                        "screenshots": [],
+                        "screenshotsAspectRatio": "16:9",
+                        "links": [],
+                        "youtubeVideo": ""
+                    },
+                    "locales": {
+                        "fr": {
+                            "title": "Lab Administration {{Windows Server 2019}}",
+                            "text": "Configuration de rôles utilisateurs, politiques de contrôle d'accès et services réseau dans un environnement Windows Server 2019. Mise en place de partages, GPO et gestion des domaines.",
+                            "tags": ["Windows Server", "Active Directory", "GPO", "Admin"]
+                        },
+                        "en": {
+                            "title": "{{Windows Server 2019}} Administration Lab",
+                            "text": "Configured user roles, access control policies and network services in a Windows Server 2019 environment. Set up shares, GPO and domain management.",
+                            "tags": ["Windows Server", "Active Directory", "GPO", "Admin"]
+                        }
+                    }
+                },
+                {
+                    "id": 3,
+                    "img": "",
+                    "faIcon": "fa-solid fa-bug",
+                    "faIconColors": {"bg": "#d13438", "fill": "#fff"},
+                    "categoryId": "security",
+                    "link": {"href": "", "tooltipString": ""},
+                    "preview": {
+                        "screenshots": [],
+                        "screenshotsAspectRatio": "16:9",
+                        "links": [],
+                        "youtubeVideo": ""
+                    },
+                    "locales": {
+                        "fr": {
+                            "title": "Exploitation de Vulnérabilités en {{Lab Multi-Machines}}",
+                            "text": "Exploitation de vulnérabilités CVE et Remote Code Execution (RCE) dans des environnements contrôlés multi-machines lors de compétitions de cybersécurité. Escalade de privilèges et post-exploitation.",
+                            "tags": ["CVE", "RCE", "Pentest", "CTF", "Exploitation"]
+                        },
+                        "en": {
+                            "title": "Vulnerability Exploitation in {{Multi-Machine Lab}}",
+                            "text": "Performed CVE-based exploitation and Remote Code Execution (RCE) in controlled multi-machine environments during cybersecurity competitions. Privilege escalation and post-exploitation.",
+                            "tags": ["CVE", "RCE", "Pentest", "CTF", "Exploitation"]
+                        }
+                    }
+                },
+                {
+                    "id": 4,
+                    "img": "",
+                    "faIcon": "fa-solid fa-magnifying-glass-chart",
+                    "faIconColors": {"bg": "#107c10", "fill": "#fff"},
+                    "categoryId": "network",
+                    "link": {"href": "", "tooltipString": ""},
+                    "preview": {
+                        "screenshots": [],
+                        "screenshotsAspectRatio": "16:9",
+                        "links": [],
+                        "youtubeVideo": ""
+                    },
+                    "locales": {
+                        "fr": {
+                            "title": "Analyse de Trafic {{Réseau}} (OMNeT++)",
+                            "text": "Simulation d'architectures réseau et analyse du comportement des paquets pour comprendre les flux de trafic et identifier les surfaces d'attaque potentielles.",
+                            "tags": ["OMNeT++", "Wireshark", "Trafic", "Analyse"]
+                        },
+                        "en": {
+                            "title": "{{Network}} Traffic Analysis (OMNeT++)",
+                            "text": "Simulated network architectures and analyzed packet behavior to understand traffic flow and identify potential attack surfaces.",
+                            "tags": ["OMNeT++", "Wireshark", "Traffic", "Analysis"]
+                        }
+                    }
+                },
+                {
+                    "id": 5,
+                    "img": "",
+                    "faIcon": "fa-solid fa-lock",
+                    "faIconColors": {"bg": "#005a9e", "fill": "#fff"},
+                    "categoryId": "security",
+                    "link": {"href": "", "tooltipString": ""},
+                    "preview": {
+                        "screenshots": [],
+                        "screenshotsAspectRatio": "16:9",
+                        "links": [],
+                        "youtubeVideo": ""
+                    },
+                    "locales": {
+                        "fr": {
+                            "title": "Développement de Plateforme Web {{Sécurisée}}",
+                            "text": "Développement et déploiement d'applications full-stack avec systèmes d'authentification, contrôle d'accès basé sur les rôles (RBAC) et bonnes pratiques de sécurité web.",
+                            "tags": ["Laravel", "MySQL", "RBAC", "Sécurité Web"]
+                        },
+                        "en": {
+                            "title": "{{Secure}} Web Platform Development",
+                            "text": "Developed and deployed full-stack applications with authentication systems, Role-Based Access Control (RBAC) and web security best practices.",
+                            "tags": ["Laravel", "MySQL", "RBAC", "Web Security"]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

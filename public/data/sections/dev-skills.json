@@ -1,0 +1,248 @@
+{
+    "title": {
+        "locales": {
+            "fr": {
+                "title_short": "Compétences",
+                "title_short_nav": "Compétences",
+                "title_long_prefix": "Explorez",
+                "title_long": "Mes {{Compétences}} Dev"
+            },
+            "en": {
+                "title_short": "Skills",
+                "title_short_nav": "Skills",
+                "title_long_prefix": "Explore",
+                "title_long": "My {{Dev}} Skills"
+            }
+        }
+    },
+
+    "articles": [
+        {
+            "id": 1,
+            "component": "ArticleCards",
+            "locales": {
+                "fr": {"title": "Domaines de {{compétence}}"},
+                "en": {"title": "Areas of {{expertise}}"}
+            },
+            "settings": {
+                "order_items_by": "id",
+                "order_items_sort": "asc"
+            },
+            "items": [
+                {
+                    "id": 1,
+                    "img": "",
+                    "faIcon": "fa-brands fa-react",
+                    "faIconColors": {"bg": "#20232a", "fill": "#61dafb"},
+                    "date": {"year": null, "month": null},
+                    "link": {"href": "", "tooltipString": ""},
+                    "locales": {
+                        "fr": {
+                            "title": "Développement {{Web}}",
+                            "text": "Applications web modernes avec ReactJS, NodeJS, Laravel et Spring Boot."
+                        },
+                        "en": {
+                            "title": "{{Web}} Development",
+                            "text": "Modern web apps with ReactJS, NodeJS, Laravel and Spring Boot."
+                        }
+                    }
+                },
+                {
+                    "id": 2,
+                    "img": "",
+                    "faIcon": "fa-solid fa-mobile-screen",
+                    "faIconColors": {"bg": "#0553b1", "fill": "#fff"},
+                    "date": {"year": null, "month": null},
+                    "link": {"href": "", "tooltipString": ""},
+                    "locales": {
+                        "fr": {
+                            "title": "Développement {{Mobile}}",
+                            "text": "Applications cross-platform avec Flutter et applications Android natives en Kotlin."
+                        },
+                        "en": {
+                            "title": "{{Mobile}} Development",
+                            "text": "Cross-platform apps with Flutter and native Android apps in Kotlin."
+                        }
+                    }
+                },
+                {
+                    "id": 3,
+                    "img": "",
+                    "faIcon": "fa-solid fa-robot",
+                    "faIconColors": {"bg": "#6e2ebf", "fill": "#fff"},
+                    "date": {"year": null, "month": null},
+                    "link": {"href": "", "tooltipString": ""},
+                    "locales": {
+                        "fr": {
+                            "title": "{{IA}} & Automatisation",
+                            "text": "LLM APIs, agents IA, prompt engineering et conception de workflows intelligents."
+                        },
+                        "en": {
+                            "title": "{{AI}} & Automation",
+                            "text": "LLM APIs, AI agents, prompt engineering and intelligent workflow design."
+                        }
+                    }
+                },
+                {
+                    "id": 4,
+                    "img": "",
+                    "faIcon": "fa-solid fa-server",
+                    "faIconColors": {"bg": "#e05a2b", "fill": "#fff"},
+                    "date": {"year": null, "month": null},
+                    "link": {"href": "", "tooltipString": ""},
+                    "locales": {
+                        "fr": {
+                            "title": "{{Backend}} & APIs",
+                            "text": "Conception d'APIs REST, systèmes d'authentification, webhooks et intégrations."
+                        },
+                        "en": {
+                            "title": "{{Backend}} & APIs",
+                            "text": "REST API design, authentication systems, webhooks and integrations."
+                        }
+                    }
+                },
+                {
+                    "id": 5,
+                    "img": "",
+                    "faIcon": "fa-solid fa-database",
+                    "faIconColors": {"bg": "#00758f", "fill": "#fff"},
+                    "date": {"year": null, "month": null},
+                    "link": {"href": "", "tooltipString": ""},
+                    "locales": {
+                        "fr": {
+                            "title": "{{Bases de données}}",
+                            "text": "Gestion et modélisation avec MySQL et Firebase."
+                        },
+                        "en": {
+                            "title": "{{Databases}}",
+                            "text": "Data management and modeling with MySQL and Firebase."
+                        }
+                    }
+                },
+                {
+                    "id": 6,
+                    "img": "",
+                    "faIcon": "fa-brands fa-docker",
+                    "faIconColors": {"bg": "#0db7ed", "fill": "#fff"},
+                    "date": {"year": null, "month": null},
+                    "link": {"href": "", "tooltipString": ""},
+                    "locales": {
+                        "fr": {
+                            "title": "{{DevOps}} & Outils",
+                            "text": "Git, GitHub, GitLab, notions Docker et méthodologies Agile (Scrum, Kanban)."
+                        },
+                        "en": {
+                            "title": "{{DevOps}} & Tooling",
+                            "text": "Git, GitHub, GitLab, Docker basics and Agile methodologies (Scrum, Kanban)."
+                        }
+                    }
+                }
+            ]
+        },
+
+        {
+            "id": 2,
+            "component": "ArticleStack",
+            "locales": {
+                "fr": {"title": "Stack {{technique}}"},
+                "en": {"title": "{{Tech}} Stack"}
+            },
+            "settings": {
+                "order_items_by": "id",
+                "order_items_sort": "asc"
+            },
+            "items": [
+                {
+                    "id": 1,
+                    "faIcon": "fa-brands fa-python",
+                    "faIconColors": {"bg": "#3572A5", "fill": "#fff"},
+                    "locales": {
+                        "fr": {"title": "Python"},
+                        "en": {"title": "Python"}
+                    }
+                },
+                {
+                    "id": 2,
+                    "faIcon": "fa-brands fa-js",
+                    "faIconColors": {"bg": "#f7df1e", "fill": "#000"},
+                    "locales": {
+                        "fr": {"title": "JavaScript"},
+                        "en": {"title": "JavaScript"}
+                    }
+                },
+                {
+                    "id": 3,
+                    "faIcon": "fa-brands fa-java",
+                    "faIconColors": {"bg": "#f89820", "fill": "#fff"},
+                    "locales": {
+                        "fr": {"title": "Java"},
+                        "en": {"title": "Java"}
+                    }
+                },
+                {
+                    "id": 4,
+                    "faIcon": "fa-brands fa-php",
+                    "faIconColors": {"bg": "#777bb3", "fill": "#fff"},
+                    "locales": {
+                        "fr": {"title": "PHP"},
+                        "en": {"title": "PHP"}
+                    }
+                },
+                {
+                    "id": 5,
+                    "faIcon": "fa-brands fa-react",
+                    "faIconColors": {"bg": "#20232a", "fill": "#61dafb"},
+                    "locales": {
+                        "fr": {"title": "ReactJS"},
+                        "en": {"title": "ReactJS"}
+                    }
+                },
+                {
+                    "id": 6,
+                    "faIcon": "fa-brands fa-node-js",
+                    "faIconColors": {"bg": "#3c873a", "fill": "#fff"},
+                    "locales": {
+                        "fr": {"title": "NodeJS"},
+                        "en": {"title": "NodeJS"}
+                    }
+                },
+                {
+                    "id": 7,
+                    "faIcon": "fa-solid fa-l",
+                    "faIconColors": {"bg": "#f55247", "fill": "#fff"},
+                    "locales": {
+                        "fr": {"title": "Laravel"},
+                        "en": {"title": "Laravel"}
+                    }
+                },
+                {
+                    "id": 8,
+                    "faIcon": "fa-brands fa-android",
+                    "faIconColors": {"bg": "#3ddb85", "fill": "#fff"},
+                    "locales": {
+                        "fr": {"title": "Flutter / Kotlin"},
+                        "en": {"title": "Flutter / Kotlin"}
+                    }
+                },
+                {
+                    "id": 9,
+                    "faIcon": "fa-solid fa-database",
+                    "faIconColors": {"bg": "#00758f", "fill": "#fff"},
+                    "locales": {
+                        "fr": {"title": "MySQL"},
+                        "en": {"title": "MySQL"}
+                    }
+                },
+                {
+                    "id": 10,
+                    "faIcon": "fa-brands fa-git-alt",
+                    "faIconColors": {"bg": "#f05032", "fill": "#fff"},
+                    "locales": {
+                        "fr": {"title": "Git / GitHub"},
+                        "en": {"title": "Git / GitHub"}
+                    }
+                }
+            ]
+        }
+    ]
+}

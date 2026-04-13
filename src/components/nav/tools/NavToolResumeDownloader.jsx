@@ -4,15 +4,18 @@ import {useUtils} from "/src/hooks/utils.js"
 import OptionPickerButton from "/src/components/buttons/OptionPickerButton.jsx"
 import {useData} from "/src/providers/DataProvider.jsx"
 import {useFeedbacks} from "/src/providers/FeedbacksProvider.jsx"
+import {useProfile} from "/src/providers/ProfileProvider.jsx"
 
 function NavToolResumeDownloader() {
     const language = useLanguage()
     const utils = useUtils()
     const data = useData()
     const feedbacks = useFeedbacks()
+    const profile = useProfile()
 
-    const profile = data.getProfile()
-    const resumeUrl = profile.resumePdfUrl
+    const profileData = data.getProfile()
+    const activeProfileId = profile?.activeProfileId
+    const resumeUrl = profileData.resumePdfUrls?.[activeProfileId] || profileData.resumePdfUrl
     const id = "download_resume"
     const tooltip = language.getString("download_resume")
 
