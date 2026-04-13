@@ -3,48 +3,56 @@
         {
             "id": "about",
             "categoryId": "home",
+            "profileId": "all",
             "jsonPath": "/data/sections/cover.json",
             "faIcon": "fa-solid fa-address-card"
         },
         {
             "id": "education",
             "categoryId": "background",
+            "profileId": "all",
             "jsonPath": "/data/sections/education.json",
             "faIcon": "fa-solid fa-graduation-cap"
         },
         {
-            "id": "skills",
+            "id": "dev-skills",
             "categoryId": "showcase",
-            "jsonPath": "/data/sections/skills.json",
-            "faIcon": "fa-solid fa-tools"
+            "profileId": "dev",
+            "jsonPath": "/data/sections/dev-skills.json",
+            "faIcon": "fa-solid fa-code"
         },
         {
-            "id": "experience",
-            "categoryId": "background",
-            "jsonPath": "/data/sections/experience.json",
-            "faIcon": "fa-solid fa-briefcase"
-        },
-        {
-            "id": "portfolio",
+            "id": "dev-portfolio",
             "categoryId": "showcase",
-            "jsonPath": "/data/sections/portfolio.json",
+            "profileId": "dev",
+            "jsonPath": "/data/sections/dev-portfolio.json",
             "faIcon": "fa-solid fa-folder-open"
         },
         {
-            "id": "achievements",
+            "id": "netsec-skills",
             "categoryId": "showcase",
-            "jsonPath": "/data/sections/achievements.json",
-            "faIcon": "fa-solid fa-award"
+            "profileId": "netsec",
+            "jsonPath": "/data/sections/netsec-skills.json",
+            "faIcon": "fa-solid fa-network-wired"
         },
         {
-            "id": "updates",
+            "id": "netsec-portfolio",
+            "categoryId": "showcase",
+            "profileId": "netsec",
+            "jsonPath": "/data/sections/netsec-portfolio.json",
+            "faIcon": "fa-solid fa-shield-halved"
+        },
+        {
+            "id": "achievements",
             "categoryId": "more",
-            "jsonPath": "/data/sections/updates.json",
-            "faIcon": "fa-solid fa-rss"
+            "profileId": "all",
+            "jsonPath": "/data/sections/achievements.json",
+            "faIcon": "fa-solid fa-trophy"
         },
         {
             "id": "contact",
             "categoryId": "more",
+            "profileId": "all",
             "jsonPath": "/data/sections/contact.json",
             "faIcon": "fa-solid fa-pen-to-square"
         }
