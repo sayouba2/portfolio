@@ -85,6 +85,69 @@
                 "order_items_sort": "asc"
             },
             "locales": {
+                "fr": {"title": "{{Langues}} parlées"},
+                "en": {"title": "{{Languages}}"}
+            },
+            "items": [
+                {
+                    "id": 1,
+                    "faIcon": "fa-solid fa-language",
+                    "faIconColors": {"bg": "", "fill": ""},
+                    "label": null,
+                    "link": {"href": null, "tooltipString": null},
+                    "copyToClipboardButton": false,
+                    "locales": {
+                        "fr": {"title": "{{Français}}", "text": "Langue maternelle"},
+                        "en": {"title": "{{French}}", "text": "Native language"}
+                    }
+                },
+                {
+                    "id": 2,
+                    "faIcon": "fa-solid fa-language",
+                    "faIconColors": {"bg": "", "fill": ""},
+                    "label": null,
+                    "link": {"href": null, "tooltipString": null},
+                    "copyToClipboardButton": false,
+                    "locales": {
+                        "fr": {"title": "{{Mooré}}", "text": "Langue maternelle"},
+                        "en": {"title": "{{Mooré}}", "text": "Native language"}
+                    }
+                },
+                {
+                    "id": 3,
+                    "faIcon": "fa-solid fa-language",
+                    "faIconColors": {"bg": "", "fill": ""},
+                    "label": null,
+                    "link": {"href": null, "tooltipString": null},
+                    "copyToClipboardButton": false,
+                    "locales": {
+                        "fr": {"title": "{{Anglais}}", "text": "Intermédiaire (B2)"},
+                        "en": {"title": "{{English}}", "text": "Intermediate (B2)"}
+                    }
+                },
+                {
+                    "id": 4,
+                    "faIcon": "fa-solid fa-language",
+                    "faIconColors": {"bg": "", "fill": ""},
+                    "label": null,
+                    "link": {"href": null, "tooltipString": null},
+                    "copyToClipboardButton": false,
+                    "locales": {
+                        "fr": {"title": "{{Arabe}}", "text": "Notions de base (A2)"},
+                        "en": {"title": "{{Arabic}}", "text": "Basic (A2)"}
+                    }
+                }
+            ]
+        },
+
+        {
+            "id": 4,
+            "component": "ArticleInfoList",
+            "settings": {
+                "order_items_by": "id",
+                "order_items_sort": "asc"
+            },
+            "locales": {
                 "fr": {"title": "Centres d'{{intérêt}}"},
                 "en": {"title": "Personal {{interests}}"}
             },
@@ -201,3 +264,4 @@
         }
     ]
 }
+
