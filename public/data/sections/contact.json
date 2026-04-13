@@ -64,11 +64,11 @@
                     "locales": {
                         "fr": {
                             "title": "{{Email}}",
-                            "text": "saykoodg677@gmail.com"
+                            "text": ""
                         },
                         "en": {
                             "title": "{{Email}}",
-                            "text": "saykoodg677@gmail.com"
+                            "text": ""
                         }
                     }
                 },
@@ -82,11 +82,11 @@
                     "locales": {
                         "fr": {
                             "title": "{{GitHub}}",
-                            "text": "github.com/sayouba2"
+                            "text": ""
                         },
                         "en": {
                             "title": "{{GitHub}}",
-                            "text": "github.com/sayouba2"
+                            "text": ""
                         }
                     }
                 },
@@ -94,17 +94,17 @@
                     "id": 3,
                     "faIcon": "fa-brands fa-linkedin",
                     "faIconColors": {"bg": "", "fill": ""},
-                    "label": "LinkedIn",
+                    "label": "Sayouba OUEDRAOGO",
                     "link": {"href": "https://linkedin.com/in/ouedraogo-sayouba-121722258", "tooltipString": "open_website"},
                     "copyToClipboardButton": false,
                     "locales": {
                         "fr": {
                             "title": "{{LinkedIn}}",
-                            "text": "linkedin.com/in/ouedraogo-sayouba-121722258"
+                            "text": ""
                         },
                         "en": {
                             "title": "{{LinkedIn}}",
-                            "text": "linkedin.com/in/ouedraogo-sayouba-121722258"
+                            "text": ""
                         }
                     }
                 },
@@ -118,11 +118,11 @@
                     "locales": {
                         "fr": {
                             "title": "{{Téléphone}}",
-                            "text": "+212 6 23 11 30 83"
+                            "text": ""
                         },
                         "en": {
                             "title": "{{Phone}}",
-                            "text": "+212 6 23 11 30 83"
+                            "text": ""
                         }
                     }
                 }
