@@ -17,6 +17,8 @@ nav.nav-header-mobile {
     div.left-tool-container, div.right-tool-container {
         position: absolute;
         top: 10px;
+        display: flex;
+        gap: 4px;
     }
 
     div.left-tool-container {

@@ -47,7 +47,7 @@
                     "categoryId": "ai",
                     "link": {"href": "", "tooltipString": ""},
                     "preview": {
-                        "screenshots": ["images/projects/smart_recruit.png"],
+                        "screenshots": ["images/projects/smart_recruit/1.png", "images/projects/smart_recruit/2.png", "images/projects/smart_recruit/3.png", "images/projects/smart_recruit/4.png", "images/projects/smart_recruit/5.png", "images/projects/smart_recruit/6.png", "images/projects/smart_recruit/7.png", "images/projects/smart_recruit/8.png", "images/projects/smart_recruit/9.png", "images/projects/smart_recruit/10.png", "images/projects/smart_recruit/11.png", "images/projects/smart_recruit/12.png", "images/projects/smart_recruit/13.png", "images/projects/smart_recruit/14.png", "images/projects/smart_recruit/15.png", "images/projects/smart_recruit/16.png", "images/projects/smart_recruit/17.png"],
                         "screenshotsAspectRatio": "16:9",
                         "links": [
                             {
@@ -79,7 +79,7 @@
                     "categoryId": "web",
                     "link": {"href": "", "tooltipString": ""},
                     "preview": {
-                        "screenshots": ["images/projects/smart_learning.png"],
+                        "screenshots": ["images/projects/smart_learning/1.png", "images/projects/smart_learning/2.png", "images/projects/smart_learning/3.png", "images/projects/smart_learning/4.png", "images/projects/smart_learning/5.png", "images/projects/smart_learning/6.png", "images/projects/smart_learning/7.png", "images/projects/smart_learning/8.png"],
                         "screenshotsAspectRatio": "16:9",
                         "links": [
                             {
@@ -163,7 +163,7 @@
                     "categoryId": "ai",
                     "link": {"href": "", "tooltipString": ""},
                     "preview": {
-                        "screenshots": ["images/projects/glaucoma_detection.png"],
+                        "screenshots": ["images/projects/glaucoma_detection/1.png", "images/projects/glaucoma_detection/2.png", "images/projects/glaucoma_detection/3.png", "images/projects/glaucoma_detection/4.png", "images/projects/glaucoma_detection/5.png", "images/projects/glaucoma_detection/6.png", "images/projects/glaucoma_detection/7.png", "images/projects/glaucoma_detection/8.png", "images/projects/glaucoma_detection/9.png", "images/projects/glaucoma_detection/10.png"],
                         "screenshotsAspectRatio": "16:9",
                         "links": [
                             {
