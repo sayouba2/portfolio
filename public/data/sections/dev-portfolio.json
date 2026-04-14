@@ -221,7 +221,7 @@
                     "categoryId": "ai",
                     "link": {"href": "", "tooltipString": ""},
                     "preview": {
-                        "screenshots": [],
+                        "screenshots": ["images/projects/ai_rag_agent/1.png", "images/projects/ai_rag_agent/2.png", "images/projects/ai_rag_agent/3.png", "images/projects/ai_rag_agent/4.png"],
                         "screenshotsAspectRatio": "16:9",
                         "links": [
                             {
@@ -253,8 +253,8 @@
                     "categoryId": "web",
                     "link": {"href": "", "tooltipString": ""},
                     "preview": {
-                        "screenshots": [],
-                        "screenshotsAspectRatio": "16:9",
+                        "screenshots": ["images/projects/chat_app/1.png", "images/projects/chat_app/2.png", "images/projects/chat_app/3.png", "images/projects/chat_app/4.png", "images/projects/chat_app/5.png", "images/projects/chat_app/6.png", "images/projects/chat_app/7.png", "images/projects/chat_app/8.png", "images/projects/chat_app/9.png", "images/projects/chat_app/10.png"],
+                        "screenshotsAspectRatio": "9:16",
                         "links": [
                             {
                                 "href": "https://github.com/sayouba2/chat_app",
