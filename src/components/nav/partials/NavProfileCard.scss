@@ -20,10 +20,10 @@ div.nav-profile-card {
 
     &-avatar {
         width: var(--avatar-size);
-        height: var(--avatar-size);
+        height: calc(var(--avatar-size) * 1.1);
         border: var(--border-size) solid var(--theme-card-background-accent);
-        border-radius: calc($standard-border-radius * 2);
-        border-top-right-radius: 0;
+        border-radius: 24px;
+        overflow: hidden;
     }
 
     &-status-circle {
