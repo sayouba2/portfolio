@@ -58,8 +58,8 @@
                     "id": 1,
                     "faIcon": "fa-regular fa-envelope",
                     "faIconColors": {"bg": "", "fill": ""},
-                    "label": "saykoodg677@gmail.com",
-                    "link": {"href": "mailto:saykoodg677@gmail.com", "tooltipString": "email_me"},
+                    "label": "sayouba.ouedraogo.pro@gmail.com",
+                    "link": {"href": "mailto:sayouba.ouedraogo.pro@gmail.com", "tooltipString": "email_me"},
                     "copyToClipboardButton": true,
                     "locales": {
                         "fr": {
