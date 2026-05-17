@@ -21,9 +21,9 @@
             "id": 1,
             "component": "ArticleContactForm",
             "settings": {
-                "email_js_public_key": "",
-                "email_js_service_id": "",
-                "email_js_template_id": ""
+                "email_js_public_key": "4o-UwuW0rilfQWEyY",
+                "email_js_service_id": "service_aagc54q",
+                "email_js_template_id": "template_q345liu"
             },
             "locales": {
                 "fr": {
