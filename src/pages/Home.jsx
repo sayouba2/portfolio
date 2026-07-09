@@ -262,13 +262,15 @@ function Journey() {
                     </Reveal>
                     <Reveal className="journey-col" delay={100}>
                         <h3 className="col-title">{L(ui.sections.honors)}</h3>
-                        <div className="card honor-card">
-                            <span className="trophy" aria-hidden="true">🏆</span>
-                            <div>
-                                <h4>{L(honors.highlight.title)}</h4>
-                                <p>{L(honors.highlight.text)}</p>
+                        {honors.highlights.map((h, i) => (
+                            <div className="card honor-card" key={i}>
+                                <span className="trophy" aria-hidden="true">🏆</span>
+                                <div>
+                                    <h4>{L(h.title)}</h4>
+                                    <p>{L(h.text)}</p>
+                                </div>
                             </div>
-                        </div>
+                        ))}
                         <div className="chips honor-chips">
                             {honors.badges.map((b, i) => <span className="chip" key={i}>{L(b)}</span>)}
                         </div>

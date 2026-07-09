@@ -305,8 +305,8 @@ export const featuredProjects = [
                 en: "React Native 0.81 / Expo SDK 54 app (React Navigation, Reanimated, SVG, expo-sqlite). Node.js / Express (ESM) backend exposing a REST API: every key (OpenAI, ElevenLabs, Twilio) stays server-side. Advanced prompt engineering: strict JSON schemas enforced on the model, explicit business rules, tolerant parsing and graceful fallbacks. Robustness: 24h rolling averages so a noisy reading can't block a stage transition, network retries, series downsampling. Progression rules are isolated as pure functions, testable without a database or UI.",
             },
             takeaway: {
-                fr: "Intégration d'IA fiable en production (sorties structurées, fallbacks), conception pour l'accessibilité et les contextes à faible connectivité, et pont entre matériel (IoT) et logiciel.",
-                en: "Reliable production AI integration (structured outputs, fallbacks), design for accessibility and low-connectivity contexts, and bridging hardware (IoT) and software.",
+                fr: "Intégration d'IA fiable en production (sorties structurées, fallbacks), conception pour l'accessibilité et les contextes à faible connectivité, et pont entre matériel (IoT) et logiciel. Projet lauréat du 1er prix de la 6e édition des Journées Entrepreneuriales de la Jeunesse Africaine (JEJA, AEBM Mohammedia).",
+                en: "Reliable production AI integration (structured outputs, fallbacks), design for accessibility and low-connectivity contexts, and bridging hardware (IoT) and software. Winner of the 1st prize at the 6th African Youth Entrepreneurship Days (JEJA, AEBM Mohammedia).",
             },
             stackGroups: [
                 { label: { fr: "Mobile", en: "Mobile" }, items: "React Native 0.81 · Expo SDK 54 · React Navigation · Reanimated · expo-sqlite" },
@@ -541,13 +541,22 @@ export const education = [
 ]
 
 export const honors = {
-    highlight: {
-        title: { fr: "Hackathon Ramadan IA — 1ère place", en: "Ramadan AI Hackathon — 1st place" },
-        text: {
-            fr: "Vainqueur régional avec Smart Recruit, une plateforme d'entretiens de recrutement menés par l'IA en temps réel.",
-            en: "Regional winner with Smart Recruit, a platform for real-time AI-led recruitment interviews.",
+    highlights: [
+        {
+            title: { fr: "Hackathon Ramadan IA — 1ère place", en: "Ramadan AI Hackathon — 1st place" },
+            text: {
+                fr: "Vainqueur régional avec Smart Recruit, une plateforme d'entretiens de recrutement menés par l'IA en temps réel. Organisé par le Ministère de la Transition Numérique et de la Réforme de l'Administration du Maroc.",
+                en: "Regional winner with Smart Recruit, a platform for real-time AI-led recruitment interviews. Organized by Morocco's Ministry of Digital Transition and Administration Reform.",
+            },
         },
-    },
+        {
+            title: { fr: "JEJA (6e édition) — 1er prix", en: "JEJA (6th edition) — 1st prize" },
+            text: {
+                fr: "Premier prix des Journées Entrepreneuriales de la Jeunesse Africaine avec AgriSmart, l'assistant agricole IoT + IA. Organisées par l'AEBM Mohammedia.",
+                en: "First prize at the African Youth Entrepreneurship Days with AgriSmart, the IoT + AI farming assistant. Organized by AEBM Mohammedia.",
+            },
+        },
+    ],
     badges: [
         { fr: "Top 5 — GCDxJIT CTF (30 équipes)", en: "Top 5 — GCDxJIT CTF (30 teams)" },
         { fr: "Top 5 national — Orange Digital Center Champions 2025", en: "National Top 5 — Orange Digital Center Champions 2025" },
