@@ -333,6 +333,7 @@ a:hover .arr-ur { transform: translate(3px, -3px); }
 .journey-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
 .col-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 22px; }
 .edu-card { padding: 24px; margin-bottom: 18px; }
+.edu-period { display: inline-block; margin-bottom: 10px; }
 .edu-card h4 { font-size: 1rem; margin-bottom: 4px; }
 .edu-inst { color: var(--blue); font-weight: 600; font-size: 0.86rem; margin-bottom: 8px; }
 .edu-card > p:last-child { color: var(--muted); font-size: 0.9rem; }

@@ -512,6 +512,7 @@ export const whatIDo = [
 
 export const education = [
     {
+        period: { fr: "2024 — aujourd'hui", en: "2024 — present" },
         title: { fr: "Cycle ingénieur — Réseaux et Systèmes d'Information", en: "Engineering degree — Networks & Information Systems" },
         institution: { fr: "Faculté des Sciences et Techniques, Marrakech", en: "Faculty of Sciences and Techniques, Marrakech" },
         text: {
@@ -520,6 +521,7 @@ export const education = [
         },
     },
     {
+        period: { fr: "2022 — 2024", en: "2022 — 2024" },
         title: { fr: "DEUST — Sciences et Techniques", en: "DEUST — Sciences and Techniques" },
         institution: { fr: "FST Settat", en: "FST Settat" },
         text: {
@@ -528,6 +530,7 @@ export const education = [
         },
     },
     {
+        period: { fr: "2019 — 2022", en: "2019 — 2022" },
         title: { fr: "Baccalauréat technique série C — Maths & Sciences physiques", en: "Technical Baccalaureate (C) — Maths & Physical Sciences" },
         institution: { fr: "Lycée Scientifique National, Bobo-Dioulasso", en: "Lycée Scientifique National, Bobo-Dioulasso" },
         text: {

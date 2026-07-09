@@ -253,6 +253,7 @@ function Journey() {
                         <h3 className="col-title">{L(ui.sections.education)}</h3>
                         {education.map((ed, i) => (
                             <div className="card edu-card" key={i}>
+                                <span className="chip chip-blue edu-period">{L(ed.period)}</span>
                                 <h4>{L(ed.title)}</h4>
                                 <p className="edu-inst">{L(ed.institution)}</p>
                                 <p>{L(ed.text)}</p>
