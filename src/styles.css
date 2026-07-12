@@ -175,21 +175,6 @@ a:hover .arr-ur { transform: translate(3px, -3px); }
 /* ---------- Hero ---------- */
 .hero { padding: calc(var(--nav-h) + 64px) 0 40px; }
 .hero-inner { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center; }
-.hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.84rem;
-    font-weight: 600;
-    color: var(--green);
-    background: var(--green-soft);
-    border-radius: 99px;
-    padding: 7px 16px;
-    margin-bottom: 24px;
-    animation: hero-up 0.6s 0.05s var(--ease) both;
-}
-.hero-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
-@keyframes pulse { 50% { opacity: 0.35; } }
 .hero h1 {
     font-size: clamp(1.9rem, 4.2vw, 2.9rem);
     font-weight: 800;
@@ -264,6 +249,38 @@ a:hover .arr-ur { transform: translate(3px, -3px); }
     font-size: 0.97rem;
 }
 .wid-body li::before { content: "⚡"; position: absolute; left: 0; }
+/* ---------- Cadre photo (bloc IA) ---------- */
+.photo-frame {
+    position: relative;
+    z-index: 0;
+    width: min(320px, 100%);
+    margin: 0 auto;
+}
+.photo-frame::before {
+    content: "";
+    position: absolute;
+    top: 14px;
+    right: -12px;
+    left: 14px;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius);
+    background: var(--blue-soft);
+    z-index: -1;
+}
+.photo-frame img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: var(--radius);
+}
+.photo-frame figcaption {
+    text-align: center;
+    margin-top: 14px;
+    line-height: 1.4;
+}
+.photo-frame figcaption strong { display: block; font-size: 1rem; }
+.photo-frame figcaption span { font-size: 0.86rem; font-weight: 600; color: var(--blue); }
+
 .stack-line { margin-top: 72px; text-align: center; }
 .stack-line p { font-weight: 700; margin-bottom: 16px; }
 .stack-line .chips { justify-content: center; }
@@ -611,8 +628,8 @@ a:hover .arr-ur { transform: translate(3px, -3px); }
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .reveal, .arr, .card, .btn { transition: none; }
-    .page-enter, .hero-badge, .hero h1, .hero-role, .hero-about,
-    .hero-socials, .hero-ctas, .hero-illu, .wave, .hero-badge .dot { animation: none; }
+    .page-enter, .hero h1, .hero-role, .hero-about,
+    .hero-socials, .hero-ctas, .hero-illu, .wave { animation: none; }
 }
 
 /* ---------- Responsive ---------- */

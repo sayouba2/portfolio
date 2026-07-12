@@ -19,7 +19,7 @@ export const site = {
     github: "https://github.com/sayouba2",
     linkedin: "https://linkedin.com/in/ouedraogo-sayouba-121722258",
     cvUrl: "mescv/CV_OUEDRAOGO_SAYOUBA_DEV.pdf",
-    photo: "images/pictures/profile.jpeg",
+    photo: "images/pictures/profile-web.jpg",
 }
 
 export const ui = {

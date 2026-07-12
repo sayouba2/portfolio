@@ -28,9 +28,6 @@ function Hero() {
         <section className="hero" id="accueil">
             <div className="container hero-inner">
                 <div className="hero-text">
-                    <span className="hero-badge">
-                        <span className="dot" aria-hidden="true" /> {L(site.status)} · {L(site.location)}
-                    </span>
                     <h1>
                         {L(ui.hero.hello)}{" "}
                         <span className="hero-name">{site.name}</span>{" "}
@@ -60,7 +57,13 @@ function Hero() {
                     </div>
                 </div>
                 <div className="hero-illu">
-                    <img src={asset("images/illustrations/developerActivity.svg")} alt="" width="540" height="405" />
+                    <figure className="photo-frame">
+                        <img src={asset(site.photo)} alt={site.name} width="320" height="320" />
+                        <figcaption>
+                            <strong>{site.name}</strong>
+                            <span>{L(site.role)}</span>
+                        </figcaption>
+                    </figure>
                 </div>
             </div>
         </section>
