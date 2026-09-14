@@ -12,14 +12,28 @@ export const site = {
         fr: "Je conçois et développe des produits web, mobiles et IA — de l'architecture backend à l'interface utilisateur.",
         en: "I design and build web, mobile and AI products — from backend architecture to user interface.",
     },
-    status: { fr: "Disponible pour un stage", en: "Available for an internship" },
+    status: { fr: "Recherche un stage PFE — février 2027", en: "Seeking a final-year internship — February 2027" },
     location: { fr: "Marrakech, Maroc", en: "Marrakech, Morocco" },
     email: "sayouba.ouedraogo.pro@gmail.com",
     phone: "+212 6 23 11 30 83",
     github: "https://github.com/sayouba2",
     linkedin: "https://linkedin.com/in/ouedraogo-sayouba-121722258",
-    cvUrl: "mescv/CV_OUEDRAOGO_SAYOUBA_DEV.pdf",
+    // CV bilingues : le helper L() choisit la version selon la langue du site.
+    cvUrl: { fr: "mescv/CV_OUEDRAOGO_SAYOUBA_Dev_FR.pdf", en: "mescv/CV_OUEDRAOGO_SAYOUBA_Dev_EN.pdf" },
+    cvUrlNet: { fr: "mescv/CV_OUEDRAOGO_SAYOUBA_Net_FR.pdf", en: "mescv/CV_OUEDRAOGO_SAYOUBA_Net_EN.pdf" },
     photo: "images/pictures/profile-web.jpg",
+}
+
+// Bandeau « Recherche PFE » affiché en haut du site.
+export const pfe = {
+    active: true,
+    label: { fr: "Recherche PFE", en: "Seeking PFE" },
+    text: {
+        fr: "Disponible pour un stage de fin d'études de 6 mois à partir de février 2027 — développement mobile & web, IA appliquée, ou réseaux & sécurité IT.",
+        en: "Available for a 6-month final-year internship from February 2027 — mobile & web development, applied AI, or networks & IT security.",
+    },
+    places: { fr: "Maroc · Remote / Hybride", en: "Morocco · Remote / Hybrid" },
+    cta: { fr: "Me contacter", en: "Get in touch" },
 }
 
 export const ui = {
@@ -34,7 +48,8 @@ export const ui = {
     hero: {
         hello: { fr: "Bonjour, je suis", en: "Hi, I'm" },
         seeProjects: { fr: "Voir mes projets", en: "See my projects" },
-        downloadCv: { fr: "Télécharger mon CV", en: "Download my resume" },
+        downloadCv: { fr: "CV Dev & IA", en: "Dev & AI resume" },
+        downloadCvNet: { fr: "CV Réseaux & Sécurité", en: "Networks & Security resume" },
         about: {
             fr: "Étudiant ingénieur à la FST Marrakech, je développe des applications web et mobiles et des systèmes intégrant l'IA — du schéma de base de données à l'interface. Formé par les CTF et les hackathons (1ère place au Hackathon Ramadan IA), j'aime les produits utiles, bien construits et sécurisés dès la conception.",
             en: "Engineering student at FST Marrakech, I build web and mobile applications and AI-powered systems — from the database schema to the interface. Shaped by CTFs and hackathons (1st place at the Ramadan AI Hackathon), I like products that are useful, well built and secure by design.",
@@ -104,6 +119,16 @@ export const ui = {
     footer: {
         credit: { fr: "Conçu et développé par Sayouba Ouedraogo", en: "Designed & built by Sayouba Ouedraogo" },
     },
+    // Libellés du dock : il annonce où l'on est dans la lecture.
+    dock: {
+        accueil: { fr: "Développeur Full Stack · Marrakech", en: "Full Stack Developer · Marrakech" },
+        competences: { fr: "Web · IA · Sécurité", en: "Web · AI · Security" },
+        experience: { fr: "Centrale Casablanca · Spheralis", en: "Centrale Casablanca · Spheralis" },
+        projets: { fr: "4 projets phares · 2 premières places", en: "4 featured projects · 2 first places" },
+        parcours: { fr: "FST Marrakech · distinctions", en: "FST Marrakech · honors" },
+        contact: { fr: "Disponible — stage PFE février 2027", en: "Available — internship from February 2027" },
+        cta: { fr: "Me contacter", en: "Get in touch" },
+    },
     categories: {
         web: { fr: "Web", en: "Web" },
         mobile: { fr: "Mobile", en: "Mobile" },
@@ -120,35 +145,35 @@ export const emailJs = {
 
 export const experiences = [
     {
-        id: "cmrpi",
-        role: { fr: "Stagiaire Développeur mobile et cybersécurité", en: "Mobile Development & Cybersecurity Intern" },
-        company: "CMRPI · EMC Cyberconfiance",
-        period: { fr: "Juil 2026 — en cours", en: "Jul 2026 — ongoing" },
+        id: "centrale-casa",
+        role: { fr: "Stagiaire Ingénieur logiciel — Data & aide à la décision", en: "Software Engineering Intern — Data & decision support" },
+        company: "École Centrale Casablanca",
+        period: { fr: "Août 2026 — en cours", en: "Aug 2026 — ongoing" },
         summary: {
-            fr: "Application mobile de signalement des cyberviolences pour enfants, bilingue FR/AR avec interface RTL, connectée à la ligne d'assistance nationale EMC.",
-            en: "Mobile app for children to report cyberviolence, bilingual FR/AR with an RTL interface, connected to the EMC national helpline.",
+            fr: "Plateforme interactive de visualisation et d'aide à la décision pour la surveillance et le contrôle des maladies infectieuses respiratoires au Maroc.",
+            en: "Interactive visualization and decision-support platform for the surveillance and control of respiratory infectious diseases in Morocco.",
         },
         bullets: [
             {
-                fr: "Conception et développement de l'app (Flutter) et de l'API (FastAPI), avec une architecture de signalement découplée de l'API tierce.",
-                en: "Designed and built the app (Flutter) and the API (FastAPI), with a reporting architecture decoupled from the third-party API.",
+                fr: "Conception des tableaux de bord d'indicateurs épidémiologiques, pensés pour être lus par des décideurs de santé publique et non par des data scientists.",
+                en: "Designed the epidemiological indicator dashboards, built to be read by public-health decision-makers rather than data scientists.",
             },
             {
-                fr: "Approche safety-by-design : orientation des enfants vers des canaux spécialisés plutôt qu'hébergement de contenus sensibles.",
-                en: "Safety-by-design approach: children are routed to specialized channels rather than hosting sensitive content.",
+                fr: "Construction du pipeline de données qui alimente la plateforme, du nettoyage des sources à l'agrégation par territoire et par période.",
+                en: "Built the data pipeline feeding the platform, from source cleaning to aggregation by territory and time period.",
             },
             {
-                fr: "Gestion de l'anonymat et protection des données de mineurs, en conformité avec la loi marocaine 09-08.",
-                en: "Anonymity handling and protection of minors' data, in compliance with Moroccan law 09-08.",
+                fr: "Déploiement et exploitation des services de la plateforme, en interaction directe avec l'équipe de recherche.",
+                en: "Deployed and operated the platform services, working directly with the research team.",
             },
         ],
-        tags: ["Flutter", "FastAPI", "FR/AR · RTL", "Safety-by-design"],
+        tags: ["Data visualization", "Dashboards", "Aide à la décision", "Santé publique"],
     },
     {
         id: "spheralis",
         role: { fr: "Stagiaire Développement full stack & Data — e-supply chain", en: "Data & Full stack Development Intern — e-supply chain" },
         company: "Spheralis",
-        period: { fr: "Juil 2025 — août 2025", en: "Jul 2025 — Aug 2025" },
+        period: { fr: "Juil. 2026", en: "Jul 2026" },
         summary: {
             fr: "Application web de gestion de stock remplaçant un suivi manuel sur Google Sheets, pour un prestataire e-commerce gérant plusieurs boutiques.",
             en: "Web-based inventory management application replacing manual Google Sheets tracking, for an e-commerce operator running several shops.",
@@ -172,6 +197,31 @@ export const experiences = [
             },
         ],
         tags: ["Python", "PostgreSQL", "Parsing PDF", "Metabase", "Docker"],
+    },
+    {
+        id: "cmrpi",
+        role: { fr: "Stagiaire Développeur mobile et cybersécurité", en: "Mobile Development & Cybersecurity Intern" },
+        company: "CMRPI · EMC Cyberconfiance",
+        period: { fr: "Juil. 2025 — août 2025", en: "Jul 2025 — Aug 2025" },
+        summary: {
+            fr: "Application mobile de signalement des cyberviolences pour enfants, bilingue FR/AR avec interface RTL, connectée à la ligne d'assistance nationale EMC.",
+            en: "Mobile app for children to report cyberviolence, bilingual FR/AR with an RTL interface, connected to the EMC national helpline.",
+        },
+        bullets: [
+            {
+                fr: "Conception et développement de l'app (Flutter) et de l'API (FastAPI), avec une architecture de signalement découplée de l'API tierce.",
+                en: "Designed and built the app (Flutter) and the API (FastAPI), with a reporting architecture decoupled from the third-party API.",
+            },
+            {
+                fr: "Approche safety-by-design : orientation des enfants vers des canaux spécialisés plutôt qu'hébergement de contenus sensibles.",
+                en: "Safety-by-design approach: children are routed to specialized channels rather than hosting sensitive content.",
+            },
+            {
+                fr: "Gestion de l'anonymat et protection des données de mineurs, en conformité avec la loi marocaine 09-08.",
+                en: "Anonymity handling and protection of minors' data, in compliance with Moroccan law 09-08.",
+            },
+        ],
+        tags: ["Flutter", "FastAPI", "FR/AR · RTL", "Safety-by-design"],
     },
 ]
 

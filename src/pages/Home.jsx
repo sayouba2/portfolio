@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { useLang, useL } from "../i18n.jsx"
-import { site, ui, experiences, featuredProjects, otherProjects, whatIDo, skills, education, honors, asset } from "../data/content.js"
+import { useL } from "../i18n.jsx"
+import { site, ui, pfe, experiences, featuredProjects, otherProjects, whatIDo, skills, education, honors, asset } from "../data/content.js"
 import Reveal from "../components/Reveal.jsx"
 import ContactForm from "../components/ContactForm.jsx"
 import { Lightbox } from "../components/Gallery.jsx"
@@ -24,49 +24,78 @@ const ICONS = {
 
 function Hero() {
     const L = useL()
+    // Le nom monte en deux temps : prénom, puis nom.
+    const [first, ...rest] = site.name.split(" ")
     return (
         <section className="hero" id="accueil">
             <div className="container hero-inner">
-                <div className="hero-text">
-                    <h1>
-                        {L(ui.hero.hello)}{" "}
-                        <span className="hero-name">{site.name}</span>{" "}
-                        <span className="wave" aria-hidden="true">👋</span>
-                    </h1>
-                    <p className="hero-role">{L(site.role)}</p>
-                    <p className="hero-about">{L(ui.hero.about)}</p>
-                    <div className="hero-socials">
-                        <a className="soc gh" href={site.github} target="_blank" rel="noreferrer" aria-label="GitHub">{ICONS.github}</a>
-                        <a className="soc li" href={site.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">{ICONS.linkedin}</a>
-                        <a className="soc ml" href={`mailto:${site.email}`} aria-label="E-mail">{ICONS.mail}</a>
-                    </div>
-                    <div className="hero-ctas">
-                        <a
-                            href="#projets"
-                            className="btn btn-primary"
-                            onClick={(e) => {
-                                e.preventDefault()
-                                document.getElementById("projets")?.scrollIntoView({ behavior: "smooth" })
-                            }}
-                        >
-                            {L(ui.hero.seeProjects)}
-                        </a>
-                        <a href={asset(site.cvUrl)} target="_blank" rel="noreferrer" className="btn btn-outline">
-                            {L(ui.hero.downloadCv)}
-                        </a>
-                    </div>
+                <figure className="photo-frame">
+                    <img src={asset(site.photo)} alt={site.name} width="132" height="132" />
+                </figure>
+
+                <span className="hero-status glass">
+                    <span className="dot" aria-hidden="true" />
+                    {L(site.status)}
+                </span>
+
+                <h1>
+                    <span className="line"><span>{first}</span></span>
+                    <span className="line"><span>{rest.join(" ")}</span></span>
+                </h1>
+
+                <p className="hero-role">{L(site.role)}</p>
+                <p className="hero-about">{L(ui.hero.about)}</p>
+
+                <div className="hero-socials">
+                    <a className="soc" href={site.github} target="_blank" rel="noreferrer" aria-label="GitHub">{ICONS.github}</a>
+                    <a className="soc" href={site.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">{ICONS.linkedin}</a>
+                    <a className="soc" href={`mailto:${site.email}`} aria-label="E-mail">{ICONS.mail}</a>
                 </div>
-                <div className="hero-illu">
-                    <figure className="photo-frame">
-                        <img src={asset(site.photo)} alt={site.name} width="320" height="320" />
-                        <figcaption>
-                            <strong>{site.name}</strong>
-                            <span>{L(site.role)}</span>
-                        </figcaption>
-                    </figure>
+
+                <div className="hero-ctas">
+                    <a
+                        href="#projets"
+                        className="btn btn-primary"
+                        onClick={(e) => {
+                            e.preventDefault()
+                            document.getElementById("projets")?.scrollIntoView({ behavior: "smooth" })
+                        }}
+                    >
+                        {L(ui.hero.seeProjects)}
+                    </a>
+                    <a href={asset(L(site.cvUrl))} target="_blank" rel="noreferrer" className="btn btn-outline">
+                        {L(ui.hero.downloadCv)}
+                    </a>
+                    <a href={asset(L(site.cvUrlNet))} target="_blank" rel="noreferrer" className="btn btn-outline">
+                        {L(ui.hero.downloadCvNet)}
+                    </a>
                 </div>
             </div>
         </section>
+    )
+}
+
+function PfeBanner() {
+    const L = useL()
+    if (!pfe.active) return null
+    return (
+        <div className="pfe-banner">
+            <Reveal className="pfe-inner card" role="status">
+                <span className="pfe-tag">{L(pfe.label)}</span>
+                <p className="pfe-text">{L(pfe.text)}</p>
+                <span className="pfe-places">{L(pfe.places)}</span>
+                <a
+                    className="pfe-cta"
+                    href="#contact"
+                    onClick={(e) => {
+                        e.preventDefault()
+                        document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
+                    }}
+                >
+                    {L(pfe.cta)}
+                </a>
+            </Reveal>
+        </div>
     )
 }
 
@@ -78,10 +107,7 @@ function WhatIDo() {
                 <SectionTitle sub={L(ui.sections.skillsSub)}>{L(ui.sections.skills)}</SectionTitle>
                 <div className="wid-list">
                     {whatIDo.map((block, i) => (
-                        <Reveal className={`wid-row ${i % 2 ? "flip" : ""}`} key={block.id}>
-                            <div className="wid-illu">
-                                <img src={asset(block.illustration)} alt="" loading="lazy" />
-                            </div>
+                        <Reveal className="wid-row card" key={block.id} delay={i * 90}>
                             <div className="wid-body">
                                 <h3>{L(block.title)}</h3>
                                 <div className="wid-logos">
@@ -212,10 +238,10 @@ function Projects() {
                                     <button
                                         className="other-cover"
                                         onClick={() => setGallery({ images: p.images, index: 0 })}
-                                        aria-label={`Voir les captures — ${L(p.title)}`}
+                                        aria-label={`${L(ui.project.gallery)} — ${L(p.title)}`}
                                     >
                                         <img src={asset(p.images[0])} alt="" loading="lazy" />
-                                        <span className="other-cover-count">{p.images.length} 📷</span>
+                                        <span className="other-cover-count">{p.images.length}</span>
                                     </button>
                                 )}
                                 <div className="other-body">
@@ -266,12 +292,9 @@ function Journey() {
                     <Reveal className="journey-col" delay={100}>
                         <h3 className="col-title">{L(ui.sections.honors)}</h3>
                         {honors.highlights.map((h, i) => (
-                            <div className="card honor-card" key={i}>
-                                <span className="trophy" aria-hidden="true">🏆</span>
-                                <div>
-                                    <h4>{L(h.title)}</h4>
-                                    <p>{L(h.text)}</p>
-                                </div>
+                            <div className="card card-award honor-card" key={i}>
+                                <h4>{L(h.title)}</h4>
+                                <p>{L(h.text)}</p>
                             </div>
                         ))}
                         <div className="chips honor-chips">
@@ -286,7 +309,6 @@ function Journey() {
 }
 
 function Contact() {
-    const { lang } = useLang()
     const L = useL()
     return (
         <section className="section" id="contact">
@@ -299,9 +321,8 @@ function Contact() {
                         <div className="contact-lines">
                             <a href={`tel:${site.phone.replace(/\s/g, "")}`}>{ICONS.phone} {site.phone}</a>
                             <a href={site.github} target="_blank" rel="noreferrer">{ICONS.github} github.com/sayouba2</a>
-                            <a href={site.linkedin} target="_blank" rel="noreferrer">{ICONS.linkedin} LinkedIn — {lang === "fr" ? "Sayouba Ouedraogo" : "Sayouba Ouedraogo"}</a>
+                            <a href={site.linkedin} target="_blank" rel="noreferrer">{ICONS.linkedin} LinkedIn</a>
                         </div>
-                        <img className="contact-illu" src={asset("images/illustrations/contactMailDark.svg")} alt="" loading="lazy" />
                     </Reveal>
                     <Reveal className="card form-card" delay={100}>
                         <ContactForm />
@@ -316,6 +337,7 @@ export default function Home() {
     return (
         <>
             <Hero />
+            <PfeBanner />
             <WhatIDo />
             <Experience />
             <Projects />

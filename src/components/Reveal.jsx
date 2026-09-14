@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 
 /** Enveloppe qui apparaît en fondu montant quand elle entre dans le viewport. */
-export default function Reveal({ children, as: Tag = "div", className = "", delay = 0 }) {
+export default function Reveal({ children, as: Tag = "div", className = "", delay = 0, ...rest }) {
     const ref = useRef(null)
     const [visible, setVisible] = useState(false)
 
@@ -30,6 +30,7 @@ export default function Reveal({ children, as: Tag = "div", className = "", dela
             ref={ref}
             className={`reveal ${visible ? "visible" : ""} ${className}`}
             style={delay ? { transitionDelay: `${delay}ms` } : undefined}
+            {...rest}
         >
             {children}
         </Tag>

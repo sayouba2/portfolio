@@ -70,13 +70,13 @@ export default function Nav() {
     useEffect(() => setOpen(false), [pathname])
 
     return (
-        <header className="nav">
+        <header className="nav glass">
             <ScrollProgress />
             <div className="nav-inner">
                 <Link to="/" className="nav-brand" onClick={() => setOpen(false)}>
-                    <span className="bracket">&lt;</span>
                     <span className="script">Sayouba</span>
-                    <span className="bracket">/&gt;</span>
+                    <span className="bracket">·</span>
+                    <span className="script">Ouedraogo</span>
                 </Link>
 
                 <nav className={`nav-links ${open ? "open" : ""}`} aria-label="Navigation principale">
@@ -107,7 +107,7 @@ export default function Nav() {
                     >
                         {lang === "fr" ? "EN" : "FR"}
                     </button>
-                    <a className="nav-cv" href={asset(site.cvUrl)} target="_blank" rel="noreferrer">
+                    <a className="nav-cv" href={asset(L(site.cvUrl))} target="_blank" rel="noreferrer">
                         {L(ui.nav.cv)}
                     </a>
                     <button

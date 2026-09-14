@@ -11,7 +11,7 @@ node_modules
 dist-ssr
 *.local
 dist/
-
+design/
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -24,3 +24,4 @@ dist/
 *.sw?
 *.sublime-workspace
 .gstack/
+.claude/
