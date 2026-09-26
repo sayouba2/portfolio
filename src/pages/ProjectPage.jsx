@@ -2,6 +2,8 @@ import { Link, useParams, Navigate } from "react-router-dom"
 import { useL } from "../i18n.jsx"
 import { ui, featuredProjects, screensFor } from "../data/content.js"
 import Showcase from "../components/Showcase.jsx"
+import { useHead } from "../components/useHead.js"
+import { homeHead, projectHead } from "../seo.js"
 
 /** Une ligne de l'étude de cas : l'intitulé en marge, le texte à droite. */
 function Block({ title, className = "", children }) {
@@ -18,6 +20,8 @@ export default function ProjectPage() {
     const { slug } = useParams()
 
     const index = featuredProjects.findIndex((p) => p.slug === slug)
+    // Appelé avant la redirection : un hook ne se saute pas.
+    useHead(index === -1 ? homeHead(L) : projectHead(featuredProjects[index], L))
     if (index === -1) return <Navigate to="/" replace />
 
     const project = featuredProjects[index]

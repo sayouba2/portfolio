@@ -7,6 +7,8 @@ import Showcase from "../components/Showcase.jsx"
 import Modal from "../components/Modal.jsx"
 import ContactForm from "../components/ContactForm.jsx"
 import Scoreboard from "../components/Scoreboard.jsx"
+import { useHead } from "../components/useHead.js"
+import { homeHead } from "../seo.js"
 
 // three.js et React Three Fiber ne servent qu'à l'ouverture : chargés à part,
 // ils ne retardent pas l'affichage du reste de la page.
@@ -118,6 +120,7 @@ export default function Home() {
     const [copyRef, copyTop] = useCopyTop()
     const heroRef = useRef(null)
     useHeroDepth(heroRef)
+    useHead(homeHead(L))
 
     // Projets montrés avec leurs captures : les phares (avec résumé), puis les
     // autres dépôts qui en ont. Ceux sans capture restent dans la liste finale.

@@ -9,6 +9,13 @@ export const asset = (path) => import.meta.env.BASE_URL + path.replace(/^\//, ""
 
 export const site = {
     name: "Sayouba Ouedraogo",
+    // Adresse publique, sans barre finale : base des URL canoniques et du sitemap.
+    url: "https://portfolio.sayouba.com",
+    // Description pour Google et les aperçus de partage (~150 caractères max).
+    description: {
+        fr: "Sayouba Ouedraogo, développeur full stack (web, mobile, IA) : projets, stages et hackathons. Recherche un stage PFE à partir de février 2027.",
+        en: "Sayouba Ouedraogo, full stack developer (web, mobile, AI): projects, internships and hackathons. Seeking a final-year internship from February 2027.",
+    },
     role: { fr: "Développeur Full Stack", en: "Full Stack Developer" },
     tagline: {
         fr: "Je conçois et développe des produits web, mobiles et IA — de l'architecture backend à l'interface utilisateur.",
