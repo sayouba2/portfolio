@@ -1,6 +1,6 @@
 # Portfolio — Sayouba Ouedraogo
 
-Portfolio personnel développé avec **React** et **Bootstrap 5**, déployé sur GitHub Pages.
+Portfolio personnel développé avec **React**, déployé sur GitHub Pages.
 
 ## A propos
 
@@ -11,8 +11,10 @@ Etudiant ingénieur en informatique à la FST de Marrakech, passionné par le **
 
 ## Stack technique
 
-- React 18 + Vite
-- Bootstrap 5 + SCSS
+- React 19 + Vite, React Router, CSS sans framework (`src/styles.css`)
+- Ouverture en WebGL : three.js + React Three Fiber (`src/components/hero/`), chargée à part
+- Navigation en verre réfractant : `@liquidglassjs/react`
+- Contenu bilingue FR/EN centralisé dans `src/data/content.js`
 - Déploiement automatique via GitHub Actions → GitHub Pages
 - Formulaire de contact via EmailJS (sans backend)
 

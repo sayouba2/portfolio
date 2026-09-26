@@ -69,7 +69,7 @@ export default function ContactForm() {
             {status === "error" && <p className="form-note error">{L(ui.form.error)}</p>}
             {status === "success" && <p className="form-note success">{L(ui.form.success)}</p>}
 
-            <button type="submit" className="btn btn-primary" disabled={status === "sending"}>
+            <button type="submit" className="btn" disabled={status === "sending"}>
                 {status === "sending" ? L(ui.form.sending) : L(ui.form.send)}
             </button>
         </form>

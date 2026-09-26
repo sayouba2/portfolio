@@ -1,3 +1,5 @@
+import screens from "./screens.json"
+
 // Tout le contenu du site, bilingue FR/EN.
 // Chaque chaîne localisée est un objet { fr, en } résolu par le helper L() de i18n.
 
@@ -21,7 +23,8 @@ export const site = {
     // CV bilingues : le helper L() choisit la version selon la langue du site.
     cvUrl: { fr: "mescv/CV_OUEDRAOGO_SAYOUBA_Dev_FR.pdf", en: "mescv/CV_OUEDRAOGO_SAYOUBA_Dev_EN.pdf" },
     cvUrlNet: { fr: "mescv/CV_OUEDRAOGO_SAYOUBA_Net_FR.pdf", en: "mescv/CV_OUEDRAOGO_SAYOUBA_Net_EN.pdf" },
-    photo: "images/pictures/profile-web.jpg",
+    // Portrait détouré pour la scène d'ouverture (WebP tiré de profile.png).
+    portrait: "images/pictures/portrait.webp",
 }
 
 // Bandeau « Recherche PFE » affiché en haut du site.
@@ -38,45 +41,12 @@ export const pfe = {
 
 export const ui = {
     nav: {
-        experience: { fr: "Expérience", en: "Experience" },
         projects: { fr: "Projets", en: "Projects" },
-        skills: { fr: "Compétences", en: "Skills" },
         journey: { fr: "Parcours", en: "Background" },
         contact: { fr: "Contact", en: "Contact" },
         cv: { fr: "CV", en: "Resume" },
-    },
-    hero: {
-        hello: { fr: "Bonjour, je suis", en: "Hi, I'm" },
-        seeProjects: { fr: "Voir mes projets", en: "See my projects" },
-        downloadCv: { fr: "CV Dev & IA", en: "Dev & AI resume" },
-        downloadCvNet: { fr: "CV Réseaux & Sécurité", en: "Networks & Security resume" },
-        about: {
-            fr: "Étudiant ingénieur à la FST Marrakech, je développe des applications web et mobiles et des systèmes intégrant l'IA — du schéma de base de données à l'interface. Formé par les CTF et les hackathons (1ère place au Hackathon Ramadan IA), j'aime les produits utiles, bien construits et sécurisés dès la conception.",
-            en: "Engineering student at FST Marrakech, I build web and mobile applications and AI-powered systems — from the database schema to the interface. Shaped by CTFs and hackathons (1st place at the Ramadan AI Hackathon), I like products that are useful, well built and secure by design.",
-        },
-    },
-    sections: {
-        experience: { fr: "Expérience", en: "Experience" },
-        featured: { fr: "Projets phares", en: "Featured projects" },
-        featuredSub: {
-            fr: "Quatre projets qui montrent comment je conçois : du problème à la solution.",
-            en: "Four projects that show how I build: from problem to solution.",
-        },
-        otherProjects: { fr: "Autres projets", en: "More projects" },
-        skills: { fr: "Ce que je fais", en: "What I do" },
-        skillsSub: {
-            fr: "Trois terrains de jeu, une même exigence : des produits complets qui fonctionnent en vrai.",
-            en: "Three playgrounds, one standard: complete products that work in the real world.",
-        },
-        stackTitle: { fr: "Technologies principales", en: "Core technologies" },
-        journey: { fr: "Formation & distinctions", en: "Education & honors" },
-        education: { fr: "Formation", en: "Education" },
-        honors: { fr: "Distinctions", en: "Honors" },
-        contact: { fr: "Contact", en: "Contact" },
-        contactSub: {
-            fr: "Un projet, une opportunité de stage ou simplement une question ? Écrivez-moi.",
-            en: "A project, an internship opportunity or just a question? Drop me a line.",
-        },
+        home: { fr: "Accueil", en: "Home" },
+        sections: { fr: "Sections", en: "Sections" },
     },
     project: {
         back: { fr: "Tous les projets", en: "All projects" },
@@ -85,16 +55,11 @@ export const ui = {
         solution: { fr: "Solution", en: "Solution" },
         features: { fr: "Fonctionnalités clés", en: "Key features" },
         architecture: { fr: "Architecture & choix techniques", en: "Architecture & technical choices" },
-        gallery: { fr: "Aperçu", en: "Preview" },
         takeaway: { fr: "Ce que ce projet démontre", en: "What this project demonstrates" },
-        stack: { fr: "Stack", en: "Stack" },
         next: { fr: "Projet suivant", en: "Next project" },
-        readCase: { fr: "Lire l'étude de cas", en: "Read the case study" },
-        live: { fr: "Aperçu en direct", en: "Live preview" },
         visit: { fr: "Visiter le site", en: "Visit the site" },
         online: { fr: "En ligne", en: "Live" },
         code: { fr: "Code source", en: "Source code" },
-        photoOf: { fr: "sur", en: "of" },
     },
     form: {
         name: { fr: "Nom", en: "Name" },
@@ -119,21 +84,60 @@ export const ui = {
     footer: {
         credit: { fr: "Conçu et développé par Sayouba Ouedraogo", en: "Designed & built by Sayouba Ouedraogo" },
     },
-    // Libellés du dock : il annonce où l'on est dans la lecture.
-    dock: {
-        accueil: { fr: "Développeur Full Stack · Marrakech", en: "Full Stack Developer · Marrakech" },
-        competences: { fr: "Web · IA · Sécurité", en: "Web · AI · Security" },
-        experience: { fr: "Centrale Casablanca · Spheralis", en: "Centrale Casablanca · Spheralis" },
-        projets: { fr: "4 projets phares · 2 premières places", en: "4 featured projects · 2 first places" },
-        parcours: { fr: "FST Marrakech · distinctions", en: "FST Marrakech · honors" },
-        contact: { fr: "Disponible — stage PFE février 2027", en: "Available — internship from February 2027" },
-        cta: { fr: "Me contacter", en: "Get in touch" },
+    // Proposition A — « Sous la surface ».
+    craft: { fr: "Ce que je construis", en: "What I build" },
+    path: {
+        // Le saut de ligne est rendu par `white-space: pre-line` sur .title.
+        title: { fr: "Expériences\n& formation", en: "Experience\n& education" },
+        sub: {
+            fr: "Mon parcours en historique de commits : la formation sur la branche principale, les stages en branches, les distinctions en tags. Survole un commit pour son résumé, clique pour le détail.",
+            en: "My path as a commit history: education on the main branch, internships as branches, honors as tags. Hover a commit for its summary, click for the details.",
+        },
+        // La légende du graphe : un recruteur n'a pas à connaître git pour le lire.
+        legend: {
+            stage: { fr: "Stages — expérience professionnelle", en: "Internships — professional experience" },
+            formation: { fr: "Formation", en: "Education" },
+            tag: { fr: "Distinctions", en: "Honors" },
+        },
+        // Préfixe des branches de stage : c'est un nom de branche git, il suit la langue.
+        branch: { fr: "stage", en: "internship" },
+    },
+    work: {
+        title: { fr: "Projets", en: "Projects" },
+        sub: {
+            fr: "Les vraies interfaces, sans recadrage. Clique sur une capture pour l'ouvrir — en taille réelle si tu veux lire chaque détail.",
+            en: "The real interfaces, uncropped. Click a screenshot to open it — at actual size if you want to read every detail.",
+        },
+        summary: { fr: "Lire le résumé", en: "Read the summary" },
+        summaryKicker: { fr: "Résumé", en: "Summary" },
+        fullCase: { fr: "Étude de cas complète", en: "Full case study" },
+        others: { fr: "Autres dépôts", en: "Other repositories" },
+        visit: { fr: "Visiter", en: "Visit" },
+        code: { fr: "Code", en: "Code" },
+    },
+    viewer: {
+        actualSize: { fr: "Taille réelle (1:1)", en: "Actual size (1:1)" },
+        fit: { fr: "Ajuster à l'écran", en: "Fit to screen" },
+        enlarge: { fr: "Agrandir", en: "Enlarge" },
+        shot: { fr: "capture", en: "screenshot" },
+        more: { fr: "Autres captures de", en: "More screenshots of" },
+        prev: { fr: "Capture précédente", en: "Previous screenshot" },
+        next: { fr: "Capture suivante", en: "Next screenshot" },
+        close: { fr: "Fermer", en: "Close" },
+    },
+    hero: {
+        cta: { fr: "Regarder sous le capot", en: "Look under the hood" },
+        cv: { fr: "Télécharger le CV", en: "Download my resume" },
+    },
+    contact: {
+        title: { fr: "Remonter à la surface", en: "Back to the surface" },
+        phone: { fr: "Téléphone", en: "Phone" },
+        location: { fr: "Basé à", en: "Based in" },
     },
     categories: {
         web: { fr: "Web", en: "Web" },
         mobile: { fr: "Mobile", en: "Mobile" },
         ai: { fr: "IA", en: "AI" },
-        all: { fr: "Tous", en: "All" },
     },
 }
 
@@ -225,7 +229,7 @@ export const experiences = [
     },
 ]
 
-export const featuredProjects = [
+const allFeaturedProjects = [
     {
         slug: "barakabox",
         title: "BarakaBox",
@@ -409,7 +413,7 @@ export const featuredProjects = [
     },
 ]
 
-export const otherProjects = [
+const allOtherProjects = [
     {
         id: "smart-learning",
         title: { fr: "Smart Learning — Plateforme e-learning", en: "Smart Learning — E-learning platform" },
@@ -460,40 +464,38 @@ export const otherProjects = [
     
 ]
 
-export const skills = {
-    domains: [
-        {
-            icon: "🖥️",
-            title: { fr: "Développement web", en: "Web development" },
-            text: { fr: "React, Laravel, Node.js/Express, TailwindCSS — du site vitrine à la marketplace complète.", en: "React, Laravel, Node.js/Express, TailwindCSS — from simple sites to full marketplaces." },
-        },
-        {
-            icon: "📱",
-            title: { fr: "Développement mobile", en: "Mobile development" },
-            text: { fr: "Flutter et React Native/Expo, avec publication d'apps complètes (offline, notifications, RTL).", en: "Flutter and React Native/Expo, shipping complete apps (offline, notifications, RTL)." },
-        },
-        {
-            icon: "🤖",
-            title: { fr: "IA & automatisation", en: "AI & automation" },
-            text: { fr: "Intégration LLM (GPT-4o, RAG), vision par ordinateur, prompt engineering avec sorties structurées.", en: "LLM integration (GPT-4o, RAG), computer vision, prompt engineering with structured outputs." },
-        },
-        {
-            icon: "🔌",
-            title: { fr: "Backend & APIs", en: "Backend & APIs" },
-            text: { fr: "FastAPI, Spring Boot, Express — API-First (OpenAPI), microservices, temps réel WebSocket.", en: "FastAPI, Spring Boot, Express — API-First (OpenAPI), microservices, real-time WebSocket." },
-        },
-        {
-            icon: "🗄️",
-            title: { fr: "Bases de données", en: "Databases" },
-            text: { fr: "PostgreSQL, MySQL, Redis, SQLite — modélisation métier et historique comme source de vérité.", en: "PostgreSQL, MySQL, Redis, SQLite — business modeling with history as the source of truth." },
-        },
-        {
-            icon: "🛠️",
-            title: { fr: "DevOps & outils", en: "DevOps & tools" },
-            text: { fr: "Docker/Compose, Nginx, Railway, Git/GitHub — déploiements conteneurisés avec healthchecks.", en: "Docker/Compose, Nginx, Railway, Git/GitHub — containerized deployments with healthchecks." },
-        },
-    ],
-    stack: ["Python", "JavaScript / TypeScript", "Java", "PHP", "React", "Flutter", "FastAPI", "Spring Boot", "PostgreSQL", "Docker"],
+/**
+ * Projets retirés de la version en ligne. Filtrés ici plutôt que supprimés :
+ * AgriSmart reviendra quand sa version finale sera prête (c'est un prototype),
+ * et le contenu reste disponible si l'un d'eux doit réapparaître.
+ */
+const RETIRED = new Set(["barakabox", "agrismart", "smart-learning", "chat-app"])
+export const featuredProjects = allFeaturedProjects.filter((p) => !RETIRED.has(p.slug))
+export const otherProjects = allOtherProjects.filter((p) => !RETIRED.has(p.id))
+
+/**
+ * Captures retravaillées : barre de favoris du navigateur recadrée, WebP en
+ * pleine résolution (la taille réelle, pour l'agrandissement) et en 1200 px
+ * pour la page. Les dimensions servent à réserver la place exacte.
+ */
+const SCREEN_DIRS = { smartattend: "smart_attend", "smart-recruit": "smart_recruit", glaucoma: "glaucoma_detection" }
+// L'ordre de présentation : la capture la plus parlante d'abord ; les doublons écartés.
+const SCREEN_ORDER = {
+    smartattend: [2, 6, 10, 5, 7, 3, 4, 9, 8, 1],
+    "smart-recruit": [1, 6, 11, 12, 14, 16, 4, 8, 7, 9, 10, 5, 13, 15, 17, 2, 3],
+    glaucoma: [7, 1, 6, 4, 8, 5, 9, 2, 3], // la n° 10 est la version anglaise de la n° 1
+}
+export function screensFor(key) {
+    const dir = SCREEN_DIRS[key]
+    const byN = new Map((screens[key] ?? []).map((i) => [i.n, i]))
+    return (SCREEN_ORDER[key] ?? []).map((n) => {
+        const i = byN.get(n)
+        return i && {
+            n, w: i.w, h: i.h,
+            full: `images/projects/${dir}/web/${n}.webp`,
+            page: `images/projects/${dir}/web/${n}-1200.webp`,
+        }
+    }).filter(Boolean)
 }
 
 // Blocs illustrés « Ce que je fais » (illustrations MIT de developerFolio, logos devicon)
@@ -562,6 +564,7 @@ export const whatIDo = [
 
 export const education = [
     {
+        id: "fst-marrakech",
         period: { fr: "2024 — aujourd'hui", en: "2024 — present" },
         title: { fr: "Cycle ingénieur — Réseaux et Systèmes d'Information", en: "Engineering degree — Networks & Information Systems" },
         institution: { fr: "Faculté des Sciences et Techniques, Marrakech", en: "Faculty of Sciences and Techniques, Marrakech" },
@@ -571,6 +574,7 @@ export const education = [
         },
     },
     {
+        id: "fst-settat",
         period: { fr: "2022 — 2024", en: "2022 — 2024" },
         title: { fr: "DEUST — Sciences et Techniques", en: "DEUST — Sciences and Techniques" },
         institution: { fr: "FST Settat", en: "FST Settat" },
@@ -580,6 +584,7 @@ export const education = [
         },
     },
     {
+        id: "lycee-bobo",
         period: { fr: "2019 — 2022", en: "2019 — 2022" },
         title: { fr: "Baccalauréat technique série C — Maths & Sciences physiques", en: "Technical Baccalaureate (C) — Maths & Physical Sciences" },
         institution: { fr: "Lycée Scientifique National, Bobo-Dioulasso", en: "Lycée Scientifique National, Bobo-Dioulasso" },

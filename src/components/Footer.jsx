@@ -5,13 +5,13 @@ export default function Footer() {
     const L = useL()
     return (
         <footer className="footer">
-            <div className="container footer-inner">
-                <span className="meta">© 2026 — {L(ui.footer.credit)}</span>
-                <div className="footer-links">
-                    <a className="meta" href={site.github} target="_blank" rel="noreferrer">GitHub</a>
-                    <a className="meta" href={site.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
-                    <a className="meta" href={`mailto:${site.email}`}>{site.email}</a>
-                </div>
+            <div className="footer-inner">
+                <span>© 2026 — {L(ui.footer.credit)}</span>
+                <span className="footer-links">
+                    <a href={site.github} target="_blank" rel="noreferrer">GitHub</a>
+                    <a href={site.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+                    <a href={`mailto:${site.email}`}>{site.email}</a>
+                </span>
             </div>
         </footer>
     )

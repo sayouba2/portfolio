@@ -16,7 +16,7 @@ export default [
                 sourceType: 'module',
             },
         },
-        settings: { react: { version: '18.3' } },
+        settings: { react: { version: '19.0' } },
         plugins: {
             react,
             'react-hooks': reactHooks,
@@ -29,5 +29,11 @@ export default [
             ...reactHooks.configs.recommended.rules,
             'react/prop-types': 'off',
         },
+    },
+    {
+        // Sous <Canvas>, les éléments JSX sont des objets three.js (mesh,
+        // planeGeometry…), pas du DOM : leurs props ne sont pas des attributs HTML.
+        files: ['src/components/hero/**/*.jsx'],
+        rules: { 'react/no-unknown-property': 'off' },
     },
 ]

@@ -1,125 +1,56 @@
-import { useEffect, useRef, useState } from "react"
 import { Link, useLocation } from "react-router-dom"
+import { LiquidGlass } from "@liquidglassjs/react"
 import { useLang, useL } from "../i18n.jsx"
 import { site, ui, asset } from "../data/content.js"
 
 const LINKS = [
-    { id: "competences", label: ui.nav.skills },
-    { id: "experience", label: ui.nav.experience },
-    { id: "projets", label: ui.nav.projects },
     { id: "parcours", label: ui.nav.journey },
+    { id: "projets", label: ui.nav.projects },
     { id: "contact", label: ui.nav.contact },
 ]
 
-// Barre de lecture au motif tissé : révèle la bande au fil du défilement.
-function ScrollProgress() {
-    const ref = useRef(null)
-
-    useEffect(() => {
-        let raf = 0
-        const update = () => {
-            raf = 0
-            const doc = document.documentElement
-            const max = doc.scrollHeight - window.innerHeight
-            const p = max > 0 ? Math.min(window.scrollY / max, 1) : 0
-            if (ref.current) ref.current.style.clipPath = `inset(0 ${100 - p * 100}% 0 0)`
-        }
-        const onScroll = () => { if (!raf) raf = requestAnimationFrame(update) }
-        update()
-        window.addEventListener("scroll", onScroll, { passive: true })
-        window.addEventListener("resize", onScroll)
-        return () => {
-            window.removeEventListener("scroll", onScroll)
-            window.removeEventListener("resize", onScroll)
-            if (raf) cancelAnimationFrame(raf)
-        }
-    }, [])
-
-    return <div className="scroll-progress" ref={ref} aria-hidden="true" />
-}
-
+/** Une pastille de vrai verre : elle réfracte la page qui défile dessous. */
 export default function Nav() {
     const L = useL()
     const { lang, setLang } = useLang()
     const { pathname } = useLocation()
-    const [active, setActive] = useState("")
-    const [open, setOpen] = useState(false)
     const onHome = pathname === "/"
 
-    // Scroll-spy : met en évidence le lien de la section visible.
-    useEffect(() => {
-        if (!onHome) {
-            setActive("")
-            return
+    // Sur l'accueil, on défile jusqu'à la section sans repasser par le routeur ;
+    // ailleurs, le lien ramène à l'accueil et ScrollManager fait le reste.
+    const scrollTo = (id) => (e) => {
+        if (!onHome) return
+        e.preventDefault()
+        if (id) {
+            document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+            history.replaceState(null, "", `#${id}`)
+        } else {
+            window.scrollTo({ top: 0, behavior: "smooth" })
+            history.replaceState(null, "", import.meta.env.BASE_URL)
         }
-        const observer = new IntersectionObserver(
-            (entries) => {
-                for (const entry of entries) {
-                    if (entry.isIntersecting) setActive(entry.target.id)
-                }
-            },
-            { rootMargin: "-40% 0px -55% 0px" }
-        )
-        LINKS.forEach(({ id }) => {
-            const el = document.getElementById(id)
-            if (el) observer.observe(el)
-        })
-        return () => observer.disconnect()
-    }, [onHome])
-
-    useEffect(() => setOpen(false), [pathname])
+    }
 
     return (
-        <header className="nav glass">
-            <ScrollProgress />
-            <div className="nav-inner">
-                <Link to="/" className="nav-brand" onClick={() => setOpen(false)}>
-                    <span className="script">Sayouba</span>
-                    <span className="bracket">·</span>
-                    <span className="script">Ouedraogo</span>
-                </Link>
-
-                <nav className={`nav-links ${open ? "open" : ""}`} aria-label="Navigation principale">
+        <LiquidGlass className="nav" radius={999} profile="circle" strength={14} chroma={0.25} behind="#main">
+            {/* Liquid Glass empile ses couches (surface, teinte, liseré) en
+                position absolue : le contenu doit vivre dans ps-glass__content,
+                sinon il est peint dessous. */}
+            <div className="ps-glass__content nav-inner">
+                <Link to="/" className="nav-brand" onClick={scrollTo(null)} aria-label={L(ui.nav.home)}>S<span>·</span>O</Link>
+                <nav className="nav-links" aria-label={L(ui.nav.sections)}>
                     {LINKS.map(({ id, label }) => (
-                        <a
-                            key={id}
-                            href={`/#${id}`}
-                            className={active === id ? "active" : ""}
-                            onClick={(e) => {
-                                setOpen(false)
-                                if (onHome) {
-                                    e.preventDefault()
-                                    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
-                                    history.replaceState(null, "", `#${id}`)
-                                }
-                            }}
-                        >
-                            {L(label)}
-                        </a>
+                        <Link key={id} to={`/#${id}`} onClick={scrollTo(id)}>{L(label)}</Link>
                     ))}
                 </nav>
-
-                <div className="nav-actions">
-                    <button
-                        className="lang-toggle"
-                        onClick={() => setLang(lang === "fr" ? "en" : "fr")}
-                        aria-label={lang === "fr" ? "Switch to English" : "Passer en français"}
-                    >
-                        {lang === "fr" ? "EN" : "FR"}
-                    </button>
-                    <a className="nav-cv" href={asset(L(site.cvUrl))} target="_blank" rel="noreferrer">
-                        {L(ui.nav.cv)}
-                    </a>
-                    <button
-                        className={`nav-burger ${open ? "open" : ""}`}
-                        onClick={() => setOpen(!open)}
-                        aria-label="Menu"
-                        aria-expanded={open}
-                    >
-                        <span /><span /><span />
-                    </button>
-                </div>
+                <button
+                    className="nav-lang"
+                    onClick={() => setLang(lang === "fr" ? "en" : "fr")}
+                    aria-label={lang === "fr" ? "Switch to English" : "Passer en français"}
+                >
+                    {lang === "fr" ? "EN" : "FR"}
+                </button>
+                <a className="nav-cv" href={asset(L(site.cvUrl))} target="_blank" rel="noreferrer">{L(ui.nav.cv)}</a>
             </div>
-        </header>
+        </LiquidGlass>
     )
 }

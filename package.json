@@ -11,14 +11,18 @@
     },
     "dependencies": {
         "@emailjs/browser": "^4.4.1",
-        "react": "^18.3.1",
-        "react-dom": "^18.3.1",
-        "react-router-dom": "^7.18.1"
+        "@liquidglassjs/core": "^0.5.3",
+        "@liquidglassjs/react": "^0.5.3",
+        "@react-three/fiber": "^9.8.1",
+        "react": "^19.3.0",
+        "react-dom": "^19.3.0",
+        "react-router-dom": "^7.18.1",
+        "three": "^0.186.0"
     },
     "devDependencies": {
         "@eslint/js": "^9.9.0",
-        "@types/react": "^18.3.3",
-        "@types/react-dom": "^18.3.0",
+        "@types/react": "^19.3.0",
+        "@types/react-dom": "^19.3.0",
         "@vitejs/plugin-react": "^4.3.1",
         "eslint": "^9.9.0",
         "eslint-plugin-react": "^7.35.0",
