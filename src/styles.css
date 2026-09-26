@@ -300,7 +300,7 @@ a { color: inherit; }
 .cp-dots i.on { background: var(--seaglass); box-shadow: 0 0 10px rgba(134, 227, 206, .6); }
 .cp-row.first .cp-dots i.on { background: var(--lantern); box-shadow: 0 0 12px rgba(243, 178, 122, .7); }
 /* Tant que la ligne n'est pas apparue, le classement reste éteint : il s'allume en entrant. */
-.reveal-on .cp-row:not(.is-in) .cp-dots i.on { background: rgba(230, 239, 236, .14); box-shadow: none; }
+.reveal-on .cp-row:not([data-in]) .cp-dots i.on { background: rgba(230, 239, 236, .14); box-shadow: none; }
 .cp-field figcaption { font-family: var(--mono); font-size: .72rem; color: var(--silt); letter-spacing: .06em; }
 
 /* ---------- Projets : les vraies captures ---------- */
@@ -527,7 +527,7 @@ a { color: inherit; }
    l'utilisateur préfère moins d'animations, rien n'est masqué. Elles se
    rejouent à chaque passage : un élément sorti par le haut (data-side="above")
    revient par le haut. --d est le décalage de cascade calculé à l'entrée.
-   Dans chaque variante, la règle « above » précède « .is-in » (même poids). */
+   Dans chaque variante, la règle « above » précède « [data-in] » (même poids). */
 .reveal-on [data-reveal] {
     opacity: 0;
     transform: translateY(28px);
@@ -536,7 +536,7 @@ a { color: inherit; }
     transition-delay: var(--d, 0ms);
 }
 .reveal-on [data-reveal][data-side="above"] { transform: translateY(-28px); }
-.reveal-on [data-reveal].is-in { opacity: 1; transform: none; filter: none; }
+.reveal-on [data-reveal][data-in] { opacity: 1; transform: none; filter: none; }
 /* Grands titres : ils émergent d'une ligne de flottaison posée sous eux. */
 .reveal-on [data-reveal="title"] {
     opacity: 1;
@@ -548,17 +548,17 @@ a { color: inherit; }
 }
 /* Revenant par le haut, ils descendent d'une ligne posée au-dessus d'eux. */
 .reveal-on [data-reveal="title"][data-side="above"] { transform: translateY(-100%); clip-path: inset(100% -5% 0 -5%); }
-.reveal-on [data-reveal="title"].is-in { transform: none; clip-path: inset(-20% -5% -12% -5%); }
+.reveal-on [data-reveal="title"][data-in] { transform: none; clip-path: inset(-20% -5% -12% -5%); }
 /* Captures : elles montent sans flou (trop coûteux sur de grandes images). */
 .reveal-on [data-reveal="frame"] { filter: none; transform: translateY(60px) scale(.97); transition: opacity 1s var(--ease), transform 1.2s var(--ease); transition-delay: var(--d, 0ms); }
 .reveal-on [data-reveal="frame"][data-side="above"] { transform: translateY(-60px) scale(.97); }
-.reveal-on [data-reveal="frame"].is-in { transform: none; }
+.reveal-on [data-reveal="frame"][data-in] { transform: none; }
 /* Le graphe du git log se dessine : les points éclosent, les traits descendent. */
 .reveal-on .gl-commit[data-reveal] .gl-rail { transform: scaleY(0); transform-origin: top; transition: transform .9s var(--ease) calc(var(--d, 0ms) + 150ms); }
 .reveal-on .gl-commit[data-side="above"] .gl-rail { transform-origin: bottom; }
 .reveal-on .gl-commit[data-reveal] .gl-dot { transform: scale(0); transition: transform .5s cubic-bezier(.34, 1.56, .64, 1) calc(var(--d, 0ms) + 120ms), box-shadow .25s, background .25s; }
-.reveal-on .gl-commit[data-reveal].is-in .gl-rail,
-.reveal-on .gl-commit[data-reveal].is-in .gl-dot { transform: none; }
+.reveal-on .gl-commit[data-reveal][data-in] .gl-rail,
+.reveal-on .gl-commit[data-reveal][data-in] .gl-dot { transform: none; }
 @media print {
     .reveal-on [data-reveal] { opacity: 1 !important; transform: none !important; filter: none !important; clip-path: none !important; }
 }

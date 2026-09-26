@@ -7,6 +7,11 @@ const MAX_STEPS = 6  // au-delà, la cascade traînerait
  * Fait « remonter à la surface » les éléments marqués `data-reveal` chaque fois
  * qu'ils entrent dans l'écran, en descendant comme en remontant (cf. styles.css).
  *
+ * L'état « apparu » est un attribut (`data-in`), jamais une classe : React
+ * réécrit `className` à chaque rendu (un commit du git log qu'on ouvre, par
+ * exemple) et effacerait une classe ajoutée ici — l'élément redeviendrait
+ * invisible tout en restant à l'écran.
+ *
  * Deux observateurs, pour ne jamais faire clignoter un élément au bord :
  * - l'entrée se déclenche quand l'élément a franchi 8 % de l'écran ;
  * - la sortie, seulement quand il en est complètement sorti. On note alors par
@@ -24,13 +29,13 @@ export function useScrollReveal(key) {
 
         const enter = new IntersectionObserver((entries) => {
             const entering = entries
-                .filter((e) => e.isIntersecting && !e.target.classList.contains("is-in"))
+                .filter((e) => e.isIntersecting && !e.target.hasAttribute("data-in"))
                 .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top || a.boundingClientRect.left - b.boundingClientRect.left)
             // En remontant, la lecture se fait du bas vers le haut : la cascade aussi.
             if (entering.length && entering[0].target.dataset.side === "above") entering.reverse()
             entering.forEach((e, i) => {
                 e.target.style.setProperty("--d", `${Math.min(i, MAX_STEPS) * STEP_MS}ms`)
-                e.target.classList.add("is-in")
+                e.target.setAttribute("data-in", "")
             })
         }, { rootMargin: "-8% 0px -8% 0px" })
 
@@ -39,7 +44,7 @@ export function useScrollReveal(key) {
                 if (e.isIntersecting) continue
                 e.target.dataset.side = e.boundingClientRect.bottom <= 0 ? "above" : "below"
                 e.target.style.setProperty("--d", "0ms")
-                e.target.classList.remove("is-in")
+                e.target.removeAttribute("data-in")
             }
         })
 
