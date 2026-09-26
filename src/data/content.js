@@ -115,6 +115,15 @@ export const ui = {
         visit: { fr: "Visiter", en: "Visit" },
         code: { fr: "Code", en: "Code" },
     },
+    competitions: {
+        title: { fr: "Hackathons", en: "Hackathons" },
+        sub: {
+            fr: "Des week-ends à livrer un produit devant un jury, puis à accompagner d'autres équipes comme mentor : c'est là que j'ai appris à aller vite sans bâcler.",
+            en: "Weekends shipping a product in front of a jury, then coaching other teams as a mentor: that's where I learned to move fast without cutting corners.",
+        },
+        with: { fr: "avec", en: "with" },
+        teams: { fr: "équipes", en: "teams" },
+    },
     viewer: {
         actualSize: { fr: "Taille réelle (1:1)", en: "Actual size (1:1)" },
         fit: { fr: "Ajuster à l'écran", en: "Fit to screen" },
@@ -595,35 +604,50 @@ export const education = [
     },
 ]
 
+/**
+ * Les hackathons, rangés comme un tableau de classement : le rang d'abord.
+ * `field` = nombre d'équipes, quand il est connu (jamais inventé) ; `top` = le
+ * classement atteint dans ce champ. `role` remplace le rang quand Sayouba n'était
+ * pas en compétition (mentor).
+ */
 export const honors = {
-    highlights: [
+    competitions: [
         {
-            title: { fr: "Hackathon Ramadan IA — 1ère place", en: "Ramadan AI Hackathon — 1st place" },
-            text: {
-                fr: "Vainqueur régional avec Smart Recruit, une plateforme d'entretiens de recrutement menés par l'IA en temps réel. Organisé par le Ministère de la Transition Numérique et de la Réforme de l'Administration du Maroc.",
-                en: "Regional winner with Smart Recruit, a platform for real-time AI-led recruitment interviews. Organized by Morocco's Ministry of Digital Transition and Administration Reform.",
+            id: "ramadan-ia",
+            place: 1,
+            rank: { fr: "1er", en: "1st" },
+            title: { fr: "Hackathon Ramadan IA", en: "Ramadan AI Hackathon" },
+            meta: {
+                fr: "Vainqueur régional — organisé par le Ministère de la Transition Numérique et de la Réforme de l'Administration du Maroc",
+                en: "Regional winner — organized by Morocco's Ministry of Digital Transition and Administration Reform",
             },
+            project: "smart-recruit",
+            field: 20,
+            top: 1,
         },
         {
-            title: { fr: "JEJA (6e édition) — 1er prix", en: "JEJA (6th edition) — 1st prize" },
-            text: {
-                fr: "Premier prix des Journées Entrepreneuriales de la Jeunesse Africaine avec AgriSmart, l'assistant agricole IoT + IA. Organisées par l'AEBM Mohammedia.",
-                en: "First prize at the African Youth Entrepreneurship Days with AgriSmart, the IoT + AI farming assistant. Organized by AEBM Mohammedia.",
+            id: "jeja",
+            place: 1,
+            rank: { fr: "1er", en: "1st" },
+            title: { fr: "JEJA — 6e édition", en: "JEJA — 6th edition" },
+            meta: {
+                fr: "Journées Entrepreneuriales de la Jeunesse Africaine — organisées par l'AEBM Mohammedia",
+                en: "African Youth Entrepreneurship Days — organized by AEBM Mohammedia",
+            },
+            // Projet retiré de la version en ligne (prototype) : cité, sans lien.
+            withName: "AgriSmart",
+            field: 10,
+            top: 1,
+        },
+        {
+            id: "rallyia",
+            role: true,
+            rank: { fr: "Mentor", en: "Mentor" },
+            title: { fr: "RallyIA Future Lab", en: "RallyIA Future Lab" },
+            meta: {
+                fr: "Mentor des équipes — organisé à Merzouga par le Ministère de la Transition Numérique et de la Réforme de l'Administration du Maroc",
+                en: "Team mentor — held in Merzouga by Morocco's Ministry of Digital Transition and Administration Reform",
             },
         },
     ],
-    badges: [
-        { fr: "Top 5 — GCDxJIT CTF (30 équipes)", en: "Top 5 — GCDxJIT CTF (30 teams)" },
-        { fr: "Top 5 national — Orange Digital Center Champions 2025", en: "National Top 5 — Orange Digital Center Champions 2025" },
-        { fr: "Top 10 — HackShield Hackathon (200 équipes)", en: "Top 10 — HackShield Hackathon (200 teams)" },
-        { fr: "HackTheBox University CTF 2025", en: "HackTheBox University CTF 2025" },
-        { fr: "Certifications Fortinet FCF (×3)", en: "Fortinet FCF certifications (×3)" },
-        { fr: "Certifications Cisco — réseaux & systèmes (×3)", en: "Cisco certifications — networking & OS (×3)" },
-        { fr: "CPPS — Hack & Fix Academy", en: "CPPS — Hack & Fix Academy" },
-        { fr: "GITEX Africa 2025", en: "GITEX Africa 2025" },
-    ],
-    note: {
-        fr: "Une culture sécurité forgée en compétition — un atout que j'applique à chaque ligne de code.",
-        en: "A security mindset forged in competition — an asset I apply to every line of code.",
-    },
 }

@@ -6,6 +6,7 @@ import GitLog from "../components/GitLog.jsx"
 import Showcase from "../components/Showcase.jsx"
 import Modal from "../components/Modal.jsx"
 import ContactForm from "../components/ContactForm.jsx"
+import Scoreboard from "../components/Scoreboard.jsx"
 
 // three.js et React Three Fiber ne servent qu'à l'ouverture : chargés à part,
 // ils ne retardent pas l'affichage du reste de la page.
@@ -55,6 +56,31 @@ function useCopyTop() {
     return [ref, top]
 }
 
+/**
+ * Profondeur de l'ouverture : en descendant, la scène s'éloigne et s'assombrit,
+ * le texte d'accroche remonte et s'efface — on plonge sous la surface.
+ * Une seule variable CSS (--depth, de 0 à 1) écrite au plus une fois par image.
+ */
+function useHeroDepth(ref) {
+    useEffect(() => {
+        const hero = ref.current
+        if (!hero || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+        let frame = 0
+        const update = () => {
+            frame = 0
+            const depth = Math.min(1, Math.max(0, window.scrollY / hero.offsetHeight))
+            hero.style.setProperty("--depth", depth.toFixed(3))
+        }
+        const onScroll = () => { if (!frame) frame = requestAnimationFrame(update) }
+        update()
+        window.addEventListener("scroll", onScroll, { passive: true })
+        return () => {
+            window.removeEventListener("scroll", onScroll)
+            cancelAnimationFrame(frame)
+        }
+    }, [ref])
+}
+
 const scrollTo = (id) => (e) => {
     e.preventDefault()
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
@@ -90,6 +116,8 @@ export default function Home() {
     const [open, setOpen] = useState(null)
     const close = useCallback(() => setOpen(null), [])
     const [copyRef, copyTop] = useCopyTop()
+    const heroRef = useRef(null)
+    useHeroDepth(heroRef)
 
     // Projets montrés avec leurs captures : les phares (avec résumé), puis les
     // autres dépôts qui en ont. Ceux sans capture restent dans la liste finale.
@@ -107,7 +135,7 @@ export default function Home() {
 
     return (
         <>
-            <header className="hero">
+            <header className="hero" ref={heroRef}>
                 <SceneBoundary fallback={<StaticHero />}>
                     <Suspense fallback={<div className="hero-canvas" />}>
                         <HeroScene name={site.name} portraitSrc={site.portrait} copyTop={copyTop} />
@@ -126,10 +154,10 @@ export default function Home() {
             </header>
 
             <section className="section craft" aria-labelledby="craft-t">
-                <h2 id="craft-t" className="eyebrow">{L(ui.craft)}</h2>
+                <h2 id="craft-t" className="eyebrow" data-reveal>{L(ui.craft)}</h2>
                 <div className="craft-cols">
                     {whatIDo.map((b) => (
-                        <div className="craft-col" key={b.id}>
+                        <div className="craft-col" key={b.id} data-reveal>
                             <h3>{L(b.title)}</h3>
                             <div className="craft-logos">
                                 {b.logos.map((t) => <img key={t} src={asset(`images/tech/${t}.svg`)} alt={t} title={t} loading="lazy" />)}
@@ -141,18 +169,24 @@ export default function Home() {
             </section>
 
             <section className="section" id="parcours" aria-labelledby="parcours-t">
-                <h2 id="parcours-t" className="title">{L(ui.path.title)}</h2>
-                <p className="sub">{L(ui.path.sub)}</p>
+                <h2 id="parcours-t" className="title" data-reveal="title">{L(ui.path.title)}</h2>
+                <p className="sub" data-reveal>{L(ui.path.sub)}</p>
                 <GitLog />
             </section>
 
+            <section className="section" id="hackathons" aria-labelledby="hackathons-t">
+                <h2 id="hackathons-t" className="title" data-reveal="title">{L(ui.competitions.title)}</h2>
+                <p className="sub" data-reveal>{L(ui.competitions.sub)}</p>
+                <Scoreboard />
+            </section>
+
             <section className="section" id="projets" aria-labelledby="projets-t">
-                <h2 id="projets-t" className="title">{L(ui.work.title)}</h2>
-                <p className="sub">{L(ui.work.sub)}</p>
+                <h2 id="projets-t" className="title" data-reveal="title">{L(ui.work.title)}</h2>
+                <p className="sub" data-reveal>{L(ui.work.sub)}</p>
                 <div className="projects">
                     {shown.map((p) => (
                         <article className="project" key={p.key}>
-                            <header className="project-head">
+                            <header className="project-head" data-reveal>
                                 <div className="project-name">
                                     <h3>{p.title}</h3>
                                     <p className="project-stack">{p.stack.join(" · ")}</p>
@@ -170,17 +204,17 @@ export default function Home() {
                                     </div>
                                 </div>
                             </header>
-                            <Showcase title={p.title} shots={p.shots} />
+                            <div data-reveal="frame"><Showcase title={p.title} shots={p.shots} /></div>
                         </article>
                     ))}
                 </div>
 
                 {others.length > 0 && (
                     <>
-                        <h3 className="eyebrow others-title">{L(ui.work.others)}</h3>
+                        <h3 className="eyebrow others-title" data-reveal>{L(ui.work.others)}</h3>
                         <ul className="others">
                             {others.map((p) => (
-                                <li key={p.id}>
+                                <li key={p.id} data-reveal>
                                     <span className="others-name">{L(p.title)}</span>
                                     <span className="others-text">{L(p.text)}</span>
                                     <span className="others-tags">{p.tags.join(" · ")}</span>
@@ -193,10 +227,10 @@ export default function Home() {
             </section>
 
             <section className="section contact" id="contact" aria-labelledby="contact-t">
-                <h2 id="contact-t" className="eyebrow">{L(ui.contact.title)}</h2>
-                <a className="contact-mail" href={`mailto:${site.email}`}>{user}<wbr />@{domain}</a>
-                <p className="contact-sub">{L(pfe.text)}</p>
-                <div className="contact-grid">
+                <h2 id="contact-t" className="eyebrow" data-reveal>{L(ui.contact.title)}</h2>
+                <a className="contact-mail" href={`mailto:${site.email}`} data-reveal="title">{user}<wbr />@{domain}</a>
+                <p className="contact-sub" data-reveal>{L(pfe.text)}</p>
+                <div className="contact-grid" data-reveal>
                     <ContactForm />
                     <ul className="contact-lines">
                         <li><span>{L(ui.contact.phone)}</span><a href={`tel:${site.phone.replace(/\s/g, "")}`}>{site.phone}</a></li>

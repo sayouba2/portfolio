@@ -6,7 +6,7 @@ import Showcase from "../components/Showcase.jsx"
 /** Une ligne de l'étude de cas : l'intitulé en marge, le texte à droite. */
 function Block({ title, className = "", children }) {
     return (
-        <section className={`case-block ${className}`}>
+        <section className={`case-block ${className}`} data-reveal>
             <h2 className="eyebrow">{title}</h2>
             <div className="case-text">{children}</div>
         </section>
@@ -27,23 +27,23 @@ export default function ProjectPage() {
     return (
         <article className="case">
             <header className="section case-head">
-                <Link to="/#projets" className="link">← {L(ui.project.back)}</Link>
-                <p className="kicker">
+                <Link to="/#projets" className="link" data-reveal>← {L(ui.project.back)}</Link>
+                <p className="kicker" data-reveal>
                     {L(ui.project.caseStudy)} · {L(ui.categories[project.category])}
                     {project.liveUrl && <> · {L(ui.project.online)}</>}
                 </p>
-                <h1 className="title">{project.title}</h1>
-                <p className="case-lead">{L(project.oneLiner)}</p>
-                <p className="project-stack">{project.stack.join(" · ")}</p>
+                <h1 className="title" data-reveal="title">{project.title}</h1>
+                <p className="case-lead" data-reveal>{L(project.oneLiner)}</p>
+                <p className="project-stack" data-reveal>{project.stack.join(" · ")}</p>
                 {(project.liveUrl || project.github) && (
-                    <div className="modal-actions">
+                    <div className="modal-actions" data-reveal>
                         {project.liveUrl && <a className="btn" href={project.liveUrl} target="_blank" rel="noreferrer">{L(ui.project.visit)} ↗</a>}
                         {project.github && <a className="btn ghost" href={project.github} target="_blank" rel="noreferrer">{L(ui.project.code)} ↗</a>}
                     </div>
                 )}
             </header>
 
-            <div className="section case-shots">
+            <div className="section case-shots" data-reveal="frame">
                 <Showcase title={project.title} shots={screensFor(project.slug)} />
             </div>
 
@@ -72,7 +72,7 @@ export default function ProjectPage() {
             </div>
 
             {next.slug !== project.slug && (
-                <nav className="section case-next" aria-label={L(ui.project.next)}>
+                <nav className="section case-next" aria-label={L(ui.project.next)} data-reveal>
                     <span className="eyebrow">{L(ui.project.next)}</span>
                     <Link to={`/projets/${next.slug}`}>{next.title} →</Link>
                 </nav>

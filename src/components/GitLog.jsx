@@ -5,7 +5,8 @@ import { ui, experiences, education, honors } from "../data/content.js"
 /**
  * Le parcours raconté dans la langue d'un développeur : un `git log --graph`.
  * Les études sont la branche principale ; les stages, des branches qui en
- * partent ; les distinctions, des tags posés sur le commit où elles sont nées.
+ * partent ; les distinctions, des tags posés sur le commit où elles sont nées
+ * (le détail des compétitions vit dans Scoreboard).
  * Survol = le corps du commit (le résumé). Clic = le diff (le détail).
  */
 const HISTORY = [
@@ -56,17 +57,17 @@ export default function GitLog() {
 
     return (
         <div className="gl">
-            <ul className="gl-legend">
+            <ul className="gl-legend" data-reveal>
                 <li className="stage"><i aria-hidden="true" />{L(ui.path.legend.stage)}</li>
                 <li className="formation"><i aria-hidden="true" />{L(ui.path.legend.formation)}</li>
                 <li className="tag"><i aria-hidden="true" />{L(ui.path.legend.tag)}</li>
             </ul>
-            <p className="gl-prompt"><span>~/sayouba</span> git log --graph --decorate</p>
+            <p className="gl-prompt" data-reveal><span>~/sayouba</span> git log --graph --decorate</p>
             <ol className="gl-list">
                 {commits.map((c) => {
                     const isOpen = open === c.ref
                     return (
-                        <li key={c.ref} className={`gl-commit ${c.kind} ${isOpen ? "open" : ""}`}>
+                        <li key={c.ref} className={`gl-commit ${c.kind} ${isOpen ? "open" : ""}`} data-reveal>
                             <Graph c={c} open={isOpen} />
                             <button className="gl-head" onClick={() => setOpen(isOpen ? null : c.ref)} aria-expanded={isOpen}>
                                 <span className="gl-line1">
@@ -74,7 +75,7 @@ export default function GitLog() {
                                     {c.branch && <span className="gl-deco">({c.branch}{c.tags ? "," : ")"}</span>}
                                     {c.tags?.map((t, i) => (
                                         <span className="gl-tag" key={t}>
-                                            tag: {slug(L(honors.highlights[t].title))}{i === c.tags.length - 1 ? ")" : ","}
+                                            tag: {slug(`${L(honors.competitions[t].title)} ${L(honors.competitions[t].rank)}`)}{i === c.tags.length - 1 ? ")" : ","}
                                         </span>
                                     ))}
                                     <span className="gl-date">{c.date}</span>
@@ -98,16 +99,6 @@ export default function GitLog() {
                     )
                 })}
             </ol>
-
-            <p className="gl-prompt"><span>~/sayouba</span> git tag -n</p>
-            <ul className="gl-tags">
-                {honors.highlights.map((h) => (
-                    <li key={L(h.title)}><span className="gl-tagname">{slug(L(h.title))}</span><span>{L(h.text)}</span></li>
-                ))}
-                {honors.badges.map((b) => (
-                    <li key={L(b)}><span className="gl-tagname">{slug(L(b))}</span><span>{L(b)}</span></li>
-                ))}
-            </ul>
         </div>
     )
 }

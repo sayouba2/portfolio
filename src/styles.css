@@ -97,6 +97,11 @@ a { color: inherit; }
 /* ---------- Ouverture ---------- */
 .hero { position: relative; height: 100svh; min-height: 620px; overflow: hidden; background: var(--abyss); }
 .hero-canvas { position: absolute; inset: 0; }
+/* Profondeur au défilement (--depth de 0 à 1, cf. useHeroDepth dans Home.jsx) :
+   la scène descend moins vite que la page et s'assombrit, le texte remonte et
+   s'efface. Jamais de scale sur le canevas : R3F le lirait comme un
+   redimensionnement et recalculerait la mise en page à chaque image. */
+.hero-canvas { transform: translateY(calc(var(--depth, 0) * 22%)); opacity: calc(1 - var(--depth, 0) * .55); }
 /* Un voile sombre en bas de l'ouverture : le texte d'accroche reste lisible,
    qu'il passe sur le code ou sur le portrait. */
 .hero::after {
@@ -119,6 +124,7 @@ a { color: inherit; }
     pointer-events: none;
 }
 .hero-copy a { pointer-events: auto; }
+.hero-copy { transform: translateY(calc(var(--depth, 0) * -60px)); opacity: calc(1 - var(--depth, 0) * 1.6); }
 .hero-status { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: .76rem; letter-spacing: .04em; color: var(--seaglass); }
 .hero-status i { flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--seaglass); box-shadow: 0 0 14px 2px rgba(134, 227, 206, .7); }
 .hero-role { font-family: var(--mono); font-size: .82rem; letter-spacing: .22em; text-transform: uppercase; color: var(--lantern); }
@@ -272,9 +278,30 @@ a { color: inherit; }
 .gl-add { display: grid; grid-template-columns: 22px 1fr; padding: 7px 14px 7px 10px; color: #c9f6ea; background: rgba(134, 227, 206, .07); font-family: var(--body); font-size: .9rem; }
 .gl-add + .gl-add { border-top: 1px solid rgba(134, 227, 206, .08); }
 .gl-add span { color: var(--seaglass); font-family: var(--mono); }
-.gl-tags { display: grid; gap: 2px; }
-.gl-tags li { display: grid; grid-template-columns: minmax(0, 320px) 1fr; gap: 18px; padding: 6px 0; border-top: 1px dashed rgba(230, 239, 236, .08); color: var(--silt); }
-.gl-tagname { color: var(--gold); overflow-wrap: anywhere; }
+
+/* ---------- Hackathons : un tableau de classement ---------- */
+.cp-board { margin-top: 48px; border-top: 1px solid var(--line); }
+.cp-row { display: grid; grid-template-columns: minmax(120px, 180px) minmax(0, 1fr) auto; gap: 32px; align-items: center; padding: 28px 0; border-bottom: 1px solid var(--line); }
+.cp-rank { font-family: var(--display); font-weight: 900; font-size: clamp(2.6rem, 5vw, 4.2rem); line-height: .9; text-transform: uppercase; color: var(--foam); white-space: nowrap; }
+.cp-row.first .cp-rank { color: var(--lantern); text-shadow: 0 0 40px rgba(243, 178, 122, .28); }
+/* Mentor : pas un rang, un rôle — en vert d'eau, un cran plus petit. */
+.cp-row.role .cp-rank { color: var(--seaglass); font-size: clamp(2rem, 3.6vw, 3rem); }
+.cp-body { display: grid; gap: 6px; justify-items: start; }
+.cp-body h3 { font-family: var(--display); font-weight: 700; font-size: 1.7rem; line-height: 1; text-transform: uppercase; letter-spacing: .01em; }
+.cp-meta { font-size: .92rem; color: var(--silt); max-width: 62ch; }
+.cp-with { font-family: var(--mono); font-size: .82rem; color: var(--seaglass); }
+.cp-body .link { margin-top: 6px; }
+/* Le champ : un point par équipe ; le classement atteint s'allume. */
+.cp-field { margin: 0; display: grid; gap: 10px; justify-items: end; }
+.cp-dots { display: grid; grid-template-columns: repeat(10, 10px); gap: 6px; }
+.cp-field.dense .cp-dots { grid-template-columns: repeat(25, 5px); gap: 4px; }
+.cp-dots i { width: 10px; height: 10px; border-radius: 50%; background: rgba(230, 239, 236, .14); transition: background .45s, box-shadow .45s; transition-delay: calc(var(--k, 0) * 70ms + 350ms); }
+.cp-field.dense .cp-dots i { width: 5px; height: 5px; }
+.cp-dots i.on { background: var(--seaglass); box-shadow: 0 0 10px rgba(134, 227, 206, .6); }
+.cp-row.first .cp-dots i.on { background: var(--lantern); box-shadow: 0 0 12px rgba(243, 178, 122, .7); }
+/* Tant que la ligne n'est pas apparue, le classement reste éteint : il s'allume en entrant. */
+.reveal-on .cp-row:not(.is-in) .cp-dots i.on { background: rgba(230, 239, 236, .14); box-shadow: none; }
+.cp-field figcaption { font-family: var(--mono); font-size: .72rem; color: var(--silt); letter-spacing: .06em; }
 
 /* ---------- Projets : les vraies captures ---------- */
 .projects { margin-top: 56px; display: grid; gap: 120px; }
@@ -495,6 +522,47 @@ a { color: inherit; }
 .footer a { text-decoration: none; overflow-wrap: anywhere; }
 .footer a:hover { color: var(--seaglass); }
 
+/* ---------- Apparitions au défilement : remonter à la surface ----------
+   Posées par useScrollReveal (html.reveal-on) : sans script, ou si
+   l'utilisateur préfère moins d'animations, rien n'est masqué. Elles se
+   rejouent à chaque passage : un élément sorti par le haut (data-side="above")
+   revient par le haut. --d est le décalage de cascade calculé à l'entrée.
+   Dans chaque variante, la règle « above » précède « .is-in » (même poids). */
+.reveal-on [data-reveal] {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(6px);
+    transition: opacity .9s var(--ease), transform .9s var(--ease), filter .9s var(--ease);
+    transition-delay: var(--d, 0ms);
+}
+.reveal-on [data-reveal][data-side="above"] { transform: translateY(-28px); }
+.reveal-on [data-reveal].is-in { opacity: 1; transform: none; filter: none; }
+/* Grands titres : ils émergent d'une ligne de flottaison posée sous eux. */
+.reveal-on [data-reveal="title"] {
+    opacity: 1;
+    filter: none;
+    transform: translateY(100%);
+    clip-path: inset(0 -5% 100% -5%);
+    transition: transform 1.1s var(--ease), clip-path 1.1s var(--ease), color .25s;
+    transition-delay: var(--d, 0ms), var(--d, 0ms), 0s;
+}
+/* Revenant par le haut, ils descendent d'une ligne posée au-dessus d'eux. */
+.reveal-on [data-reveal="title"][data-side="above"] { transform: translateY(-100%); clip-path: inset(100% -5% 0 -5%); }
+.reveal-on [data-reveal="title"].is-in { transform: none; clip-path: inset(-20% -5% -12% -5%); }
+/* Captures : elles montent sans flou (trop coûteux sur de grandes images). */
+.reveal-on [data-reveal="frame"] { filter: none; transform: translateY(60px) scale(.97); transition: opacity 1s var(--ease), transform 1.2s var(--ease); transition-delay: var(--d, 0ms); }
+.reveal-on [data-reveal="frame"][data-side="above"] { transform: translateY(-60px) scale(.97); }
+.reveal-on [data-reveal="frame"].is-in { transform: none; }
+/* Le graphe du git log se dessine : les points éclosent, les traits descendent. */
+.reveal-on .gl-commit[data-reveal] .gl-rail { transform: scaleY(0); transform-origin: top; transition: transform .9s var(--ease) calc(var(--d, 0ms) + 150ms); }
+.reveal-on .gl-commit[data-side="above"] .gl-rail { transform-origin: bottom; }
+.reveal-on .gl-commit[data-reveal] .gl-dot { transform: scale(0); transition: transform .5s cubic-bezier(.34, 1.56, .64, 1) calc(var(--d, 0ms) + 120ms), box-shadow .25s, background .25s; }
+.reveal-on .gl-commit[data-reveal].is-in .gl-rail,
+.reveal-on .gl-commit[data-reveal].is-in .gl-dot { transform: none; }
+@media print {
+    .reveal-on [data-reveal] { opacity: 1 !important; transform: none !important; filter: none !important; clip-path: none !important; }
+}
+
 /* ---------- Petits écrans ---------- */
 @media (max-width: 900px) {
     .nav-links { display: none; }
@@ -509,7 +577,9 @@ a { color: inherit; }
     .others-text, .others-tags { grid-column: 1; }
     .contact-grid { grid-template-columns: 1fr; gap: 44px; }
     .contact-lines { grid-template-columns: 1fr 1fr; }
-    .gl-tags li { grid-template-columns: 1fr; gap: 2px; }
+    .cp-row { grid-template-columns: auto minmax(0, 1fr); gap: 14px 22px; padding: 24px 0; align-items: start; }
+    .cp-rank { font-size: 2.6rem; min-width: 3.2ch; }
+    .cp-field { grid-column: 1 / -1; justify-items: start; }
     .gl-date { margin-left: 0; width: 100%; }
     .case-block { grid-template-columns: 1fr; gap: 14px; }
     .hero-static img { right: -6vw; height: 62%; bottom: auto; top: 118px; }
