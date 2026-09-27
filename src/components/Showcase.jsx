@@ -103,37 +103,79 @@ function Lightbox({ shots, index, title, onClose, onMove }) {
     const L = useL()
     const [real, setReal] = useState(false)
     const closeRef = useRef(null)
+    const stageRef = useRef(null)
+    const touchRef = useRef(null)
+    const swipedRef = useRef(false)
     const shot = shots[index]
     const name = `${title} — ${L(ui.viewer.shot)} ${index + 1}`
 
     useOverlay(onClose, closeRef)
     useEffect(() => {
         const onKey = (e) => {
-            if (e.key === "ArrowLeft") onMove(-1)
-            if (e.key === "ArrowRight") onMove(1)
+            if (real || (e.key !== "ArrowLeft" && e.key !== "ArrowRight")) return
+            e.preventDefault()
+            onMove(e.key === "ArrowLeft" ? -1 : 1)
         }
         window.addEventListener("keydown", onKey)
         return () => window.removeEventListener("keydown", onKey)
-    }, [onMove])
+    }, [onMove, real])
+
+    useEffect(() => {
+        stageRef.current?.scrollTo({ top: 0, left: 0, behavior: "instant" })
+    }, [index, real])
+
+    const onTouchStart = (event) => {
+        swipedRef.current = false
+        touchRef.current = !real && event.touches.length === 1
+            ? { x: event.touches[0].clientX, y: event.touches[0].clientY }
+            : null
+    }
+    const onTouchEnd = (event) => {
+        const start = touchRef.current
+        touchRef.current = null
+        if (!start || real || !event.changedTouches.length) return
+        const dx = event.changedTouches[0].clientX - start.x
+        const dy = event.changedTouches[0].clientY - start.y
+        if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+            swipedRef.current = true
+            if (shots.length > 1) onMove(dx < 0 ? 1 : -1)
+        }
+    }
 
     return createPortal(
         <div className="sc-lb" role="dialog" aria-modal="true" aria-label={name}>
             <div className="sc-lb-top">
-                <span className="sc-lb-count" aria-live="polite" aria-atomic="true">{title} · {index + 1} / {shots.length} · {shot.w}×{shot.h}</span>
+                <span className="sc-lb-count">{title}</span>
                 <button className={`sc-lb-toggle ${real ? "on" : ""}`} onClick={() => setReal((v) => !v)} aria-pressed={real}>
                     {real ? L(ui.viewer.fit) : L(ui.viewer.actualSize)}
                 </button>
                 <button ref={closeRef} className="sc-lb-close" onClick={onClose} aria-label={L(ui.viewer.close)}>✕</button>
             </div>
-            <div className={`sc-lb-stage ${real ? "real" : ""}`} onClick={(e) => { if (e.target === e.currentTarget) onClose() }}>
-                <img src={asset(shot.full)} width={shot.w} height={shot.h} alt={name} />
+            <div
+                ref={stageRef}
+                className={`sc-lb-stage ${real ? "real" : ""}`}
+                onTouchStart={onTouchStart}
+                onTouchMove={(event) => { if (event.touches.length !== 1) touchRef.current = null }}
+                onTouchEnd={onTouchEnd}
+                onTouchCancel={() => { touchRef.current = null }}
+                onClick={(event) => {
+                    if (swipedRef.current) { swipedRef.current = false; return }
+                    if (!real && event.target === event.currentTarget) onClose()
+                }}
+                tabIndex={real ? 0 : undefined}
+                role={real ? "region" : undefined}
+                aria-label={real ? L(ui.viewer.pan) : undefined}
+            >
+                <img key={shot.full} src={asset(shot.full)} width={shot.w} height={shot.h} alt={name} draggable="false" />
             </div>
-            {shots.length > 1 && (
-                <>
-                    <button className="sc-lb-arrow prev" onClick={() => onMove(-1)} aria-label={L(ui.viewer.prev)}>‹</button>
-                    <button className="sc-lb-arrow next" onClick={() => onMove(1)} aria-label={L(ui.viewer.next)}>›</button>
-                </>
-            )}
+            <div className="sc-lb-controls">
+                {shots.length > 1 && <button className="sc-lb-arrow prev" onClick={() => onMove(-1)} aria-label={L(ui.viewer.prev)}>‹</button>}
+                <p className="sc-lb-position" aria-live="polite" aria-atomic="true">
+                    <span>{index + 1} / {shots.length}</span>
+                    <small>{real ? L(ui.viewer.pan) : L(ui.viewer.swipe)}</small>
+                </p>
+                {shots.length > 1 && <button className="sc-lb-arrow next" onClick={() => onMove(1)} aria-label={L(ui.viewer.next)}>›</button>}
+            </div>
         </div>,
         document.body
     )

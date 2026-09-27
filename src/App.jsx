@@ -7,12 +7,14 @@ import Footer from "./components/Footer.jsx"
 import Home from "./pages/Home.jsx"
 import ProjectPage from "./pages/ProjectPage.jsx"
 import { useScrollReveal } from "./components/useScrollReveal.js"
+import { useScrollMotion } from "./components/useScrollMotion.js"
 
 // Le key sur <main> relance le fondu d'entrée à chaque changement de page.
 // L'id sert de décor à la nav en verre (cf. `behind` dans Nav.jsx).
 function PageShell({ children }) {
     const { pathname } = useLocation()
     useScrollReveal(pathname)
+    useScrollMotion(pathname)
     return <main id="main" key={pathname} className="page-enter" tabIndex="-1">{children}</main>
 }
 

@@ -1,111 +1,17 @@
-import { Component, Suspense, lazy, useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useState } from "react"
 import { Link } from "react-router-dom"
 import { useL } from "../i18n.jsx"
-import { site, ui, pfe, whatIDo, experiences, honors, featuredProjects, otherProjects, asset, screensFor } from "../data/content.js"
+import { site, ui, pfe, whatIDo, featuredProjects, otherProjects, asset, screensFor } from "../data/content.js"
 import GitLog from "../components/GitLog.jsx"
 import Showcase from "../components/Showcase.jsx"
 import Modal from "../components/Modal.jsx"
 import ContactForm from "../components/ContactForm.jsx"
 import Scoreboard from "../components/Scoreboard.jsx"
+import Hero from "../components/hero/Hero.jsx"
 import { useHead } from "../components/useHead.js"
 import { homeHead } from "../seo.js"
 
-// three.js et React Three Fiber ne servent qu'à l'ouverture : chargés à part,
-// ils ne retardent pas l'affichage du reste de la page.
-const HeroScene = lazy(() => import("../components/hero/HeroScene.jsx"))
 const CATEGORY_ACCENTS = { web: "#86E3CE", mobile: "#B9A4F0", ai: "#F3B27A" }
-
-/**
- * Sans WebGL (navigateur ancien, accélération désactivée), la scène lève une
- * erreur : on affiche alors la même composition, figée, plutôt qu'un trou —
- * le nom n'existe sinon que dans le canevas.
- */
-class SceneBoundary extends Component {
-    state = { failed: false }
-    static getDerivedStateFromError() { return { failed: true } }
-    render() { return this.state.failed ? this.props.fallback : this.props.children }
-}
-
-function StaticHero() {
-    const [first, ...rest] = site.name.split(" ")
-    return (
-        <div className="hero-canvas hero-static" aria-hidden="true">
-            <p className="hero-static-back">{first}</p>
-            <img src={asset(site.portrait)} alt="" />
-            <p className="hero-static-front">{rest.join(" ")}</p>
-        </div>
-    )
-}
-
-/**
- * Le haut du texte d'accroche, en pixels depuis le haut de l'ouverture. La
- * scène pose le nom juste au-dessus (et, sur téléphone, le portrait au-dessus
- * du nom) : ce bloc change de hauteur avec la langue, la largeur, les polices
- * et la hauteur réellement visible de l'écran, donc on le mesure.
- */
-function useCopyTop() {
-    const ref = useRef(null)
-    const [top, setTop] = useState(null)
-    useEffect(() => {
-        const copy = ref.current
-        if (!copy) return
-        const update = () => setTop(copy.offsetTop)
-        update()
-        const observer = new ResizeObserver(update)
-        observer.observe(copy)
-        observer.observe(copy.offsetParent ?? document.body)
-        return () => observer.disconnect()
-    }, [])
-    return [ref, top]
-}
-
-/**
- * Profondeur de l'ouverture : en descendant, la scène s'éloigne et s'assombrit,
- * le texte d'accroche remonte et s'efface — on plonge sous la surface.
- * Une seule variable CSS (--depth, de 0 à 1) écrite au plus une fois par image.
- */
-function useHeroDepth(ref) {
-    useEffect(() => {
-        const hero = ref.current
-        if (!hero) return
-        const reduced = window.matchMedia("(prefers-reduced-motion: reduce)")
-        let frame = 0
-        let listening = false
-        const update = () => {
-            frame = 0
-            const depth = Math.min(1, Math.max(0, window.scrollY / hero.offsetHeight))
-            hero.style.setProperty("--depth", depth.toFixed(3))
-        }
-        const onScroll = () => { if (!frame) frame = requestAnimationFrame(update) }
-        const sync = () => {
-            if (reduced.matches) {
-                if (listening) window.removeEventListener("scroll", onScroll)
-                listening = false
-                cancelAnimationFrame(frame)
-                frame = 0
-                hero.style.removeProperty("--depth")
-                return
-            }
-            if (!listening) window.addEventListener("scroll", onScroll, { passive: true })
-            listening = true
-            update()
-        }
-
-        sync()
-        reduced.addEventListener("change", sync)
-        return () => {
-            if (listening) window.removeEventListener("scroll", onScroll)
-            reduced.removeEventListener("change", sync)
-            cancelAnimationFrame(frame)
-        }
-    }, [ref])
-}
-
-const scrollTo = (id) => (e) => {
-    e.preventDefault()
-    const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
-    document.getElementById(id)?.scrollIntoView({ behavior })
-}
 
 function ProjectSummary({ p }) {
     const L = useL()
@@ -136,9 +42,6 @@ export default function Home() {
     const L = useL()
     const [open, setOpen] = useState(null)
     const close = useCallback(() => setOpen(null), [])
-    const [copyRef, copyTop] = useCopyTop()
-    const heroRef = useRef(null)
-    useHeroDepth(heroRef)
     useHead(homeHead(L))
 
     // Projets montrés avec leurs captures : les phares (avec résumé), puis les
@@ -156,54 +59,19 @@ export default function Home() {
     ]
     const others = otherProjects.filter((p) => !screensFor(p.id).length)
     const [user, domain] = site.email.split("@")
-    const wins = honors.competitions.filter((competition) => competition.place === 1).length
 
     return (
         <>
-            <header className="hero" ref={heroRef}>
-                <SceneBoundary fallback={<StaticHero />}>
-                    <Suspense fallback={<StaticHero />}>
-                        <HeroScene name={site.name} portraitSrc={site.portrait} copyTop={copyTop} />
-                    </Suspense>
-                </SceneBoundary>
-                <h1 className="sr-only">{site.name} — {L(site.role)}</h1>
-                <div className="hero-copy" ref={copyRef}>
-                    <div className="hero-topline">
-                        {pfe.active && <p className="hero-status"><i aria-hidden="true" />{L(site.status)}</p>}
-                        <p className="hero-place">{L(pfe.places)}</p>
-                    </div>
-                    <p className="hero-role">{L(site.role)}</p>
-                    <p className="hero-tagline">{L(site.tagline)}</p>
-                    <div className="hero-ctas">
-                        <a className="btn" href="#projets" onClick={scrollTo("projets")}>{L(ui.hero.cta)}<span aria-hidden="true">↘</span></a>
-                        <a className="btn ghost" href={asset(L(site.cvUrl))} target="_blank" rel="noreferrer">{L(ui.hero.cv)}<span aria-hidden="true">↓</span></a>
-                    </div>
-                </div>
-                <div className="hero-scroll" aria-hidden="true"><span>{L(ui.hero.scroll)}</span><i /></div>
-            </header>
-
-            <section className="proof-strip" aria-labelledby="proof-t">
-                <div className="proof-inner">
-                    <p className="proof-label" id="proof-t" data-reveal>{L(ui.proof.label)}</p>
-                    <ul>
-                        <li data-reveal><strong>{L(ui.proof.availabilityValue)}</strong><span>{L(ui.proof.availability)}</span></li>
-                        <li data-reveal><strong>{experiences.length}</strong><span>{L(ui.proof.internships)}</span></li>
-                        <li data-reveal><strong>{wins}×</strong><span>{L(ui.proof.wins)}</span></li>
-                        <li data-reveal><strong>{L(ui.proof.scopeValue)}</strong><span>{L(ui.proof.scope)}</span></li>
-                    </ul>
-                </div>
-            </section>
+            <Hero />
 
             <section className="section craft" aria-labelledby="craft-t">
                 <header className="section-heading">
-                    <p className="chapter-marker" data-reveal><span>01</span> / 05</p>
                     <h2 id="craft-t" className="title section-title" data-reveal="title">{L(ui.craft)}</h2>
                     <p className="sub" data-reveal>{L(ui.craftSub)}</p>
                 </header>
                 <div className="craft-cols">
-                    {whatIDo.map((b, index) => (
-                        <div className="craft-col" key={b.id} data-reveal style={{ "--item": index }}>
-                            <span className="craft-number" aria-hidden="true">0{index + 1}</span>
+                    {whatIDo.map((b) => (
+                        <div className="craft-col" key={b.id} data-reveal>
                             <h3>{L(b.title)}</h3>
                             <div className="craft-logos">
                                 {b.logos.map((t) => <img key={t} src={asset(`images/tech/${t}.svg`)} alt={t} title={t} loading="lazy" />)}
@@ -214,9 +82,16 @@ export default function Home() {
                 </div>
             </section>
 
+            <section className="section journey-section" id="parcours" aria-labelledby="parcours-t">
+                <header className="section-heading section-heading-split">
+                    <h2 id="parcours-t" className="title" data-reveal="title">{L(ui.path.title)}</h2>
+                    <p className="sub" data-reveal>{L(ui.path.sub)}</p>
+                </header>
+                <GitLog />
+            </section>
+
             <section className="section projects-section" id="projets" aria-labelledby="projets-t">
                 <header className="section-heading section-heading-split">
-                    <p className="chapter-marker" data-reveal><span>02</span> / 05</p>
                     <h2 id="projets-t" className="title" data-reveal="title">{L(ui.work.title)}</h2>
                     <p className="sub" data-reveal>{L(ui.work.sub)}</p>
                 </header>
@@ -227,10 +102,9 @@ export default function Home() {
                             key={p.key}
                             style={{ "--project-accent": p.accent }}
                         >
-                            <header className="project-head" data-reveal>
-                                <div className="project-name">
+                            <header className="project-head">
+                                <div className="project-name" data-reveal={index % 2 ? "right" : "left"}>
                                     <p className="project-overline">
-                                        <span>{String(index + 1).padStart(2, "0")} / {String(shown.length).padStart(2, "0")}</span>
                                         <span>{L(ui.categories[p.category])}</span>
                                     </p>
                                     <h3>
@@ -240,7 +114,7 @@ export default function Home() {
                                         {p.stack.map((technology) => <li key={technology}>{technology}</li>)}
                                     </ul>
                                 </div>
-                                <div className="project-copy">
+                                <div className="project-copy" data-reveal={index % 2 ? "left" : "right"}>
                                     <p>{p.text}</p>
                                     <div className="project-actions">
                                         {p.project && (
@@ -276,18 +150,8 @@ export default function Home() {
                 )}
             </section>
 
-            <section className="section journey-section" id="parcours" aria-labelledby="parcours-t">
-                <header className="section-heading section-heading-split">
-                    <p className="chapter-marker" data-reveal><span>03</span> / 05</p>
-                    <h2 id="parcours-t" className="title" data-reveal="title">{L(ui.path.title)}</h2>
-                    <p className="sub" data-reveal>{L(ui.path.sub)}</p>
-                </header>
-                <GitLog />
-            </section>
-
             <section className="section competition-section" id="hackathons" aria-labelledby="hackathons-t">
                 <header className="section-heading section-heading-split">
-                    <p className="chapter-marker" data-reveal><span>04</span> / 05</p>
                     <h2 id="hackathons-t" className="title" data-reveal="title">{L(ui.competitions.title)}</h2>
                     <p className="sub" data-reveal>{L(ui.competitions.sub)}</p>
                 </header>
@@ -295,7 +159,6 @@ export default function Home() {
             </section>
 
             <section className="section contact" id="contact" aria-labelledby="contact-t">
-                <p className="chapter-marker" data-reveal><span>05</span> / 05</p>
                 <p className="eyebrow contact-eyebrow" data-reveal>{L(ui.contact.eyebrow)}</p>
                 <h2 id="contact-t" className="title contact-title" data-reveal="title">{L(ui.contact.title)}</h2>
                 <a className="contact-mail" href={`mailto:${site.email}`} data-reveal="title">{user}<wbr />@{domain}</a>

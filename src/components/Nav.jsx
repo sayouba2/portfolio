@@ -5,8 +5,8 @@ import { useLang, useL } from "../i18n.jsx"
 import { site, ui, asset } from "../data/content.js"
 
 const LINKS = [
-    { id: "projets", label: ui.nav.projects },
     { id: "parcours", label: ui.nav.journey },
+    { id: "projets", label: ui.nav.projects },
     { id: "hackathons", label: ui.competitions.title },
     { id: "contact", label: ui.nav.contact },
 ]
