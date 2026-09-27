@@ -6,10 +6,10 @@
     isolation: isolate;
     overflow: hidden;
     min-height: min(940px, 100svh);
-    background: #070f11;
+    background: var(--abyss);
 }
-.hero::before { content: ""; position: absolute; z-index: -1; inset: 0; background: radial-gradient(ellipse at 77% 44%, rgba(55, 119, 101, .13), transparent 44%), linear-gradient(115deg, rgba(3, 7, 8, .2), transparent); }
-.hero-grid { position: absolute; z-index: -1; inset: 0; background-image: linear-gradient(rgba(161, 189, 179, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(161, 189, 179, .045) 1px, transparent 1px); background-size: 88px 88px; mask-image: linear-gradient(90deg, transparent 28%, #000 78%); }
+.hero::before { content: ""; position: absolute; z-index: -1; inset: 0; background: radial-gradient(ellipse at 77% 44%, rgba(55, 119, 101, .045), transparent 44%), linear-gradient(115deg, rgba(0, 0, 0, .3), transparent); }
+.hero-grid { position: absolute; z-index: -1; inset: 0; background-image: linear-gradient(rgba(161, 189, 179, .018) 1px, transparent 1px), linear-gradient(90deg, rgba(161, 189, 179, .018) 1px, transparent 1px); background-size: 88px 88px; mask-image: linear-gradient(90deg, transparent 28%, #000 78%); }
 .hero-shell { max-width: 1560px; min-height: inherit; margin-inline: auto; padding: 142px clamp(24px, 6vw, 100px) 0; display: flex; flex-direction: column; }
 .hero-main { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: center; gap: 28px; flex: 1; padding-block: 18px 64px; }
 .hero-content { position: relative; z-index: 3; }
@@ -35,7 +35,7 @@
 .hero-status-dot { flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--seaglass); box-shadow: 0 0 0 4px rgba(134, 227, 206, .08); }
 .hero-visual { position: relative; width: 100%; aspect-ratio: .94; max-height: 580px; }
 .hero-art { position: absolute; inset: 0; transform: translate(calc(var(--hero-x) * -.5), calc(var(--hero-y) * -.5 + var(--hero-scroll, 0) * var(--hero-drift, 58px))); }
-.hero-disc { position: absolute; top: 9%; left: 7%; width: 85%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 40% 34%, #193d35, #122921 57%, #0b1716 74%); border: 1px solid rgba(159, 204, 175, .13); box-shadow: inset 0 0 80px rgba(0, 0, 0, .25); }
+.hero-disc { position: absolute; top: 9%; left: 7%; width: 85%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 40% 34%, #0c211b, #09150f 57%, #050c0b 74%); border: 1px solid rgba(159, 204, 175, .13); box-shadow: inset 0 0 80px rgba(0, 0, 0, .4); }
 .hero-disc::after { content: ""; position: absolute; inset: 12%; border: 1px solid rgba(199, 227, 209, .08); border-radius: inherit; }
 .hero-orbit { position: absolute; left: -1%; top: 1%; width: 101%; aspect-ratio: 1; border: 1px solid rgba(183, 207, 188, .21); border-radius: 50%; animation: hero-orbit-turn 42s linear infinite; }
 .hero-orbit > span { position: absolute; top: 50%; left: -4px; width: 7px; height: 7px; border-radius: 50%; background: var(--lantern); box-shadow: 0 0 14px rgba(243, 178, 122, .4); }
@@ -114,7 +114,7 @@
     .hero-availability { margin-top: 6px; min-height: 38px; font-size: .56rem; color: #a9beb5; }
     .hero-visual { position: absolute; z-index: 0; top: 76px; right: -8%; bottom: 46px; width: 100%; max-width: none; max-height: none; aspect-ratio: auto; pointer-events: none; }
     .hero-art { inset: 0; }
-    .hero-art::after { content: ""; position: absolute; z-index: 2; inset: 0; background: linear-gradient(0deg, #070f11 3%, rgba(7, 15, 17, .98) 23%, rgba(7, 15, 17, .76) 46%, rgba(7, 15, 17, .06) 78%), linear-gradient(90deg, #070f11 0%, transparent 72%); }
+    .hero-art::after { content: ""; position: absolute; z-index: 2; inset: 0; background: linear-gradient(0deg, var(--abyss) 3%, rgba(2, 4, 5, .99) 23%, rgba(2, 4, 5, .88) 46%, rgba(2, 4, 5, .24) 78%), linear-gradient(90deg, var(--abyss) 0%, transparent 72%); }
     .hero-disc { width: 109%; left: 0; top: 11%; opacity: .8; }
     .hero-orbit { width: 121%; left: -6%; top: 8%; opacity: .5; }
     .hero-orbit-inner { width: 113%; left: -2%; top: 10%; }
