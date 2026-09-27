@@ -1,6 +1,6 @@
 import { Link, useParams, Navigate } from "react-router-dom"
 import { useL } from "../i18n.jsx"
-import { ui, featuredProjects, screensFor } from "../data/content.js"
+import { site, pfe, ui, featuredProjects, screensFor, asset } from "../data/content.js"
 import Showcase from "../components/Showcase.jsx"
 import { useHead } from "../components/useHead.js"
 import { homeHead, projectHead } from "../seo.js"
@@ -29,7 +29,7 @@ export default function ProjectPage() {
     const cs = project.caseStudy
 
     return (
-        <article className="case">
+        <article className="case" style={{ "--project-accent": project.accent || "#86E3CE" }}>
             <header className="section case-head">
                 <Link to="/#projets" className="link" data-reveal>← {L(ui.project.back)}</Link>
                 <p className="kicker" data-reveal>
@@ -48,7 +48,7 @@ export default function ProjectPage() {
             </header>
 
             <div className="section case-shots" data-reveal="frame">
-                <Showcase title={project.title} shots={screensFor(project.slug)} />
+                <Showcase title={project.title} shots={screensFor(project.slug)} priority />
             </div>
 
             <div className="section case-body">
@@ -74,6 +74,16 @@ export default function ProjectPage() {
                     <p className="modal-lead">{L(cs.takeaway)}</p>
                 </Block>
             </div>
+
+            <section className="section case-cta" aria-labelledby="case-cta-t" data-reveal>
+                <p className="eyebrow">{L(ui.contact.eyebrow)}</p>
+                <h2 id="case-cta-t">{L(ui.contact.title)}</h2>
+                <p>{L(pfe.text)}</p>
+                <div className="modal-actions">
+                    <Link className="btn" to="/#contact">{L(pfe.cta)} <span aria-hidden="true">↗</span></Link>
+                    <a className="btn ghost" href={asset(L(site.cvUrl))} target="_blank" rel="noreferrer">{L(ui.hero.cv)} <span aria-hidden="true">↓</span></a>
+                </div>
+            </section>
 
             {next.slug !== project.slug && (
                 <nav className="section case-next" aria-label={L(ui.project.next)} data-reveal>

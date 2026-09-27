@@ -7,17 +7,59 @@ import { asset } from "../../data/content.js"
 
 // Palette du site : les abysses, une lueur verre-de-mer, une lanterne.
 const SEA = { base: "#050B0D", colors: ["#081C1F", "#114743", "#2F8B7C"] }
-const REDUCED = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
 const CODE_PX = 0.42      // glyphes à l'écran : 26 px de texture × 0,42 ≈ 11 px — un motif, pas un texte à lire
+const MOBILE_MEDIA = "(max-width: 900px), (pointer: coarse)"
+const MOTION_MEDIA = "(prefers-reduced-motion: reduce)"
+
+function useReducedMotion() {
+    const [reduced, setReduced] = useState(() =>
+        typeof window !== "undefined" && window.matchMedia(MOTION_MEDIA).matches
+    )
+
+    useEffect(() => {
+        const media = window.matchMedia(MOTION_MEDIA)
+        const update = () => setReduced(media.matches)
+        update()
+        media.addEventListener("change", update)
+        return () => media.removeEventListener("change", update)
+    }, [])
+
+    return reduced
+}
+
+function readDpr() {
+    if (typeof window === "undefined") return 1
+    const cap = window.matchMedia(MOBILE_MEDIA).matches ? 1.25 : 1.5
+    return Math.min(window.devicePixelRatio || 1, cap)
+}
+
+function useAdaptiveDpr() {
+    const [dpr, setDpr] = useState(readDpr)
+
+    useEffect(() => {
+        const media = window.matchMedia(MOBILE_MEDIA)
+        const update = () => setDpr(readDpr())
+        update()
+        media.addEventListener("change", update)
+        window.addEventListener("resize", update)
+        return () => {
+            media.removeEventListener("change", update)
+            window.removeEventListener("resize", update)
+        }
+    }, [])
+
+    return dpr
+}
 
 /**
  * Le fond : du code qui affleure dans les abysses. À peine visible partout, il
  * s'allume là où passe le courant du shader.
  */
-function CodeAbyss() {
+function CodeAbyss({ animate }) {
     const viewport = useThree((s) => s.viewport)
     const camera = useThree((s) => s.camera)
     const px = useThree((s) => s.size)
+    const invalidate = useThree((s) => s.invalidate)
     const size = viewport.getCurrentViewport(camera, [0, 0, -1.6])
 
     const material = useMemo(() => new THREE.ShaderMaterial({
@@ -83,16 +125,38 @@ function CodeAbyss() {
             if (!alive) { t.dispose(); return }
             material.uniforms.uCode.value = t
             material.uniforms.uHasCode.value = 1
+            invalidate()
         })
         return () => { alive = false; material.uniforms.uCode.value?.dispose(); material.dispose() }
-    }, [material])
+    }, [invalidate, material])
+
+    // Le canevas est en mode `demand` : lorsqu'il est visible, on demande au
+    // plus 30 images/s. Hors écran ou avec reduced-motion, aucune boucle ne tourne.
+    useEffect(() => {
+        if (!animate) {
+            invalidate()
+            return undefined
+        }
+
+        let frame = 0
+        let previous = 0
+        const tick = (now) => {
+            if (now - previous >= 1000 / 30) {
+                previous = now
+                invalidate()
+            }
+            frame = requestAnimationFrame(tick)
+        }
+        frame = requestAnimationFrame(tick)
+        return () => cancelAnimationFrame(frame)
+    }, [animate, invalidate])
 
     useFrame((_, delta) => {
         const u = material.uniforms
         u.uAspect.value = size.width / size.height
         // Répétition calculée en pixels : les glyphes gardent la même taille à l'écran.
         u.uRepeat.value.set(px.width / (2048 * CODE_PX), px.height / (2048 * CODE_PX))
-        if (!REDUCED) u.uTime.value = (u.uTime.value + Math.min(delta, 1 / 30)) % 3600
+        if (animate) u.uTime.value = (u.uTime.value + Math.min(delta, 1 / 30)) % 3600
     })
 
     return (
@@ -110,6 +174,7 @@ const NAME_TOP_GAP = 18         // sur téléphone, entre la nav et le haut de S
 const CHIN_GAP = 16             // entre le menton et le haut de OUEDRAOGO
 const HAIR_OVERLAP = 0.35       // part de la hauteur des lettres de SAYOUBA cachée par les cheveux
 const PHOTO_Z = -0.4            // profondeur du portrait dans la scène
+const NAME_TEXTURE = { width: 2400, height: 600, padding: 56, fontSize: 560 }
 // Capitales dans la texture d'une ligne du nom (2400 × 600, cf. NamePlate).
 const GLYPH = { top: 157 / 600, height: 403 / 600 }
 // Dans portrait.webp, en fraction de la hauteur depuis le haut : le sommet de
@@ -201,12 +266,25 @@ function NamePlate({ lines, copyTop }) {
             // Lignes de base d'origine (560 et 1130 sur une texture de 1200 px de haut).
             made = lines.map((line, i) => {
                 const c = document.createElement("canvas")
-                c.width = 2400
-                c.height = 600
+                c.width = NAME_TEXTURE.width
+                c.height = NAME_TEXTURE.height
                 const g = c.getContext("2d")
+                const text = line.toUpperCase()
                 g.fillStyle = "#E6EFEC"
-                g.font = '900 560px "Big Shoulders Display", Impact, sans-serif'
-                g.fillText(line.toUpperCase(), 40, i === 0 ? 560 : 530)
+                g.font = `900 ${NAME_TEXTURE.fontSize}px "Big Shoulders Display", Impact, sans-serif`
+
+                // Une ligne longue (OUEDRAOGO notamment) dépassait parfois le
+                // canevas. On mesure sa largeur réelle et on la comprime juste
+                // assez horizontalement pour garder une marge des deux côtés,
+                // sans changer la hauteur commune aux deux lignes.
+                const available = NAME_TEXTURE.width - NAME_TEXTURE.padding * 2
+                const measured = Math.max(g.measureText(text).width, 1)
+                const scaleX = Math.min(1, available / measured)
+                g.save()
+                g.translate(NAME_TEXTURE.padding, 0)
+                g.scale(scaleX, 1)
+                g.fillText(text, 0, i === 0 ? 560 : 530)
+                g.restore()
                 const t = new THREE.CanvasTexture(c)
                 t.colorSpace = THREE.SRGBColorSpace
                 t.anisotropy = 8
@@ -303,6 +381,8 @@ function Portrait({ src, copyTop }) {
 export default function HeroScene({ name, portraitSrc, copyTop }) {
     const wrap = useRef(null)
     const [on, setOn] = useState(true)
+    const reducedMotion = useReducedMotion()
+    const dpr = useAdaptiveDpr()
     const lines = useMemo(() => {
         const [first, ...rest] = name.split(" ")
         return [first, rest.join(" ")]
@@ -321,13 +401,13 @@ export default function HeroScene({ name, portraitSrc, copyTop }) {
         <div className="hero-canvas" ref={wrap} aria-hidden="true">
             <Canvas
                 flat
-                frameloop={on ? "always" : "never"}
-                dpr={[1, 2]}
+                frameloop="demand"
+                dpr={dpr}
                 camera={{ position: [0, 0, 6], fov: 35 }}
-                gl={{ antialias: true, alpha: false, powerPreference: "high-performance", preserveDrawingBuffer: import.meta.env.DEV }}
+                gl={{ antialias: false, alpha: false, powerPreference: "high-performance", preserveDrawingBuffer: import.meta.env.DEV }}
             >
                 <color attach="background" args={[SEA.base]} />
-                <CodeAbyss />
+                <CodeAbyss animate={on && !reducedMotion} />
                 {portraitSrc && <Portrait src={asset(portraitSrc)} copyTop={copyTop} />}
                 <NamePlate lines={lines} copyTop={copyTop} />
             </Canvas>

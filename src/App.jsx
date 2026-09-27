@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom"
-import { useEffect } from "react"
-import { LanguageProvider } from "./i18n.jsx"
+import { useEffect, useRef } from "react"
+import { LanguageProvider, useL } from "./i18n.jsx"
+import { ui } from "./data/content.js"
 import Nav from "./components/Nav.jsx"
 import Footer from "./components/Footer.jsx"
 import Home from "./pages/Home.jsx"
@@ -12,7 +13,63 @@ import { useScrollReveal } from "./components/useScrollReveal.js"
 function PageShell({ children }) {
     const { pathname } = useLocation()
     useScrollReveal(pathname)
-    return <main id="main" key={pathname} className="page-enter">{children}</main>
+    return <main id="main" key={pathname} className="page-enter" tabIndex="-1">{children}</main>
+}
+
+function SkipLink() {
+    const L = useL()
+    return <a className="skip-link" href="#main">{L(ui.a11y.skip)}</a>
+}
+
+/** Une lumière très discrète suit le pointeur derrière les sections. */
+function AmbientBackdrop() {
+    useEffect(() => {
+        const root = document.documentElement
+        const fine = window.matchMedia("(pointer: fine)")
+        const reduced = window.matchMedia("(prefers-reduced-motion: reduce)")
+
+        let frame = 0
+        let active = false
+        let x = window.innerWidth * .5
+        let y = window.innerHeight * .3
+        const paint = () => {
+            frame = 0
+            root.style.setProperty("--pointer-x", `${x}px`)
+            root.style.setProperty("--pointer-y", `${y}px`)
+        }
+        const move = (event) => {
+            x = event.clientX
+            y = event.clientY
+            if (!frame) frame = requestAnimationFrame(paint)
+        }
+        const stop = () => {
+            if (!active) return
+            active = false
+            window.removeEventListener("pointermove", move)
+            cancelAnimationFrame(frame)
+            frame = 0
+            root.style.removeProperty("--pointer-x")
+            root.style.removeProperty("--pointer-y")
+        }
+        const sync = () => {
+            stop()
+            if (!fine.matches || reduced.matches) return
+            active = true
+            paint()
+            window.addEventListener("pointermove", move, { passive: true })
+        }
+
+        sync()
+        fine.addEventListener("change", sync)
+        reduced.addEventListener("change", sync)
+        return () => {
+            stop()
+            fine.removeEventListener("change", sync)
+            reduced.removeEventListener("change", sync)
+        }
+    }, [])
+
+    return <div className="site-ambient" aria-hidden="true"><i /><i /></div>
 }
 
 /**
@@ -44,16 +101,27 @@ function ViewportVars() {
 // longue ferait défiler toute la page précédente à l'écran.
 function ScrollManager() {
     const { pathname, hash } = useLocation()
+    const previousPath = useRef(pathname)
 
     useEffect(() => {
+        const pathChanged = previousPath.current !== pathname
+        previousPath.current = pathname
+
         if (hash) {
             const el = document.querySelector(hash)
             if (el) {
-                el.scrollIntoView({ behavior: "smooth", block: "start" })
-                return
+                const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
+                el.scrollIntoView({ behavior, block: "start" })
             }
+        } else {
+            window.scrollTo({ top: 0, behavior: "auto" })
         }
-        window.scrollTo({ top: 0, behavior: "instant" })
+
+        // Une nouvelle route remplace tout le contenu principal. Le focus suit
+        // ce changement sans perturber les simples ancres de la page d'accueil.
+        if (pathChanged) {
+            requestAnimationFrame(() => document.getElementById("main")?.focus({ preventScroll: true }))
+        }
     }, [pathname, hash])
 
     return null
@@ -65,6 +133,8 @@ export default function App() {
             <BrowserRouter>
                 <ScrollManager />
                 <ViewportVars />
+                <SkipLink />
+                <AmbientBackdrop />
                 <Nav />
                 <PageShell>
                     <Routes>

@@ -1,7 +1,7 @@
 import { Component, Suspense, lazy, useCallback, useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import { useL } from "../i18n.jsx"
-import { site, ui, pfe, whatIDo, featuredProjects, otherProjects, asset, screensFor } from "../data/content.js"
+import { site, ui, pfe, whatIDo, experiences, honors, featuredProjects, otherProjects, asset, screensFor } from "../data/content.js"
 import GitLog from "../components/GitLog.jsx"
 import Showcase from "../components/Showcase.jsx"
 import Modal from "../components/Modal.jsx"
@@ -13,6 +13,7 @@ import { homeHead } from "../seo.js"
 // three.js et React Three Fiber ne servent qu'à l'ouverture : chargés à part,
 // ils ne retardent pas l'affichage du reste de la page.
 const HeroScene = lazy(() => import("../components/hero/HeroScene.jsx"))
+const CATEGORY_ACCENTS = { web: "#86E3CE", mobile: "#B9A4F0", ai: "#F3B27A" }
 
 /**
  * Sans WebGL (navigateur ancien, accélération désactivée), la scène lève une
@@ -66,18 +67,35 @@ function useCopyTop() {
 function useHeroDepth(ref) {
     useEffect(() => {
         const hero = ref.current
-        if (!hero || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+        if (!hero) return
+        const reduced = window.matchMedia("(prefers-reduced-motion: reduce)")
         let frame = 0
+        let listening = false
         const update = () => {
             frame = 0
             const depth = Math.min(1, Math.max(0, window.scrollY / hero.offsetHeight))
             hero.style.setProperty("--depth", depth.toFixed(3))
         }
         const onScroll = () => { if (!frame) frame = requestAnimationFrame(update) }
-        update()
-        window.addEventListener("scroll", onScroll, { passive: true })
+        const sync = () => {
+            if (reduced.matches) {
+                if (listening) window.removeEventListener("scroll", onScroll)
+                listening = false
+                cancelAnimationFrame(frame)
+                frame = 0
+                hero.style.removeProperty("--depth")
+                return
+            }
+            if (!listening) window.addEventListener("scroll", onScroll, { passive: true })
+            listening = true
+            update()
+        }
+
+        sync()
+        reduced.addEventListener("change", sync)
         return () => {
-            window.removeEventListener("scroll", onScroll)
+            if (listening) window.removeEventListener("scroll", onScroll)
+            reduced.removeEventListener("change", sync)
             cancelAnimationFrame(frame)
         }
     }, [ref])
@@ -85,7 +103,8 @@ function useHeroDepth(ref) {
 
 const scrollTo = (id) => (e) => {
     e.preventDefault()
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+    const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
+    document.getElementById(id)?.scrollIntoView({ behavior })
 }
 
 function ProjectSummary({ p }) {
@@ -128,39 +147,63 @@ export default function Home() {
         ...featuredProjects.map((p) => ({
             key: p.slug, title: p.title, text: L(p.oneLiner), stack: p.stack,
             live: p.liveUrl, github: p.github, project: p.caseStudy && p, shots: screensFor(p.slug),
+            category: p.category, accent: p.accent || CATEGORY_ACCENTS[p.category],
         })),
         ...otherProjects.filter((p) => screensFor(p.id).length).map((p) => ({
             key: p.id, title: L(p.title), text: L(p.text), stack: p.tags, github: p.github, shots: screensFor(p.id),
+            category: p.category, accent: CATEGORY_ACCENTS[p.category],
         })),
     ]
     const others = otherProjects.filter((p) => !screensFor(p.id).length)
     const [user, domain] = site.email.split("@")
+    const wins = honors.competitions.filter((competition) => competition.place === 1).length
 
     return (
         <>
             <header className="hero" ref={heroRef}>
                 <SceneBoundary fallback={<StaticHero />}>
-                    <Suspense fallback={<div className="hero-canvas" />}>
+                    <Suspense fallback={<StaticHero />}>
                         <HeroScene name={site.name} portraitSrc={site.portrait} copyTop={copyTop} />
                     </Suspense>
                 </SceneBoundary>
                 <h1 className="sr-only">{site.name} — {L(site.role)}</h1>
                 <div className="hero-copy" ref={copyRef}>
-                    {pfe.active && <p className="hero-status"><i aria-hidden="true" />{L(site.status)}</p>}
+                    <div className="hero-topline">
+                        {pfe.active && <p className="hero-status"><i aria-hidden="true" />{L(site.status)}</p>}
+                        <p className="hero-place">{L(pfe.places)}</p>
+                    </div>
                     <p className="hero-role">{L(site.role)}</p>
                     <p className="hero-tagline">{L(site.tagline)}</p>
                     <div className="hero-ctas">
-                        <a className="btn" href="#projets" onClick={scrollTo("projets")}>{L(ui.hero.cta)}</a>
-                        <a className="btn ghost" href={asset(L(site.cvUrl))} target="_blank" rel="noreferrer">{L(ui.hero.cv)}</a>
+                        <a className="btn" href="#projets" onClick={scrollTo("projets")}>{L(ui.hero.cta)}<span aria-hidden="true">↘</span></a>
+                        <a className="btn ghost" href={asset(L(site.cvUrl))} target="_blank" rel="noreferrer">{L(ui.hero.cv)}<span aria-hidden="true">↓</span></a>
                     </div>
                 </div>
+                <div className="hero-scroll" aria-hidden="true"><span>{L(ui.hero.scroll)}</span><i /></div>
             </header>
 
+            <section className="proof-strip" aria-labelledby="proof-t">
+                <div className="proof-inner">
+                    <p className="proof-label" id="proof-t" data-reveal>{L(ui.proof.label)}</p>
+                    <ul>
+                        <li data-reveal><strong>{L(ui.proof.availabilityValue)}</strong><span>{L(ui.proof.availability)}</span></li>
+                        <li data-reveal><strong>{experiences.length}</strong><span>{L(ui.proof.internships)}</span></li>
+                        <li data-reveal><strong>{wins}×</strong><span>{L(ui.proof.wins)}</span></li>
+                        <li data-reveal><strong>{L(ui.proof.scopeValue)}</strong><span>{L(ui.proof.scope)}</span></li>
+                    </ul>
+                </div>
+            </section>
+
             <section className="section craft" aria-labelledby="craft-t">
-                <h2 id="craft-t" className="eyebrow" data-reveal>{L(ui.craft)}</h2>
+                <header className="section-heading">
+                    <p className="chapter-marker" data-reveal><span>01</span> / 05</p>
+                    <h2 id="craft-t" className="title section-title" data-reveal="title">{L(ui.craft)}</h2>
+                    <p className="sub" data-reveal>{L(ui.craftSub)}</p>
+                </header>
                 <div className="craft-cols">
-                    {whatIDo.map((b) => (
-                        <div className="craft-col" key={b.id} data-reveal>
+                    {whatIDo.map((b, index) => (
+                        <div className="craft-col" key={b.id} data-reveal style={{ "--item": index }}>
+                            <span className="craft-number" aria-hidden="true">0{index + 1}</span>
                             <h3>{L(b.title)}</h3>
                             <div className="craft-logos">
                                 {b.logos.map((t) => <img key={t} src={asset(`images/tech/${t}.svg`)} alt={t} title={t} loading="lazy" />)}
@@ -171,43 +214,47 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className="section" id="parcours" aria-labelledby="parcours-t">
-                <h2 id="parcours-t" className="title" data-reveal="title">{L(ui.path.title)}</h2>
-                <p className="sub" data-reveal>{L(ui.path.sub)}</p>
-                <GitLog />
-            </section>
-
-            <section className="section" id="hackathons" aria-labelledby="hackathons-t">
-                <h2 id="hackathons-t" className="title" data-reveal="title">{L(ui.competitions.title)}</h2>
-                <p className="sub" data-reveal>{L(ui.competitions.sub)}</p>
-                <Scoreboard />
-            </section>
-
-            <section className="section" id="projets" aria-labelledby="projets-t">
-                <h2 id="projets-t" className="title" data-reveal="title">{L(ui.work.title)}</h2>
-                <p className="sub" data-reveal>{L(ui.work.sub)}</p>
+            <section className="section projects-section" id="projets" aria-labelledby="projets-t">
+                <header className="section-heading section-heading-split">
+                    <p className="chapter-marker" data-reveal><span>02</span> / 05</p>
+                    <h2 id="projets-t" className="title" data-reveal="title">{L(ui.work.title)}</h2>
+                    <p className="sub" data-reveal>{L(ui.work.sub)}</p>
+                </header>
                 <div className="projects">
-                    {shown.map((p) => (
-                        <article className="project" key={p.key}>
+                    {shown.map((p, index) => (
+                        <article
+                            className={`project ${index % 2 ? "project-reverse" : ""}`}
+                            key={p.key}
+                            style={{ "--project-accent": p.accent }}
+                        >
                             <header className="project-head" data-reveal>
                                 <div className="project-name">
-                                    <h3>{p.title}</h3>
-                                    <p className="project-stack">{p.stack.join(" · ")}</p>
+                                    <p className="project-overline">
+                                        <span>{String(index + 1).padStart(2, "0")} / {String(shown.length).padStart(2, "0")}</span>
+                                        <span>{L(ui.categories[p.category])}</span>
+                                    </p>
+                                    <h3>
+                                        {p.project ? <Link to={`/projets/${p.project.slug}`}>{p.title}</Link> : p.title}
+                                    </h3>
+                                    <ul className="project-tags" aria-label={L(ui.work.technologies)}>
+                                        {p.stack.map((technology) => <li key={technology}>{technology}</li>)}
+                                    </ul>
                                 </div>
                                 <div className="project-copy">
                                     <p>{p.text}</p>
                                     <div className="project-actions">
                                         {p.project && (
-                                            <button className="btn" onClick={(e) => setOpen({ p: p.project, x: e.clientX, y: e.clientY })}>
-                                                {L(ui.work.summary)}
-                                            </button>
+                                            <>
+                                                <Link className="btn" to={`/projets/${p.project.slug}`}>{L(ui.work.fullCase)}<span aria-hidden="true">↗</span></Link>
+                                                <button className="link summary-link" onClick={(e) => setOpen({ p: p.project, origin: e.detail ? { x: e.clientX, y: e.clientY } : null })}>{L(ui.work.summary)}</button>
+                                            </>
                                         )}
                                         {p.live && <a className="link" href={p.live} target="_blank" rel="noreferrer">{L(ui.work.visit)} ↗</a>}
                                         {p.github && <a className="link" href={p.github} target="_blank" rel="noreferrer">{L(ui.work.code)} ↗</a>}
                                     </div>
                                 </div>
                             </header>
-                            <div data-reveal="frame"><Showcase title={p.title} shots={p.shots} /></div>
+                            <div className="project-media" data-reveal="frame"><Showcase title={p.title} shots={p.shots} priority={index === 0} /></div>
                         </article>
                     ))}
                 </div>
@@ -229,8 +276,28 @@ export default function Home() {
                 )}
             </section>
 
+            <section className="section journey-section" id="parcours" aria-labelledby="parcours-t">
+                <header className="section-heading section-heading-split">
+                    <p className="chapter-marker" data-reveal><span>03</span> / 05</p>
+                    <h2 id="parcours-t" className="title" data-reveal="title">{L(ui.path.title)}</h2>
+                    <p className="sub" data-reveal>{L(ui.path.sub)}</p>
+                </header>
+                <GitLog />
+            </section>
+
+            <section className="section competition-section" id="hackathons" aria-labelledby="hackathons-t">
+                <header className="section-heading section-heading-split">
+                    <p className="chapter-marker" data-reveal><span>04</span> / 05</p>
+                    <h2 id="hackathons-t" className="title" data-reveal="title">{L(ui.competitions.title)}</h2>
+                    <p className="sub" data-reveal>{L(ui.competitions.sub)}</p>
+                </header>
+                <Scoreboard />
+            </section>
+
             <section className="section contact" id="contact" aria-labelledby="contact-t">
-                <h2 id="contact-t" className="eyebrow" data-reveal>{L(ui.contact.title)}</h2>
+                <p className="chapter-marker" data-reveal><span>05</span> / 05</p>
+                <p className="eyebrow contact-eyebrow" data-reveal>{L(ui.contact.eyebrow)}</p>
+                <h2 id="contact-t" className="title contact-title" data-reveal="title">{L(ui.contact.title)}</h2>
                 <a className="contact-mail" href={`mailto:${site.email}`} data-reveal="title">{user}<wbr />@{domain}</a>
                 <p className="contact-sub" data-reveal>{L(pfe.text)}</p>
                 <div className="contact-grid" data-reveal>
@@ -245,7 +312,7 @@ export default function Home() {
             </section>
 
             {open && (
-                <Modal origin={open} onClose={close} label={open.p.title}>
+                <Modal origin={open.origin} onClose={close} label={open.p.title}>
                     <ProjectSummary p={open.p} />
                 </Modal>
             )}

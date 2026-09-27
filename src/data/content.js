@@ -47,6 +47,9 @@ export const pfe = {
 }
 
 export const ui = {
+    a11y: {
+        skip: { fr: "Aller au contenu", en: "Skip to content" },
+    },
     nav: {
         projects: { fr: "Projets", en: "Projects" },
         journey: { fr: "Parcours", en: "Background" },
@@ -93,6 +96,19 @@ export const ui = {
     },
     // Proposition A — « Sous la surface ».
     craft: { fr: "Ce que je construis", en: "What I build" },
+    craftSub: {
+        fr: "Trois terrains de jeu, une même exigence : transformer une idée en produit fiable, lisible et utile.",
+        en: "Three areas of practice, one standard: turning an idea into a reliable, clear and useful product.",
+    },
+    proof: {
+        label: { fr: "En bref", en: "At a glance" },
+        availability: { fr: "Disponible pour un PFE", en: "Available for a final-year internship" },
+        availabilityValue: { fr: "Fév. 2027", en: "Feb. 2027" },
+        internships: { fr: "Expériences terrain", en: "Industry experiences" },
+        wins: { fr: "Premières places", en: "First-place finishes" },
+        scope: { fr: "Produits de bout en bout", en: "End-to-end products" },
+        scopeValue: { fr: "Web · Mobile · IA", en: "Web · Mobile · AI" },
+    },
     path: {
         // Le saut de ligne est rendu par `white-space: pre-line` sur .title.
         title: { fr: "Expériences\n& formation", en: "Experience\n& education" },
@@ -118,6 +134,7 @@ export const ui = {
         summary: { fr: "Lire le résumé", en: "Read the summary" },
         summaryKicker: { fr: "Résumé", en: "Summary" },
         fullCase: { fr: "Étude de cas complète", en: "Full case study" },
+        technologies: { fr: "Technologies", en: "Technologies" },
         others: { fr: "Autres dépôts", en: "Other repositories" },
         visit: { fr: "Visiter", en: "Visit" },
         code: { fr: "Code", en: "Code" },
@@ -142,11 +159,13 @@ export const ui = {
         close: { fr: "Fermer", en: "Close" },
     },
     hero: {
-        cta: { fr: "Regarder sous le capot", en: "Look under the hood" },
+        cta: { fr: "Voir mes projets", en: "View my work" },
         cv: { fr: "Télécharger le CV", en: "Download my resume" },
+        scroll: { fr: "Explorer", en: "Explore" },
     },
     contact: {
-        title: { fr: "Remonter à la surface", en: "Back to the surface" },
+        eyebrow: { fr: "Remonter à la surface", en: "Back to the surface" },
+        title: { fr: "Travaillons ensemble", en: "Let's work together" },
         phone: { fr: "Téléphone", en: "Phone" },
         location: { fr: "Basé à", en: "Based in" },
     },
