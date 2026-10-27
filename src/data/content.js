@@ -185,7 +185,7 @@ export const ui = {
 }
 
 // URL du Worker de l'assistant IA (dossier worker/, voir wrangler.jsonc). Vide : réponses locales seulement.
-export const assistantApi = ""
+export const assistantApi = "https://portfolio-assistant.sayouba-assistant.workers.dev"
 
 export const emailJs = {
     publicKey: "4o-UwuW0rilfQWEyY",
