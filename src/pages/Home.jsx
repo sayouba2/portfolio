@@ -12,7 +12,7 @@ export function SectionTitle({ first, second }) {
 
 function CircularContact({ onContact }) {
     const L = useL()
-    return <div className="circular-contact"><svg viewBox="0 0 200 200" aria-hidden="true"><defs><path id="hire-circle" d="M100 100m-78 0a78 78 0 1 1 156 0a78 78 0 1 1-156 0"/></defs><text><textPath href="#hire-circle" textLength="488">React ✳ Mobile ✳ Full Stack ✳ IA ✳ </textPath></text></svg><button onClick={onContact}>{L({ fr: "Parlons !", en: "Hire Me" })}</button></div>
+    return <div className="circular-contact"><svg viewBox="0 0 200 200" aria-hidden="true"><defs><path id="hire-circle" d="M100 100m-78 0a78 78 0 1 1 156 0a78 78 0 1 1-156 0"/></defs><text><textPath href="#hire-circle" textLength="488">React * Mobile * Full Stack * IA * </textPath></text></svg><button onClick={onContact}>{L({ fr: "Parlons !", en: "Hire Me" })}</button></div>
 }
 
 function AboutStatement() {
@@ -59,7 +59,7 @@ export default function Home({ onContact }) {
             <div className="hero-copy">
                 <h1 id="hero-heading">{lang === "fr" ? <>Des <em>Idées</em><br/>Aux <em>Solutions<br className="hero-title-break"/> Intelligentes</em></> : <>Turning <em>Ideas</em><br/>Into <em>AI-Powered<br className="hero-title-break"/> Solutions</em></>}</h1>
                 <p>{lang === "fr" ? <>Développeur <strong>Full Stack</strong> passionné, je donne vie à vos idées à travers des <strong>applications web, mobiles</strong> et des <strong>solutions IA</strong>.</> : <>As a passionate <strong>Full Stack Developer</strong>, I bring ideas to life through cutting-edge <strong>web & mobile applications</strong> and <strong>AI solutions</strong>.</>}</p>
-                <div className="hero-actions"><a className="raised-button" href={asset(L(site.cvUrl))} target="_blank" rel="noreferrer"><span>{L({ fr: "Mon CV", en: "Resume" })}</span></a><button className="raised-button" onClick={onContact}><span>Contact</span></button></div>
+                <div className="hero-actions"><a className="raised-button" href={asset(L(site.cvUrl))} target="_blank" rel="noreferrer"><span>{L({ fr: "Mon CV", en: "Resume" })}</span></a><button className="raised-button hero-contact" onClick={onContact}><span>Contact</span></button></div>
             </div>
             <CircularContact onContact={onContact}/>
         </section>
