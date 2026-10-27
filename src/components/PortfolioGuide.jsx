@@ -1,10 +1,15 @@
 import { useEffect, useId, useRef, useState } from "react"
 import { useL } from "../i18n.jsx"
-import { experiences, featuredProjects, pfe, site } from "../data/content.js"
+import { assistantApi, experiences, featuredProjects, pfe, site } from "../data/content.js"
 import "./portfolio-guide.css"
 
 const copy = {
     title: { fr: "Assistant", en: "Assistant" },
+    titleAi: { fr: "Assistant IA", en: "AI Assistant" },
+    slow: {
+        fr: "Doucement ! 3 messages maximum toutes les 10 secondes. Patiente un instant avant de reposer ta question.",
+        en: "Whoa, slow down! 3 messages per 10 seconds max. Please wait a moment before asking again.",
+    },
     byline: { fr: "Conçu par Sayouba Ouedraogo", en: "Built by Sayouba Ouedraogo" },
     typing: { fr: "Écrit…", en: "Typing..." },
     typingBubble: { fr: "Écrit", en: "Typing" },
@@ -39,7 +44,7 @@ const skills = {
     en: "I build web and mobile applications with React, Flutter, Spring Boot and FastAPI. I also work with applied AI: RAG, LLMs and computer vision.",
 }
 
-// Pas de serveur derrière (site statique) : le premier sujet reconnu dans la question donne la réponse.
+// Réponses locales, sans Worker configuré ou quand il ne répond pas : le premier sujet reconnu l'emporte.
 const topics = [
     { match: /dispo|availab|stage|pfe|intern|recrut|hire|embauch|quand|when/, answer: L => `${L(pfe.text)} ${L(pfe.places)}.` },
     { match: /competen|skill|stack|techno|langage|language|outil|tool|react|flutter|spring|python|\bia\b|\bai\b|rag|llm/, answer: L => L(skills) },
@@ -117,6 +122,7 @@ export default function PortfolioGuide() {
     const [badge, setBadge] = useState(false)
     const touched = useRef(false)
     const timer = useRef(0)
+    const pending = useRef(null)
     const toggleRef = useRef(null)
     const inputRef = useRef(null)
     const bodyRef = useRef(null)
@@ -126,7 +132,10 @@ export default function PortfolioGuide() {
         const t = setTimeout(() => { if (!touched.current) setBadge(true) }, 6500)
         return () => clearTimeout(t)
     }, [])
-    useEffect(() => () => clearTimeout(timer.current), [])
+    useEffect(() => () => {
+        clearTimeout(timer.current)
+        pending.current?.abort()
+    }, [])
     useEffect(() => {
         bodyRef.current?.scrollTo({ top: bodyRef.current.scrollHeight })
     }, [messages, draft, busy])
@@ -149,15 +158,15 @@ export default function PortfolioGuide() {
         return () => document.removeEventListener("keydown", onKeyDown)
     }, [open])
 
-    const ask = (raw) => {
-        const text = raw.trim()
-        if (!text || busy) return
-        const reply = answerFor(text, L)
+    const finish = (reply) => {
+        setMessages(m => [...m, { role: "bot", text: reply }])
+        setDraft("")
+        setBusy(false)
+    }
+
+    // Réponse locale : « Écrit… » un instant, puis la réponse s'affiche mot à mot comme un flux.
+    const playLocal = (reply) => {
         const words = reply.split(/(\s+)/)
-        setMessages(m => [...m, { role: "user", text }])
-        setInput("")
-        setBusy(true)
-        // « Écrit… » un instant, puis la réponse s'affiche mot à mot comme un flux.
         timer.current = setTimeout(() => {
             let shown = 0
             timer.current = setInterval(() => {
@@ -165,14 +174,47 @@ export default function PortfolioGuide() {
                 setDraft(words.slice(0, shown).join(""))
                 if (shown < words.length) return
                 clearInterval(timer.current)
-                setMessages(m => [...m, { role: "bot", text: reply }])
-                setDraft("")
-                setBusy(false)
+                finish(reply)
             }, 40)
         }, 700)
     }
 
+    // Réponse de l'IA lue au fil du flux du Worker ; null s'il ne répond pas.
+    const streamReply = async (history, signal) => {
+        let reply = ""
+        try {
+            const response = await fetch(assistantApi, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: history }), signal })
+            if (response.status === 429) return L(copy.slow)
+            if (!response.ok || !response.body) return null
+            const reader = response.body.getReader()
+            const decoder = new TextDecoder()
+            for (;;) {
+                const { done, value } = await reader.read()
+                if (done) break
+                reply += decoder.decode(value, { stream: true })
+                setDraft(reply)
+            }
+        } catch { /* réseau coupé ou conversation effacée : on garde ce qui est arrivé */ }
+        return reply.trim() || null
+    }
+
+    const ask = async (raw) => {
+        const text = raw.trim()
+        if (!text || busy) return
+        const history = [...messages, { role: "user", text }]
+        setMessages(history)
+        setInput("")
+        setBusy(true)
+        const abort = new AbortController()
+        pending.current = abort
+        const reply = assistantApi ? await streamReply(history.slice(-10), abort.signal) : null
+        if (abort.signal.aborted) return
+        if (reply) finish(reply)
+        else playLocal(answerFor(text, L))
+    }
+
     const reset = () => {
+        pending.current?.abort()
         clearTimeout(timer.current)
         setMessages([])
         setDraft("")
@@ -196,7 +238,7 @@ export default function PortfolioGuide() {
                     <div className="guide-id">
                         <span className="guide-avatar"><Robot /><span className="guide-status" /></span>
                         <div>
-                            <h2 id={`${panelId}-title`}>{L(copy.title)}</h2>
+                            <h2 id={`${panelId}-title`}>{L(assistantApi ? copy.titleAi : copy.title)}</h2>
                             <p>{L(busy ? copy.typing : copy.byline)}</p>
                         </div>
                     </div>

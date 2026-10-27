@@ -47,7 +47,7 @@ export default function Home({ onContact }) {
     const [preview, setPreview] = useState(null)
     const previewRef = useRef(null)
     useHead(homeHead(L))
-    const projects = [...featuredProjects.map(p => ({ key: p.slug, title: p.title, image: screensFor(p.slug)[0]?.page, to: `/projets/${p.slug}`, type: p.slug === "smartattend" ? L({ fr: "Reconnaissance faciale · Full Stack", en: "Facial recognition · Full Stack" }) : L({ fr: "Recrutement intelligent · IA", en: "AI-powered recruitment" }) })), ...otherProjects.map(p => ({ key: p.id, title: L(p.title), image: screensFor(p.id)[0]?.page || "images/projects/ai_rag_agent/1.png", to: p.github, type: p.id === "glaucoma" ? L({ fr: "Vision par ordinateur", en: "Computer vision" }) : L({ fr: "Assistant documentaire · RAG", en: "Document assistant · RAG" }) }))]
+    const projects = [...featuredProjects.map(p => ({ key: p.slug, title: p.title, image: screensFor(p.slug)[0]?.page, to: `/projets/${p.slug}`, type: L(p.type) })), ...otherProjects.map(p => ({ key: p.id, title: L(p.title), image: screensFor(p.id)[0]?.page || "images/projects/ai_rag_agent/1.png", to: p.github, type: p.id === "glaucoma" ? L({ fr: "Vision par ordinateur", en: "Computer vision" }) : L({ fr: "Assistant documentaire · RAG", en: "Document assistant · RAG" }) }))]
     const movePreview = e => {
         if (e.pointerType === "touch" || !previewRef.current) return
         previewRef.current.style.left = `${Math.min(window.innerWidth - 210, Math.max(210, e.clientX))}px`

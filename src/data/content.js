@@ -69,6 +69,7 @@ export const ui = {
         next: { fr: "Projet suivant", en: "Next project" },
         visit: { fr: "Visiter le site", en: "Visit the site" },
         online: { fr: "En ligne", en: "Live" },
+        inHouse: { fr: "En production · logiciel interne", en: "In production · internal software" },
         code: { fr: "Code source", en: "Source code" },
     },
     form: {
@@ -183,6 +184,9 @@ export const ui = {
     },
 }
 
+// URL du Worker de l'assistant IA (dossier worker/, voir wrangler.jsonc). Vide : réponses locales seulement.
+export const assistantApi = ""
+
 export const emailJs = {
     publicKey: "4o-UwuW0rilfQWEyY",
     serviceId: "service_aagc54q",
@@ -273,6 +277,93 @@ export const experiences = [
 
 const allFeaturedProjects = [
     {
+        slug: "m2covid",
+        title: "m2covid",
+        category: "web",
+        accent: "#1d5fb8",
+        type: { fr: "Simulation épidémiologique · Application web", en: "Epidemiological simulation · Web application" },
+        oneLiner: {
+            fr: "Plateforme web de simulation épidémiologique dédiée au Maroc — scénarios configurables, propagation simulée et visualisations interactives.",
+            en: "Epidemiological simulation web platform for Morocco — configurable scenarios, simulated spread and interactive visualizations.",
+        },
+        stack: ["React", "Python", "FastAPI"],
+        liveUrl: "https://m2covid.centrale-casablanca.net/",
+        images: ["images/projects/m2covid/1.png"],
+        caseStudy: {
+            context: {
+                fr: "Les modèles qui décrivent la propagation des maladies infectieuses respiratoires sont complexes et restent difficiles à manipuler hors d'un environnement de recherche. Projet réalisé pendant mon stage à l'École Centrale Casablanca, pour la surveillance et le contrôle de ces maladies au Maroc.",
+                en: "The models describing how respiratory infectious diseases spread are complex and hard to work with outside a research environment. Built during my internship at École Centrale Casablanca, for the surveillance and control of these diseases in Morocco.",
+            },
+            solution: {
+                fr: "m2covid est une plateforme web de simulation épidémiologique dédiée au Maroc. Elle permet de configurer des scénarios, de simuler la propagation d'une épidémie et d'explorer les résultats à travers des visualisations interactives. La plateforme est déployée et accessible en ligne.",
+                en: "m2covid is an epidemiological simulation web platform dedicated to Morocco. It lets users configure scenarios, simulate how an epidemic spreads and explore the results through interactive visualizations. The platform is deployed and available online.",
+            },
+            features: [
+                { fr: "Configuration de scénarios de simulation.", en: "Simulation scenario configuration." },
+                { fr: "Simulation de la propagation d'une épidémie à partir des modèles scientifiques de l'équipe de recherche.", en: "Epidemic spread simulation based on the research team's scientific models." },
+                { fr: "Exploration des résultats à travers des visualisations interactives.", en: "Result exploration through interactive visualizations." },
+                { fr: "Tableaux de bord d'indicateurs épidémiologiques, pensés pour être lus par des décideurs de santé publique.", en: "Epidemiological indicator dashboards, built to be read by public-health decision-makers." },
+                { fr: "Pipeline de données : du nettoyage des sources à l'agrégation par territoire et par période.", en: "Data pipeline: from source cleaning to aggregation by territory and time period." },
+            ],
+            architecture: {
+                fr: "Front web en React ; backend en Python avec une API FastAPI au service des modèles de simulation. Plateforme déployée et exploitée en interaction directe avec l'équipe de recherche.",
+                en: "React web front end; Python back end with a FastAPI API serving the simulation models. Deployed and operated working directly with the research team.",
+            },
+            takeaway: {
+                fr: "Rendre des modèles scientifiques complexes accessibles aux chercheurs, dans une plateforme déployée et utilisée en ligne.",
+                en: "Making complex scientific models accessible to researchers, in a platform that is deployed and used online.",
+            },
+            stackGroups: [
+                { label: { fr: "Frontend", en: "Frontend" }, items: "React · visualisations interactives" },
+                { label: { fr: "Backend", en: "Backend" }, items: "Python · FastAPI" },
+            ],
+        },
+    },
+    {
+        slug: "spheralis",
+        title: "Spheralis",
+        category: "web",
+        accent: "#1d5c55",
+        type: { fr: "Gestion de stock et de commandes · E-commerce", en: "Inventory & order management · E-commerce" },
+        oneLiner: {
+            fr: "Application web de gestion de stock et de commandes pour le e-commerce, connectée à WooCommerce et à WhatsApp — déployée et utilisée au quotidien.",
+            en: "Inventory and order management web app for e-commerce, connected to WooCommerce and WhatsApp — deployed and used every day.",
+        },
+        stack: ["React", "TypeScript", "Spring Boot", "PostgreSQL"],
+        // Logiciel interne : en production, mais sans lien public.
+        inHouse: true,
+        images: ["images/projects/spheralis/1.png"],
+        caseStudy: {
+            context: {
+                fr: "Un prestataire e-commerce gérant plusieurs boutiques suivait son stock à la main sur Google Sheets, avec des produits répartis entre plusieurs fournisseurs. Projet réalisé pendant mon stage chez Spheralis.",
+                en: "An e-commerce operator running several shops tracked its stock by hand in Google Sheets, with products spread across several suppliers. Built during my internship at Spheralis.",
+            },
+            solution: {
+                fr: "Spheralis est une application web de gestion de stock et de commandes pour le e-commerce. Connectée à WooCommerce et à WhatsApp, elle centralise les stocks de plusieurs fournisseurs, facilite les inventaires et automatise la confirmation des commandes, avec des tableaux de bord pour piloter l'activité. Elle est déployée et utilisée au quotidien ; c'est un logiciel interne, son lien n'est donc pas public.",
+                en: "Spheralis is an inventory and order management web app for e-commerce. Connected to WooCommerce and WhatsApp, it centralizes stock from several suppliers, makes inventories easier and automates order confirmation, with dashboards to steer the business. It is deployed and used every day; as internal software, its link is not public.",
+            },
+            features: [
+                { fr: "Centralisation des stocks de plusieurs fournisseurs.", en: "Stock from several suppliers centralized in one place." },
+                { fr: "Inventaires facilités, avec l'historique complet des mouvements de stock comme source de vérité.", en: "Easier inventories, with the full stock movement history as the source of truth." },
+                { fr: "Commandes synchronisées avec WooCommerce et confirmation automatisée via WhatsApp.", en: "Orders synced with WooCommerce and automated confirmation via WhatsApp." },
+                { fr: "Tableaux de bord pour piloter l'activité : chiffre d'affaires, commandes livrées, revenus de livraison.", en: "Dashboards to steer the business: revenue, delivered orders, delivery income." },
+            ],
+            architecture: {
+                fr: "Front web en React et TypeScript, API Spring Boot et base PostgreSQL. L'application est branchée sur WooCommerce pour les commandes et sur WhatsApp pour leur confirmation.",
+                en: "React and TypeScript web front end, Spring Boot API and PostgreSQL database. The app is wired to WooCommerce for orders and to WhatsApp for confirming them.",
+            },
+            takeaway: {
+                fr: "Livrer un logiciel métier utilisé au quotidien : remplacer un suivi manuel par un outil fiable, branché sur les canaux que l'équipe utilise déjà.",
+                en: "Shipping business software used every day: replacing manual tracking with a reliable tool, wired to the channels the team already uses.",
+            },
+            stackGroups: [
+                { label: { fr: "Frontend", en: "Frontend" }, items: "React · TypeScript" },
+                { label: { fr: "Backend", en: "Backend" }, items: "Spring Boot · PostgreSQL" },
+                { label: { fr: "Intégrations", en: "Integrations" }, items: "WooCommerce · WhatsApp" },
+            ],
+        },
+    },
+    {
         slug: "barakabox",
         title: "BarakaBox",
         category: "web",
@@ -326,6 +417,7 @@ const allFeaturedProjects = [
         category: "ai",
         accent: "#4f46e5",
         emoji: "🎓",
+        type: { fr: "Reconnaissance faciale · Application web", en: "Facial recognition · Web application" },
         oneLiner: {
             fr: "Pointage universitaire automatique par reconnaissance faciale — microservices Java/Python, suivi temps réel, biométrie chiffrée.",
             en: "Automated university attendance via facial recognition — Java/Python microservices, real-time tracking, encrypted biometrics.",
@@ -418,6 +510,7 @@ const allFeaturedProjects = [
         category: "ai",
         accent: "#7c3aed",
         emoji: "🎙️",
+        type: { fr: "Recrutement IA · Entretiens en temps réel", en: "AI recruitment · Real-time interviews" },
         oneLiner: {
             fr: "Plateforme de recrutement IA menant des entretiens audio en temps réel — vainqueur du Hackathon Ramadan IA.",
             en: "AI recruitment platform conducting real-time audio interviews — winner of the Ramadan AI Hackathon.",
@@ -520,9 +613,11 @@ export const otherProjects = allOtherProjects.filter((p) => !RETIRED.has(p.id))
  * pleine résolution (la taille réelle, pour l'agrandissement) et en 1200 px
  * pour la page. Les dimensions servent à réserver la place exacte.
  */
-const SCREEN_DIRS = { smartattend: "smart_attend", "smart-recruit": "smart_recruit", glaucoma: "glaucoma_detection" }
+const SCREEN_DIRS = { m2covid: "m2covid", spheralis: "spheralis", smartattend: "smart_attend", "smart-recruit": "smart_recruit", glaucoma: "glaucoma_detection" }
 // L'ordre de présentation : la capture la plus parlante d'abord ; les doublons écartés.
 const SCREEN_ORDER = {
+    m2covid: [1],
+    spheralis: [1],
     smartattend: [2, 6, 10, 5, 7, 3, 4, 9, 8, 1],
     "smart-recruit": [1, 6, 11, 12, 14, 16, 4, 8, 7, 9, 10, 5, 13, 15, 17, 2, 3],
     glaucoma: [7, 1, 6, 4, 8, 5, 9, 2, 3], // la n° 10 est la version anglaise de la n° 1

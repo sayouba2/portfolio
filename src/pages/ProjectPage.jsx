@@ -35,6 +35,7 @@ export default function ProjectPage() {
                 <p className="kicker" data-reveal>
                     {L(ui.project.caseStudy)} · {L(ui.categories[project.category])}
                     {project.liveUrl && <> · {L(ui.project.online)}</>}
+                    {project.inHouse && <> · {L(ui.project.inHouse)}</>}
                 </p>
                 <h1 className="title" data-reveal="title">{project.title}</h1>
                 <p className="case-lead" data-reveal>{L(project.oneLiner)}</p>

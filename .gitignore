@@ -25,3 +25,7 @@ design/
 *.sublime-workspace
 .gstack/
 .claude/
+
+# Worker de l’assistant : clé OpenAI locale et état de wrangler
+.dev.vars
+.wrangler/

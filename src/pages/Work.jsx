@@ -7,7 +7,7 @@ import "./work.css"
 
 const copy = {
     title: { fr: "Projets", en: "Work" },
-    description: { fr: "Une sélection de mes projets web et IA : SmartAttend, Smart Recruit, vision par ordinateur et agents RAG.", en: "A selection of my web and AI projects: SmartAttend, Smart Recruit, computer vision and RAG agents." },
+    description: { fr: "Une sélection de mes projets web et IA : m2covid, Spheralis, SmartAttend, Smart Recruit, vision par ordinateur et agents RAG.", en: "A selection of my web and AI projects: m2covid, Spheralis, SmartAttend, Smart Recruit, computer vision and RAG agents." },
     filter: { fr: "Filtrer", en: "Filter" },
     filters: { fr: "Filtrer les projets", en: "Filter projects" },
     all: { fr: "Tous", en: "All" },
@@ -30,10 +30,8 @@ const projects = [
         href: `/projets/${project.slug}`,
         image: screensFor(project.slug)[0]?.page || project.images?.[0],
         internal: true,
-        categories: ["fullstack", "ai"],
-        type: project.slug === "smartattend"
-            ? { fr: "Reconnaissance faciale · Application web", en: "Facial recognition · Web application" }
-            : { fr: "Recrutement IA · Entretiens en temps réel", en: "AI recruitment · Real-time interviews" },
+        categories: project.category === "ai" ? ["fullstack", "ai"] : ["fullstack"],
+        type: project.type,
     })),
     ...otherProjects.map(project => ({
         id: project.id,

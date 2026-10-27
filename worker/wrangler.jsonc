@@ -1,0 +1,25 @@
+// Assistant du portfolio : relais entre le site (GitHub Pages) et OpenAI, qui garde la clé secrète.
+// Déploiement, depuis ce dossier :
+//   npx wrangler login
+//   npx wrangler secret put OPENAI_API_KEY
+//   npx wrangler deploy
+// puis copier l'URL affichée (https://portfolio-assistant.<compte>.workers.dev) dans assistantApi (src/data/content.js).
+// En local : clé dans worker/.dev.vars (OPENAI_API_KEY=...), jamais commitée, puis npx wrangler dev.
+{
+    "name": "portfolio-assistant",
+    "main": "src/index.js",
+    "compatibility_date": "2026-09-01",
+    "vars": {
+        // Modèle bon marché, sans raisonnement ; à changer ici si OpenAI le retire.
+        "OPENAI_MODEL": "gpt-4.1-nano",
+        "ALLOWED_ORIGINS": "https://portfolio.sayouba.com,http://localhost:5173"
+    },
+    "ratelimits": [
+        {
+            // 3 messages par 10 s et par visiteur, comme la référence (compté par site Cloudflare, donc approximatif).
+            "name": "CHAT_LIMIT",
+            "namespace_id": "1001",
+            "simple": { "limit": 3, "period": 10 }
+        }
+    ]
+}
