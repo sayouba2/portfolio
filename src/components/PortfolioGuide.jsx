@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState } from "react"
-import { useL } from "../i18n.jsx"
+import { useL, useLang } from "../i18n.jsx"
 import { assistantApi, experiences, featuredProjects, pfe, site } from "../data/content.js"
+import { langOf } from "./langOf.js"
 import "./portfolio-guide.css"
 
 const copy = {
@@ -111,6 +112,7 @@ function Eyes({ blinking }) {
 
 export default function PortfolioGuide() {
     const L = useL()
+    const { lang } = useLang()
     const panelId = useId()
     const [open, setOpen] = useState(false)
     const [wide, setWide] = useState(false)
@@ -180,11 +182,11 @@ export default function PortfolioGuide() {
     }
 
     // Réponse de l'IA lue au fil du flux du Worker ; null s'il ne répond pas.
-    const streamReply = async (history, signal) => {
+    const streamReply = async (history, signal, say) => {
         let reply = ""
         try {
             const response = await fetch(assistantApi, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: history }), signal })
-            if (response.status === 429) return L(copy.slow)
+            if (response.status === 429) return say(copy.slow)
             if (!response.ok || !response.body) return null
             const reader = response.body.getReader()
             const decoder = new TextDecoder()
@@ -207,10 +209,13 @@ export default function PortfolioGuide() {
         setBusy(true)
         const abort = new AbortController()
         pending.current = abort
-        const reply = assistantApi ? await streamReply(history.slice(-10), abort.signal) : null
+        // Les messages de secours parlent la langue de la question, pas forcément celle du site.
+        const asked = langOf(text, lang)
+        const say = (value) => value?.[asked] ?? value
+        const reply = assistantApi ? await streamReply(history.slice(-10), abort.signal, say) : null
         if (abort.signal.aborted) return
         if (reply) finish(reply)
-        else playLocal(answerFor(text, L))
+        else playLocal(answerFor(text, say))
     }
 
     const reset = () => {

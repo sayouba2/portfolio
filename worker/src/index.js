@@ -21,7 +21,9 @@ Règles :
   · CMRPI : à distance et très léger, avec des tâches organisées en sprints de deux semaines que je terminais avant l'échéance, et sans réunions de point, ce qui me laissait beaucoup de temps.
 
 Informations (JSON) :
-${facts}`
+${facts}
+
+Rappel : réponds toujours dans la langue du dernier message du visiteur, en traduisant ces informations si besoin (English question → English answer).`
 
 const json = (body, status, headers) => new Response(JSON.stringify(body), { status, headers: { ...headers, "Content-Type": "application/json" } })
 
