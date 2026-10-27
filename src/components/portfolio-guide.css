@@ -85,6 +85,9 @@
     flex-direction: column;
     width: 35vw;
     height: 70vh;
+    /* Jamais sous l'en-tête du site (70 px) : sur iPhone, vh ignore la barre d'outils de Safari, dvh la compte. */
+    max-height: calc(100vh - 178px);
+    max-height: calc(100dvh - 178px);
     border: 1px solid var(--chat-line);
     border-radius: 24px;
     background: color-mix(in srgb, var(--chat-bg) 80%, transparent);
