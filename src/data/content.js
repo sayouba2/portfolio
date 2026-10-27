@@ -72,12 +72,17 @@ export const ui = {
         code: { fr: "Code source", en: "Source code" },
     },
     form: {
-        name: { fr: "Nom", en: "Name" },
-        email: { fr: "E-mail", en: "Email" },
-        subject: { fr: "Sujet", en: "Subject" },
-        message: { fr: "Message", en: "Message" },
-        send: { fr: "Envoyer le message", en: "Send message" },
-        sending: { fr: "Envoi en cours…", en: "Sending…" },
+        name: { fr: "Votre nom", en: "Your name" },
+        email: { fr: "Votre adresse e-mail", en: "Your email address" },
+        // Objet de l'e-mail reçu : le formulaire n'a plus de champ « Sujet ».
+        subject: { fr: "Nouveau message depuis le portfolio", en: "New message from the portfolio" },
+        message: { fr: "Comment puis-je vous aider ?", en: "What can I help you with?" },
+        consent: { fr: "J'accepte l'usage de mes données pour me répondre.", en: "I agree to my details being used to reply." },
+        send: { fr: "Envoyer le message", en: "Submit message" },
+        sending: { fr: "Envoi…", en: "Sending..." },
+        sentTitle: { fr: "Message envoyé", en: "Message sent" },
+        failTitle: { fr: "Un problème est survenu", en: "Something went wrong" },
+        invalidTitle: { fr: "Formulaire incomplet", en: "Incomplete form" },
         success: {
             fr: "Merci ! Votre message a bien été envoyé, je vous répondrai rapidement.",
             en: "Thank you! Your message has been sent — I'll get back to you shortly.",
@@ -87,8 +92,8 @@ export const ui = {
             en: "Sending failed. Please try again or email me directly.",
         },
         invalid: {
-            fr: "Merci de remplir tous les champs avec une adresse e-mail valide.",
-            en: "Please fill in every field with a valid email address.",
+            fr: "Merci de remplir tous les champs, avec une adresse e-mail valide, et de cocher la case.",
+            en: "Please fill in every field with a valid email address and tick the box.",
         },
     },
     footer: {

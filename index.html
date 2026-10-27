@@ -17,8 +17,8 @@
         <!-- Meta: Configurations -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="format-detection" content="address=no"/>
-        <meta name="color-scheme" content="dark">
-        <meta name="theme-color" content="#050B0D"/>
+        <meta name="color-scheme" content="dark light">
+        <meta name="theme-color" content="#111111"/>
 
         <!-- Meta: SEO -->
         <meta name="description" content="Portfolio de Sayouba Ouedraogo — Développeur Full Stack (web, mobile, IA). Projets, expériences et contact."/>
@@ -72,10 +72,14 @@
         }(window.location))
         </script>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+        <link rel="preload" href="/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/fonts/playfair-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
+        <script>
+            try {
+                var savedTheme = localStorage.getItem('portfolio-theme');
+                document.documentElement.dataset.theme = savedTheme === 'light' ? 'light' : 'dark';
+            } catch (_) { document.documentElement.dataset.theme = 'dark'; }
+        </script>
     </head>
     <body>
         <div id="root"></div>

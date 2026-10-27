@@ -4,41 +4,41 @@ import { useL } from "../i18n.jsx"
 import { ui, emailJs } from "../data/content.js"
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const EMPTY = { name: "", email: "", message: "" }
 
-export default function ContactForm() {
+const isValid = (values, consent) => values.name.trim() && values.message.trim() && EMAIL_RE.test(values.email) && consent
+
+/** Formulaire du panneau de contact ; signale invalid | success | error via onStatus. */
+export default function ContactForm({ onStatus }) {
     const L = useL()
-    const [fields, setFields] = useState({ name: "", email: "", subject: "", message: "" })
-    const [status, setStatus] = useState("idle") // idle | invalid | sending | success | error
+    const [fields, setFields] = useState(EMPTY)
+    const [consent, setConsent] = useState(false)
+    const [invalid, setInvalid] = useState(false)
+    const [sending, setSending] = useState(false)
 
     const set = (key) => (e) => {
         const next = { ...fields, [key]: e.target.value }
         setFields(next)
-        if (status === "error" || (status === "invalid" && isValid(next))) setStatus("idle")
+        if (invalid && isValid(next, consent)) setInvalid(false)
     }
 
-    const invalid = status === "invalid"
     const fieldInvalid = {
         name: invalid && !fields.name.trim(),
         email: invalid && !EMAIL_RE.test(fields.email),
-        subject: invalid && !fields.subject.trim(),
         message: invalid && !fields.message.trim(),
-    }
-
-    function isValid(values) {
-        return values.name.trim()
-            && values.subject.trim()
-            && values.message.trim()
-            && EMAIL_RE.test(values.email)
+        consent: invalid && !consent,
     }
 
     async function handleSubmit(e) {
         e.preventDefault()
-        const { name, email, subject, message } = fields
-        if (!isValid({ name, email, subject, message })) {
-            setStatus("invalid")
+        const { name, email, message } = fields
+        if (!isValid(fields, consent)) {
+            setInvalid(true)
+            onStatus("invalid")
             return
         }
-        setStatus("sending")
+        setSending(true)
+        onStatus(null)
         try {
             emailjs.init(emailJs.publicKey)
             // Mêmes noms de variables que le template EmailJS existant
@@ -47,52 +47,49 @@ export default function ContactForm() {
                 from_name: name,
                 email,
                 from_email: email,
-                custom_subject: subject,
+                custom_subject: L(ui.form.subject),
                 message,
                 custom_source: window.location.href,
                 custom_source_name: "Portfolio",
             })
             if (result.status === 200) {
-                setStatus("success")
-                setFields({ name: "", email: "", subject: "", message: "" })
+                setFields(EMPTY)
+                setConsent(false)
+                onStatus("success")
             } else {
-                setStatus("error")
+                onStatus("error")
             }
         } catch {
-            setStatus("error")
+            onStatus("error")
+        } finally {
+            setSending(false)
         }
     }
 
     return (
         <form className="contact-form" onSubmit={handleSubmit} noValidate>
             <div className="form-row">
-                <label>
-                    {L(ui.form.name)}
-                    <input type="text" value={fields.name} onChange={set("name")} required aria-invalid={fieldInvalid.name} aria-describedby={fieldInvalid.name ? "contact-status" : undefined} />
-                </label>
-                <label>
-                    {L(ui.form.email)}
-                    <input type="email" value={fields.email} onChange={set("email")} required aria-invalid={fieldInvalid.email} aria-describedby={fieldInvalid.email ? "contact-status" : undefined} />
-                </label>
+                <div className="cf-field">
+                    <input id="cf-name" type="text" placeholder=" " value={fields.name} onChange={set("name")} disabled={sending} required aria-invalid={fieldInvalid.name} />
+                    <label htmlFor="cf-name">{L(ui.form.name)}</label>
+                </div>
+                <div className="cf-field">
+                    <input id="cf-email" type="email" placeholder=" " value={fields.email} onChange={set("email")} disabled={sending} required aria-invalid={fieldInvalid.email} />
+                    <label htmlFor="cf-email">{L(ui.form.email)}</label>
+                </div>
             </div>
-            <label>
-                {L(ui.form.subject)}
-                <input type="text" value={fields.subject} onChange={set("subject")} required aria-invalid={fieldInvalid.subject} aria-describedby={fieldInvalid.subject ? "contact-status" : undefined} />
-            </label>
-            <label>
-                {L(ui.form.message)}
-                <textarea rows="5" value={fields.message} onChange={set("message")} required aria-invalid={fieldInvalid.message} aria-describedby={fieldInvalid.message ? "contact-status" : undefined} />
-            </label>
-
-            <div id="contact-status" className="form-status" aria-live="polite" aria-atomic="true">
-                {status === "invalid" && <p className="form-note error" role="alert">{L(ui.form.invalid)}</p>}
-                {status === "error" && <p className="form-note error" role="alert">{L(ui.form.error)}</p>}
-                {status === "success" && <p className="form-note success">{L(ui.form.success)}</p>}
+            <div className="cf-field">
+                <textarea id="cf-message" placeholder=" " rows="5" value={fields.message} onChange={set("message")} disabled={sending} required aria-invalid={fieldInvalid.message} />
+                <label htmlFor="cf-message">{L(ui.form.message)}</label>
             </div>
-
-            <button type="submit" className="btn" disabled={status === "sending"}>
-                {status === "sending" ? L(ui.form.sending) : L(ui.form.send)}
-            </button>
+            <label className="contact-consent">
+                <input type="checkbox" checked={consent} onChange={(e) => { setConsent(e.target.checked); if (invalid && isValid(fields, e.target.checked)) setInvalid(false) }} required aria-invalid={fieldInvalid.consent} />
+                <span className="consent-box" aria-hidden="true" />
+                <span>{L(ui.form.consent)} *</span>
+            </label>
+            <div className="contact-submit">
+                <button type="submit" disabled={sending}>{sending ? L(ui.form.sending) : L(ui.form.send)}</button>
+            </div>
         </form>
     )
 }
