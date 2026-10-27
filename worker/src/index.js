@@ -49,7 +49,8 @@ export default {
                 model: env.OPENAI_MODEL,
                 messages: [{ role: "system", content: SYSTEM }, ...messages],
                 max_completion_tokens: 350,
-                temperature: .4,
+                // Modèle à raisonnement : sans raisonnement, la réponse part tout de suite et les 350 jetons servent au texte.
+                reasoning_effort: "none",
                 stream: true,
             }),
         }).catch(() => null)
