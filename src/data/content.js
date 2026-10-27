@@ -198,7 +198,7 @@ export const experiences = [
         id: "centrale-casa",
         role: { fr: "Stagiaire Ingénieur logiciel — Data & aide à la décision", en: "Software Engineering Intern — Data & decision support" },
         company: "École Centrale Casablanca",
-        period: { fr: "Août 2026 — en cours", en: "Aug 2026 — ongoing" },
+        period: { fr: "27 juil. 2026 — 9 oct. 2026", en: "Jul 27, 2026 — Oct 9, 2026" },
         summary: {
             fr: "Plateforme interactive de visualisation et d'aide à la décision pour la surveillance et le contrôle des maladies infectieuses respiratoires au Maroc.",
             en: "Interactive visualization and decision-support platform for the surveillance and control of respiratory infectious diseases in Morocco.",
@@ -220,13 +220,13 @@ export const experiences = [
         tags: ["Data visualization", "Dashboards", "Aide à la décision", "Santé publique"],
     },
     {
-        id: "spheralis",
+        id: "relax-agency",
         role: { fr: "Stagiaire Développement full stack & Data — e-supply chain", en: "Data & Full stack Development Intern — e-supply chain" },
-        company: "Spheralis",
-        period: { fr: "Juil. 2026", en: "Jul 2026" },
+        company: "Relax Agency",
+        period: { fr: "1 juil. 2026 — 15 sept. 2026", en: "Jul 1, 2026 — Sep 15, 2026" },
         summary: {
-            fr: "Application web de gestion de stock remplaçant un suivi manuel sur Google Sheets, pour un prestataire e-commerce gérant plusieurs boutiques.",
-            en: "Web-based inventory management application replacing manual Google Sheets tracking, for an e-commerce operator running several shops.",
+            fr: "Application web de gestion de stock remplaçant un suivi manuel sur Google Sheets, pour le client Spheralis, prestataire e-commerce gérant plusieurs boutiques.",
+            en: "Web-based inventory management application replacing manual Google Sheets tracking, for the client Spheralis, an e-commerce operator running several shops.",
         },
         bullets: [
             {
@@ -252,7 +252,7 @@ export const experiences = [
         id: "cmrpi",
         role: { fr: "Stagiaire Développeur mobile et cybersécurité", en: "Mobile Development & Cybersecurity Intern" },
         company: "CMRPI · EMC Cyberconfiance",
-        period: { fr: "Juil. 2025 — août 2025", en: "Jul 2025 — Aug 2025" },
+        period: { fr: "1 juil. 2026 — 31 août 2026", en: "Jul 1, 2026 — Aug 31, 2026" },
         summary: {
             fr: "Application mobile de signalement des cyberviolences pour enfants, bilingue FR/AR avec interface RTL, connectée à la ligne d'assistance nationale EMC.",
             en: "Mobile app for children to report cyberviolence, bilingual FR/AR with an RTL interface, connected to the EMC national helpline.",
@@ -335,8 +335,8 @@ const allFeaturedProjects = [
         images: ["images/projects/spheralis/1.png"],
         caseStudy: {
             context: {
-                fr: "Un prestataire e-commerce gérant plusieurs boutiques suivait son stock à la main sur Google Sheets, avec des produits répartis entre plusieurs fournisseurs. Projet réalisé pendant mon stage chez Spheralis.",
-                en: "An e-commerce operator running several shops tracked its stock by hand in Google Sheets, with products spread across several suppliers. Built during my internship at Spheralis.",
+                fr: "Spheralis, prestataire e-commerce gérant plusieurs boutiques, suivait son stock à la main sur Google Sheets, avec des produits répartis entre plusieurs fournisseurs. Projet réalisé pour ce client pendant mon stage chez Relax Agency.",
+                en: "Spheralis, an e-commerce operator running several shops, tracked its stock by hand in Google Sheets, with products spread across several suppliers. Built for this client during my internship at Relax Agency.",
             },
             solution: {
                 fr: "Spheralis est une application web de gestion de stock et de commandes pour le e-commerce. Connectée à WooCommerce et à WhatsApp, elle centralise les stocks de plusieurs fournisseurs, facilite les inventaires et automatise la confirmation des commandes, avec des tableaux de bord pour piloter l'activité. Elle est déployée et utilisée au quotidien ; c'est un logiciel interne, son lien n'est donc pas public.",

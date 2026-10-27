@@ -11,7 +11,7 @@ import { ui, experiences, education, honors } from "../data/content.js"
  */
 const HISTORY = [
     { ref: "centrale-casa", lane: 1, branch: "centrale-casablanca", head: true, scope: "centrale" },
-    { ref: "spheralis", lane: 1, branch: "spheralis", scope: "spheralis" },
+    { ref: "relax-agency", lane: 1, branch: "relax-agency", scope: "relax" },
     { ref: "cmrpi", lane: 1, branch: "cmrpi", scope: "cmrpi", fork: true },
     { ref: "fst-marrakech", lane: 0, main: true, scope: "fst", tags: [0, 1] },
     { ref: "fst-settat", lane: 0, scope: "fst" },
