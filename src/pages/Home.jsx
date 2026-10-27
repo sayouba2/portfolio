@@ -72,7 +72,7 @@ export default function Home({ onContact }) {
             <SectionTitle first={L({ fr: "Derniers", en: "Recent" })} second={L({ fr: "Projets", en: "Work" })}/>
             <div className="recent-list" onPointerMove={movePreview} onPointerLeave={() => setPreview(null)}>
                 {projects.map(p => {
-                    const props = { className: "recent-project", onPointerEnter: () => setPreview(p), onFocus: () => setPreview(null), children: <><h3>{p.title}</h3><p>{p.type}</p><img className="recent-mobile-image" src={asset(p.image)} alt="" loading="lazy"/><span className="recent-arrow" aria-hidden="true">↗</span></> }
+                    const props = { className: "recent-project", onPointerEnter: () => setPreview(p), onFocus: () => setPreview(null), children: <><h3>{p.title}</h3><p>{p.type}</p><img className="recent-mobile-image" src={asset(p.image)} alt="" loading="lazy"/><span className="recent-arrow" aria-hidden="true">{"↗\uFE0E"}</span></> }
                     return p.to.startsWith("/") ? <Link key={p.key} to={p.to} {...props}/> : <a key={p.key} href={p.to} target="_blank" rel="noreferrer" {...props}/>
                 })}
             </div>

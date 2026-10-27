@@ -42,8 +42,8 @@ export default function ProjectPage() {
                 <p className="project-stack" data-reveal>{project.stack.join(" · ")}</p>
                 {(project.liveUrl || project.github) && (
                     <div className="modal-actions" data-reveal>
-                        {project.liveUrl && <a className="btn" href={project.liveUrl} target="_blank" rel="noreferrer">{L(ui.project.visit)} ↗</a>}
-                        {project.github && <a className="btn ghost" href={project.github} target="_blank" rel="noreferrer">{L(ui.project.code)} ↗</a>}
+                        {project.liveUrl && <a className="btn" href={project.liveUrl} target="_blank" rel="noreferrer">{L(ui.project.visit)} {"↗\uFE0E"}</a>}
+                        {project.github && <a className="btn ghost" href={project.github} target="_blank" rel="noreferrer">{L(ui.project.code)} {"↗\uFE0E"}</a>}
                     </div>
                 )}
             </header>
@@ -81,7 +81,7 @@ export default function ProjectPage() {
                 <h2 id="case-cta-t">{L(ui.contact.title)}</h2>
                 <p>{L(pfe.text)}</p>
                 <div className="modal-actions">
-                    <Link className="btn" to="/#contact">{L(pfe.cta)} <span aria-hidden="true">↗</span></Link>
+                    <Link className="btn" to="/#contact">{L(pfe.cta)} <span aria-hidden="true">{"↗\uFE0E"}</span></Link>
                     <a className="btn ghost" href={asset(L(site.cvUrl))} target="_blank" rel="noreferrer">{L(ui.hero.cv)} <span aria-hidden="true">↓</span></a>
                 </div>
             </section>

@@ -33,7 +33,7 @@ function FullMenu({ onClose, onContact, theme, onTheme }) {
             {links.map(link => <NavLink key={link.to} to={link.to} end onClick={onClose}><span>{L(link.label)}</span><span aria-hidden="true">{L(link.label)}</span></NavLink>)}
             <button onClick={() => { onClose(); onContact() }}><span>Contact</span><span aria-hidden="true">Contact</span></button>
         </nav>
-        <div className="menu-bottom"><a href={`mailto:${site.email}`}>{site.email} ↗</a><SocialLinks /></div>
+        <div className="menu-bottom"><a href={`mailto:${site.email}`}>{site.email} {"↗\uFE0E"}</a><SocialLinks /></div>
     </div>, document.body)
 }
 

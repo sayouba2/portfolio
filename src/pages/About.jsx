@@ -359,8 +359,8 @@ export default function About({ onContact }) {
                         <p>{L(copy.bio)}</p>
                         <p>{L(copy.approach)}</p>
                         <div className="about-bio-actions">
-                            <a className="about-button" href={asset(L(site.cvUrl))} download>{L(copy.cv)}<span aria-hidden="true">↗</span></a>
-                            <button className="about-text-link" type="button" onClick={openContact}>{L(copy.contact)}<span aria-hidden="true">↗</span></button>
+                            <a className="about-button" href={asset(L(site.cvUrl))} download>{L(copy.cv)}<span aria-hidden="true">{"↗\uFE0E"}</span></a>
+                            <button className="about-text-link" type="button" onClick={openContact}>{L(copy.contact)}<span aria-hidden="true">{"↗\uFE0E"}</span></button>
                         </div>
                         <SocialLinks />
                     </div>
@@ -392,7 +392,7 @@ export default function About({ onContact }) {
                 <Heading id="about-journey-title" script={L(copy.journeyScript)} title={L(copy.journeyTitle)} />
                 <div className="about-journey-grid">
                     <div className="about-journey-column">
-                        <h3 className="about-column-title"><span aria-hidden="true">↗</span>{L(copy.experience)}</h3>
+                        <h3 className="about-column-title"><span aria-hidden="true">{"↗\uFE0E"}</span>{L(copy.experience)}</h3>
                         <ol className="about-timeline">
                             {experiences.map((entry) => (
                                 <li className="about-timeline-item" key={entry.id}>
@@ -406,7 +406,7 @@ export default function About({ onContact }) {
                         </ol>
                     </div>
                     <div className="about-journey-column">
-                        <h3 className="about-column-title"><span aria-hidden="true">↗</span>{L(copy.education)}</h3>
+                        <h3 className="about-column-title"><span aria-hidden="true">{"↗\uFE0E"}</span>{L(copy.education)}</h3>
                         <ol className="about-timeline">
                             {education.map((entry) => (
                                 <li className="about-timeline-item" key={entry.id}>
@@ -448,7 +448,7 @@ export default function About({ onContact }) {
                         <li className="about-award" key={award.id}>
                             <span className="about-award-rank">{L(award.rank)}</span>
                             <div><h3>{L(award.title)}</h3><p>{L(award.meta)}</p>{(award.project || award.withName) && <span className="about-award-project">{L(copy.project)} : {award.project === "smart-recruit" ? "Smart Recruit" : L(award.withName)}</span>}</div>
-                            <span className="about-award-arrow" aria-hidden="true">↗</span>
+                            <span className="about-award-arrow" aria-hidden="true">{"↗\uFE0E"}</span>
                         </li>
                     ))}
                 </ol>
@@ -457,7 +457,7 @@ export default function About({ onContact }) {
             <section className="about-section about-contact" aria-labelledby="about-contact-title">
                 <Heading id="about-contact-title" script={L(copy.contactScript)} title={L(copy.contactTitle)} />
                 <p>{L(pfe.text)}</p>
-                <button className="about-button" type="button" onClick={openContact}>{L(copy.contact)}<span aria-hidden="true">↗</span></button>
+                <button className="about-button" type="button" onClick={openContact}>{L(copy.contact)}<span aria-hidden="true">{"↗\uFE0E"}</span></button>
             </section>
         </div>
     )
