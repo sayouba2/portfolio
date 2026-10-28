@@ -21,7 +21,7 @@
 .about-hero-name { position: absolute; top: 23%; left: 50%; transform: translateX(-50%); width: max-content; font-size: 19.3vw; font-weight: 800; letter-spacing: -.065em; line-height: 1; color: #fff; animation: about-name-enter 1s ease backwards; }
 .about-hero-portrait { position: absolute; z-index: 1; bottom: -5%; left: 50%; transform: translateX(-50%); transform-origin: 50% 100%; scale: calc(1 - var(--f) * .3); translate: 0 calc(var(--f) * -12%); width: min(72vw, 830px); height: 88%; object-fit: contain; object-position: center bottom; filter: grayscale(1) contrast(1.08); animation: about-portrait-enter 1s ease backwards; }
 .about-hero-name, .about-hero-copy, .about-hero-scroll { opacity: calc(1 - var(--f) * 1.7); }
-.about-signature { position: absolute; z-index: 3; left: calc(var(--frame-x) + 2%); bottom: calc(14% + 1%); padding: .3em .35em; font-family: "Monsieur La Doulaise", cursive; font-size: clamp(64px, 7vw, 120px); line-height: 1; color: #111; clip-path: inset(0 calc((1 - var(--s)) * 100%) 0 0); pointer-events: none; }
+.about-signature { position: absolute; z-index: 3; left: calc(var(--frame-x) + 2%); bottom: calc(14% + 1%); padding: .3em .35em; font-family: "Monsieur La Doulaise", cursive; font-size: clamp(64px, 7vw, 120px); line-height: 1; color: #0a0a0a; clip-path: inset(0 calc((1 - var(--s)) * 100%) 0 0); pointer-events: none; }
 .about-hero-copy { position: absolute; z-index: 3; bottom: 80px; left: 56px; }
 .about-hero-copy p { font-family: "Monsieur La Doulaise", cursive; font-size: clamp(44px, 5vw, 80px); line-height: 1; font-weight: 400; }
 .about-hero-copy h1 { font-size: clamp(30px, 4.3vw, 66px); letter-spacing: -.05em; line-height: 1.15; font-weight: 750; }
@@ -101,7 +101,7 @@
 
 /* Panneaux plein écran épinglés : chacun glisse par-dessus le précédent. */
 .expertise-section > .about-section { padding-bottom: 40px; }
-.service-panel { position: sticky; top: 0; height: 100svh; min-height: 560px; display: grid; place-items: center; overflow: hidden; isolation: isolate; background: #111; color: #fff; }
+.service-panel { position: sticky; top: 0; height: 100svh; min-height: 560px; display: grid; place-items: center; overflow: hidden; isolation: isolate; background: #0a0a0a; color: #fff; }
 .service-panel > img { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; scale: 1.06; filter: grayscale(1) brightness(.4) contrast(1.1) blur(7px); }
 .service-panel-copy { width: min(940px, calc(100% - 48px)); text-align: center; }
 .service-panel-index { font-size: 12px; letter-spacing: .2em; opacity: .7; }

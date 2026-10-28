@@ -13,7 +13,7 @@
 .footer-invitation-first { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; }
 .footer-invitation-second { display: block; margin-top: 12px; }
 .footer-invitation em { font-family: "Playfair Display", Georgia, serif; font-weight: 700; }
-.changing-word { font: inherit; line-height: 1.2; color: #111; background: var(--accent); padding: 8px 20px 12px; border: 0; border-radius: 8px; overflow: hidden; text-align: center; cursor: pointer; transition: background .25s, box-shadow .25s; }
+.changing-word { font: inherit; line-height: 1.2; color: #0a0a0a; background: var(--accent); padding: 8px 20px 12px; border: 0; border-radius: 8px; overflow: hidden; text-align: center; cursor: pointer; transition: background .25s, box-shadow .25s; }
 .changing-word:hover { box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 20%, transparent); }
 .changing-word span { display: block; animation: footer-word-in .5s cubic-bezier(.22,1,.36,1) both; }
 .footer-contact-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; margin-top: 90px; padding-bottom: 70px; }

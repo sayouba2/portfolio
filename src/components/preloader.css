@@ -1,6 +1,6 @@
 .preloader { position: fixed; inset: 0; z-index: 200; pointer-events: none; }
 /* Couleurs fixes : le rideau reste sombre / clair / sombre quel que soit le thème. */
-.preloader-curtain { position: fixed; inset: 0; transform-origin: 50% 0; background: #111; animation: preloader-lift .8s cubic-bezier(.42, 0, .58, 1) var(--lift) forwards; }
+.preloader-curtain { position: fixed; inset: 0; transform-origin: 50% 0; background: #0a0a0a; animation: preloader-lift .8s cubic-bezier(.42, 0, .58, 1) var(--lift) forwards; }
 .preloader-curtain:nth-child(1) { z-index: 3; }
 .preloader-curtain:nth-child(2) { z-index: 2; background: #f5f5f5; animation-timing-function: cubic-bezier(.85, 0, .15, 1); animation-delay: calc(var(--lift) + 200ms); }
 .preloader-curtain:nth-child(3) { z-index: 1; animation-delay: calc(var(--lift) + 400ms); }
