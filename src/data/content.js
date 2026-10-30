@@ -225,8 +225,8 @@ export const experiences = [
         company: "Relax Agency",
         period: { fr: "1 juil. 2026 — 15 sept. 2026", en: "Jul 1, 2026 — Sep 15, 2026" },
         summary: {
-            fr: "Application web de gestion de stock remplaçant un suivi manuel sur Google Sheets, pour le client Spheralis, prestataire e-commerce gérant plusieurs boutiques.",
-            en: "Web-based inventory management application replacing manual Google Sheets tracking, for the client Spheralis, an e-commerce operator running several shops.",
+            fr: "Application web de gestion de stock remplaçant un suivi manuel sur Google Sheets, pour le client HarmonAI, prestataire e-commerce gérant plusieurs boutiques.",
+            en: "Web-based inventory management application replacing manual Google Sheets tracking, for the client HarmonAI, an e-commerce operator running several shops.",
         },
         bullets: [
             {
@@ -368,7 +368,7 @@ const allFeaturedProjects = [
     },
     {
         slug: "spheralis",
-        title: "Spheralis",
+        title: "HarmonAI",
         category: "web",
         accent: "#1d5c55",
         type: { fr: "Gestion de stock et de commandes · E-commerce", en: "Inventory & order management · E-commerce" },
@@ -382,12 +382,12 @@ const allFeaturedProjects = [
         images: ["images/projects/spheralis/1.png"],
         caseStudy: {
             context: {
-                fr: "Spheralis, prestataire e-commerce gérant plusieurs boutiques, suivait son stock à la main sur Google Sheets, avec des produits répartis entre plusieurs fournisseurs. Projet réalisé pour ce client pendant mon stage chez Relax Agency.",
-                en: "Spheralis, an e-commerce operator running several shops, tracked its stock by hand in Google Sheets, with products spread across several suppliers. Built for this client during my internship at Relax Agency.",
+                fr: "HarmonAI, prestataire e-commerce gérant plusieurs boutiques, suivait son stock à la main sur Google Sheets, avec des produits répartis entre plusieurs fournisseurs. Projet réalisé pour ce client pendant mon stage chez Relax Agency.",
+                en: "HarmonAI, an e-commerce operator running several shops, tracked its stock by hand in Google Sheets, with products spread across several suppliers. Built for this client during my internship at Relax Agency.",
             },
             solution: {
-                fr: "Spheralis est une application web de gestion de stock et de commandes pour le e-commerce. Connectée à WooCommerce et à WhatsApp, elle centralise les stocks de plusieurs fournisseurs, facilite les inventaires et automatise la confirmation des commandes, avec des tableaux de bord pour piloter l'activité. Elle est déployée et utilisée au quotidien ; c'est un logiciel interne, son lien n'est donc pas public.",
-                en: "Spheralis is an inventory and order management web app for e-commerce. Connected to WooCommerce and WhatsApp, it centralizes stock from several suppliers, makes inventories easier and automates order confirmation, with dashboards to steer the business. It is deployed and used every day; as internal software, its link is not public.",
+                fr: "HarmonAI est une application web de gestion de stock et de commandes pour le e-commerce. Connectée à WooCommerce et à WhatsApp, elle centralise les stocks de plusieurs fournisseurs, facilite les inventaires et automatise la confirmation des commandes, avec des tableaux de bord pour piloter l'activité. Elle est déployée et utilisée au quotidien ; c'est un logiciel interne, son lien n'est donc pas public.",
+                en: "HarmonAI is an inventory and order management web app for e-commerce. Connected to WooCommerce and WhatsApp, it centralizes stock from several suppliers, makes inventories easier and automates order confirmation, with dashboards to steer the business. It is deployed and used every day; as internal software, its link is not public.",
             },
             features: [
                 { fr: "Centralisation des stocks de plusieurs fournisseurs.", en: "Stock from several suppliers centralized in one place." },
