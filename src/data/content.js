@@ -367,7 +367,7 @@ const allFeaturedProjects = [
         },
     },
     {
-        slug: "spheralis",
+        slug: "harmonai",
         title: "HarmonAI",
         category: "web",
         accent: "#1d5c55",
@@ -660,12 +660,12 @@ export const otherProjects = allOtherProjects.filter((p) => !RETIRED.has(p.id))
  * pleine résolution (la taille réelle, pour l'agrandissement) et en 1200 px
  * pour la page. Les dimensions servent à réserver la place exacte.
  */
-const SCREEN_DIRS = { m2covid: "m2covid", spheralis: "spheralis", smartattend: "smart_attend", "smart-recruit": "smart_recruit", glaucoma: "glaucoma_detection" }
+const SCREEN_DIRS = { m2covid: "m2covid", harmonai: "spheralis", smartattend: "smart_attend", "smart-recruit": "smart_recruit", glaucoma: "glaucoma_detection" }
 // L'ordre de présentation : la capture la plus parlante d'abord ; les doublons écartés.
 const SCREEN_ORDER = {
     "candidature-whatsapp": [1],
     m2covid: [1],
-    spheralis: [1],
+    harmonai: [1],
     smartattend: [2, 6, 10, 5, 7, 3, 4, 9, 8, 1],
     "smart-recruit": [1, 6, 11, 12, 14, 16, 4, 8, 7, 9, 10, 5, 13, 15, 17, 2, 3],
     glaucoma: [7, 1, 6, 4, 8, 5, 9, 2, 3], // la n° 10 est la version anglaise de la n° 1
