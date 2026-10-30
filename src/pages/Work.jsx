@@ -7,7 +7,7 @@ import "./work.css"
 
 const copy = {
     title: { fr: "Projets", en: "Work" },
-    description: { fr: "Une sélection de mes projets web et IA : candidatures automatisées via WhatsApp, m2covid, HarmonAI, SmartAttend, Smart Recruit, vision par ordinateur et agents RAG.", en: "A selection of my web and AI projects: automated applications via WhatsApp, m2covid, HarmonAI, SmartAttend, Smart Recruit, computer vision and RAG agents." },
+    description: { fr: "Une sélection de mes projets web et IA : candidatures automatisées via WhatsApp, m2covid, METRIC 2026, HarmonAI, SmartAttend, Smart Recruit, vision par ordinateur et agents RAG.", en: "A selection of my web and AI projects: automated applications via WhatsApp, m2covid, METRIC 2026, HarmonAI, SmartAttend, Smart Recruit, computer vision and RAG agents." },
     filter: { fr: "Filtrer", en: "Filter" },
     filters: { fr: "Filtrer les projets", en: "Filter projects" },
     all: { fr: "Tous", en: "All" },

@@ -5,10 +5,11 @@ import "./preloader.css"
 const GREETINGS = ["Bonjour", "Hello", "Hola", "Ciao", "Olá", "Hallo", "你好", "Привет", "مرحبا", "Salam"]
 const FIRST_MS = 1000
 const STEP_MS = 150
-// Le rideau part un peu avant le dernier mot ; le mot s'efface 1 s après, tout disparaît 0,8 s plus tard.
-const LIFT_MS = 700 + (GREETINGS.length - 1) * STEP_MS
-const FADE_MS = LIFT_MS + 1000
-const END_MS = LIFT_MS + 1800
+// Même calendrier que la référence : le rideau part 0,7 s après le dernier mot, qui s'efface juste après.
+const LIFT_MS = 2930
+const FADE_MS = 3050
+// Le troisième rideau part 400 ms après le premier et dure 800 ms : on attend qu'il ait fini.
+const END_MS = LIFT_MS + 1200
 
 /** Salutations en plusieurs langues, puis trois rideaux qui remontent. Une fois par chargement du site. */
 export default function Preloader() {

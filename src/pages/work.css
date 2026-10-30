@@ -42,6 +42,8 @@
 .work-card-visit { display: inline-flex; align-items: center; gap: 12px; color: inherit; font-size: 14px; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
 .work-card-visit svg { width: 17px; height: 17px; transition: transform .2s; }
 .work-card-visit:hover svg { transform: translate(2px,-2px); }
+/* Deux cartes puis une large, comme la référence ; une carte seule en fin de liste filtrée prend aussi toute la ligne. */
+.work-projects--grid .work-card:is(:nth-child(3n), :last-child:nth-child(3n+1)) { grid-column: 1 / -1; }
 .work-projects--list { border-top: 1px solid color-mix(in srgb, var(--ink) 45%, transparent); }
 .work-projects--list .work-card { position: relative; padding: 32px 24px; border-bottom: 1px solid color-mix(in srgb, var(--ink) 45%, transparent); }
 .work-projects--list .work-card-copy { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 10px 25px; padding: 0; }
@@ -56,6 +58,15 @@
 .work-page :is(button,a):focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
 
 @media (min-width: 1550px) { .work-heading { margin-bottom: 100px; } }
+@media (min-width: 1280px) {
+    .work-projects--grid .work-card:is(:nth-child(3n), :last-child:nth-child(3n+1)) { display: flex; gap: 32px; padding: 32px 40px; }
+    .work-projects--grid .work-card:is(:nth-child(3n), :last-child:nth-child(3n+1)) .work-card-image { flex: 0 0 50%; align-self: center; }
+    .work-projects--grid .work-card:is(:nth-child(3n), :last-child:nth-child(3n+1)) .work-card-copy { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; padding: 0; }
+    .work-projects--grid .work-card:is(:nth-child(3n), :last-child:nth-child(3n+1)) .work-card-type { font-size: 16px; }
+    .work-projects--grid .work-card:is(:nth-child(3n), :last-child:nth-child(3n+1)) h2 { font-size: 36px; }
+    .work-projects--grid .work-card:is(:nth-child(3n), :last-child:nth-child(3n+1)) .work-card-description { font-size: 15px; line-height: 1.6; }
+    .work-projects--grid .work-card:is(:nth-child(3n), :last-child:nth-child(3n+1)) .work-card-visit { margin-top: auto; }
+}
 @media (max-width: 900px) {
     .work-page { padding: 125px 6vw 100px; }
     .work-heading { margin-bottom: 55px; }

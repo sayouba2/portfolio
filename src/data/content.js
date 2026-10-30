@@ -367,6 +367,49 @@ const allFeaturedProjects = [
         },
     },
     {
+        slug: "metric-2026",
+        title: "METRIC 2026",
+        category: "web",
+        accent: "#0a8259",
+        type: { fr: "Site de conférence scientifique · Bilingue", en: "Scientific conference website · Bilingual" },
+        oneLiner: {
+            fr: "Site web bilingue et responsive dédié à la conférence scientifique METRIC 2026. Développé avec React et Tailwind CSS, il rassemble le programme, les thématiques de recherche et les informations pratiques dans une interface claire et accessible.",
+            en: "Bilingual, responsive website for the METRIC 2026 scientific conference. Built with React and Tailwind CSS, it brings together the program, research themes and practical information in a clear, accessible interface.",
+        },
+        stack: ["React", "JavaScript", "Vite", "Tailwind CSS", "Lucide React"],
+        liveUrl: "https://metric.centrale-casablanca.net/",
+        images: ["images/projects/metric/1.png"],
+        caseStudy: {
+            context: {
+                fr: "METRIC 2026 est une conférence nationale consacrée à la modélisation mathématique, à la simulation numérique et à l'intelligence artificielle appliquées aux mobilités urbaines et aux épidémies au Maroc. Elle avait besoin d'un site unique pour présenter l'événement à ses participants, en français comme en anglais.",
+                en: "METRIC 2026 is a national conference on mathematical modeling, numerical simulation and artificial intelligence applied to urban mobility and epidemics in Morocco. It needed a single website to present the event to its participants, in both French and English.",
+            },
+            solution: {
+                fr: "J'ai conçu et développé un site web bilingue français–anglais qui centralise le programme, les axes scientifiques, les comités et les informations pratiques dans une interface responsive, adaptée aux mobiles et aux ordinateurs.",
+                en: "I designed and built a bilingual French–English website that brings together the program, scientific themes, committees and practical information in a responsive interface suited to phones and computers.",
+            },
+            features: [
+                { fr: "Site bilingue français–anglais, avec changement de langue depuis l'en-tête.", en: "Bilingual French–English site, with a language switch in the header." },
+                { fr: "Programme, axes scientifiques, comités et informations pratiques réunis au même endroit.", en: "Program, scientific themes, committees and practical information in one place." },
+                { fr: "Interface responsive, adaptée aux mobiles et aux ordinateurs.", en: "Responsive interface suited to phones and computers." },
+                { fr: "Images optimisées pour faciliter la navigation.", en: "Optimized images for smooth navigation." },
+            ],
+            architecture: {
+                fr: "Architecture React modulaire construite avec Vite et stylée avec Tailwind CSS, avec les icônes Lucide React. Les contenus français et anglais sont centralisés, ce qui facilite la maintenance du site.",
+                en: "Modular React architecture built with Vite and styled with Tailwind CSS, using Lucide React icons. French and English content is centralized, which makes the site easier to maintain.",
+            },
+            takeaway: {
+                fr: "Rendre une conférence scientifique lisible pour tous ses publics, avec une base de code et des contenus bilingues simples à maintenir.",
+                en: "Making a scientific conference easy to follow for all its audiences, with a codebase and bilingual content that are simple to maintain.",
+            },
+            stackGroups: [
+                { label: { fr: "Frontend", en: "Frontend" }, items: "React · JavaScript" },
+                { label: { fr: "Outillage", en: "Tooling" }, items: "Vite" },
+                { label: { fr: "Interface", en: "Interface" }, items: "Tailwind CSS · Lucide React" },
+            ],
+        },
+    },
+    {
         slug: "harmonai",
         title: "HarmonAI",
         category: "web",
@@ -660,11 +703,12 @@ export const otherProjects = allOtherProjects.filter((p) => !RETIRED.has(p.id))
  * pleine résolution (la taille réelle, pour l'agrandissement) et en 1200 px
  * pour la page. Les dimensions servent à réserver la place exacte.
  */
-const SCREEN_DIRS = { m2covid: "m2covid", harmonai: "spheralis", smartattend: "smart_attend", "smart-recruit": "smart_recruit", glaucoma: "glaucoma_detection" }
+const SCREEN_DIRS = { m2covid: "m2covid", "metric-2026": "metric", harmonai: "spheralis", smartattend: "smart_attend", "smart-recruit": "smart_recruit", glaucoma: "glaucoma_detection" }
 // L'ordre de présentation : la capture la plus parlante d'abord ; les doublons écartés.
 const SCREEN_ORDER = {
     "candidature-whatsapp": [1],
     m2covid: [1],
+    "metric-2026": [1],
     harmonai: [1],
     smartattend: [2, 6, 10, 5, 7, 3, 4, 9, 8, 1],
     "smart-recruit": [1, 6, 11, 12, 14, 16, 4, 8, 7, 9, 10, 5, 13, 15, 17, 2, 3],

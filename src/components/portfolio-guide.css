@@ -19,7 +19,7 @@
 }
 .portfolio-guide button:focus-visible, .portfolio-guide a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-/* Bouton : révélé à la fin de l'intro (Preloader.jsx, ~3,8 s). */
+/* Bouton : révélé à la fin de l'intro (Preloader.jsx, ~4,1 s). */
 .guide-toggle {
     position: fixed;
     right: 32px;
