@@ -48,7 +48,6 @@ function Portfolio() {
                 <Route path="/" element={<Home onContact={openContact} />} />
                 <Route path="/about" element={<About onContact={openContact} />} />
                 <Route path="/work" element={<Work />} />
-                <Route path="/projets/spheralis" element={<Navigate to="/projets/harmonai" replace />} />
                 <Route path="/projets/:slug" element={<ProjectPage />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

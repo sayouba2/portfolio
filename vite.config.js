@@ -55,13 +55,6 @@ function seoPages() {
                     pages.push(head)
                     this.emitFile({ type: 'asset', fileName: `projets/${p.slug}.html`, source: applyHead(html, head) })
                 }
-                // Ancienne adresse : redirection statique, y compris sans JavaScript.
-                const harmonaiUrl = `${SITE_URL}/projets/harmonai`
-                this.emitFile({
-                    type: 'asset',
-                    fileName: 'projets/spheralis.html',
-                    source: `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>HarmonAI — Redirection</title><link rel="canonical" href="${harmonaiUrl}"><meta http-equiv="refresh" content="0;url=${harmonaiUrl}"></head><body><a href="${harmonaiUrl}">Découvrir HarmonAI</a></body></html>`,
-                })
                 const today = new Date().toISOString().slice(0, 10)
                 const urls = pages.map((h) => `  <url><loc>${SITE_URL}${h.path}</loc><lastmod>${today}</lastmod></url>`).join('\n')
                 this.emitFile({
