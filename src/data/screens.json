@@ -242,5 +242,14 @@
    "h": 827,
    "barre": 0
   }
+ ],
+ "candidature-whatsapp": [
+  {
+   "n": 1,
+   "w": 1600,
+   "h": 565,
+   "full": "images/projects/candidature_whatsapp/workflow.png",
+   "page": "images/projects/candidature_whatsapp/workflow.png"
+  }
  ]
 }

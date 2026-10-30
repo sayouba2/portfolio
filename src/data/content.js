@@ -277,6 +277,53 @@ export const experiences = [
 
 const allFeaturedProjects = [
     {
+        slug: "candidature-whatsapp",
+        title: "Candidature automatique via WhatsApp",
+        category: "ai",
+        accent: "#25D366",
+        type: { fr: "Automatisation · n8n, IA & LaTeX", en: "Automation · n8n, AI & LaTeX" },
+        oneLiner: {
+            fr: "Un lien ou un texte d'offre envoyé sur WhatsApp suffit : CV et lettre personnalisés en PDF, candidature par Gmail ou WhatsApp, archivage et suivi centralisé.",
+            en: "Send a job posting link or text on WhatsApp: receive tailored PDF résumés and cover letters, apply via Gmail or WhatsApp, and archive and track every application.",
+        },
+        stack: ["n8n", "OpenAI", "WhatsApp Cloud API", "Gmail", "Google Drive", "Google Sheets", "LaTeX", "Firecrawl"],
+        images: ["images/projects/candidature_whatsapp/workflow.png"],
+        caseStudy: {
+            context: {
+                fr: "Adapter un CV, rédiger une lettre, envoyer les documents et tenir un tableau de suivi prend du temps à chaque candidature de stage ou d'emploi. J'ai conçu ce workflow n8n pour automatiser ces étapes depuis WhatsApp, en m'appuyant uniquement sur mes vraies expériences.",
+                en: "Tailoring a résumé, writing a cover letter, sending the documents and updating a tracker takes time for every internship or job application. I designed this n8n workflow to automate these steps from WhatsApp, using only my real experience.",
+            },
+            solution: {
+                fr: "J'envoie le lien ou le texte d'une offre sur WhatsApp. Le workflow analyse le poste, l'entreprise, la ville, les compétences clés et l'email de candidature avec un modèle OpenAI. Il lit mon profil à partir de mes CV et de mon portfolio, puis génère un CV adapté et une lettre personnalisée à partir de mon template LaTeX, compilés en PDF. Si une adresse email figure dans l'offre, Gmail envoie la candidature avec les deux pièces jointes. Sinon, je reçois les PDF sur WhatsApp pour postuler moi-même et je confirme avec « j'ai postulé ». Dans les deux cas, les documents sont archivés dans Google Drive et la candidature est enregistrée dans Google Sheets avec une date de relance à J+14.",
+                en: "I send a job posting link or text on WhatsApp. An OpenAI model extracts the role, company, city, key skills and application email. The workflow reads my profile from my résumés and portfolio, then uses my LaTeX template to produce a tailored résumé and personalized cover letter, compiled as PDFs. If the posting includes an email address, Gmail sends the application with both attachments. Otherwise, I receive the PDFs on WhatsApp, apply myself and confirm with “j'ai postulé”. In both cases, documents are archived in Google Drive and the application is logged in Google Sheets with a follow-up date 14 days later.",
+            },
+            features: [
+                { fr: "Déclenchement depuis WhatsApp avec le lien ou le texte d'une offre de stage ou d'emploi.", en: "Start from WhatsApp with an internship or job posting link or text." },
+                { fr: "Analyse de l'offre : poste, entreprise, ville, compétences clés et adresse email de candidature.", en: "Extract the role, company, city, key skills and application email from the posting." },
+                { fr: "CV et lettre sur mesure, rédigés uniquement à partir de mes expériences réelles et compilés en PDF avec LaTeX.", en: "Tailored résumés and cover letters grounded only in my real experience and compiled as PDFs with LaTeX." },
+                { fr: "Envoi automatique par Gmail avec les deux pièces jointes, nommées pour chaque entreprise.", en: "Automatic Gmail delivery with both attachments, named for each company." },
+                { fr: "Sans email dans l'offre : réception des documents sur WhatsApp, candidature manuelle et confirmation « j'ai postulé ».", en: "Without an application email: receive documents on WhatsApp, apply manually and confirm with “j'ai postulé”." },
+                { fr: "Archivage dans Google Drive et suivi dans Google Sheets avec une date de relance à J+14.", en: "Archive documents in Google Drive and track applications in Google Sheets with a follow-up date 14 days later." },
+                { fr: "Nouvelles tentatives automatiques en cas d'erreur passagère d'un service.", en: "Automatic retries when a service encounters a transient error." },
+            ],
+            architecture: {
+                fr: "n8n orchestre le workflow : réception du message via WhatsApp Cloud API, extraction du contenu des offres avec Firecrawl et analyse avec OpenAI. Les CV et le portfolio fournissent le profil de référence pour la génération LaTeX. XeLaTeX / pdfLaTeX assurent la compilation des PDF. Le flux se sépare ensuite entre l'envoi par Gmail et la remise des documents sur WhatsApp, avant l'archivage Google Drive et la mise à jour du suivi Google Sheets. La confirmation « j'ai postulé » permet de suivre aussi les candidatures envoyées manuellement.",
+                en: "n8n orchestrates the workflow: WhatsApp Cloud API receives messages, Firecrawl extracts job posting content and OpenAI analyzes it. My résumés and portfolio provide the reference profile for LaTeX generation. XeLaTeX / pdfLaTeX compile the PDFs. The workflow then branches into Gmail delivery or document delivery on WhatsApp, followed by Google Drive archiving and Google Sheets tracking. The “j'ai postulé” confirmation also tracks applications sent manually.",
+            },
+            takeaway: {
+                fr: "Relier messagerie, IA, génération documentaire et outils de suivi dans un workflow de candidature complet, avec des documents personnalisés fondés sur mon parcours réel.",
+                en: "Connecting messaging, AI, document generation and tracking tools into a complete application workflow, with personalized documents grounded in my real background.",
+            },
+            stackGroups: [
+                { label: { fr: "Orchestration", en: "Orchestration" }, items: "n8n" },
+                { label: { fr: "Analyse des offres", en: "Posting analysis" }, items: "OpenAI · Firecrawl" },
+                { label: { fr: "Messagerie & envoi", en: "Messaging & delivery" }, items: "WhatsApp Cloud API · Gmail" },
+                { label: { fr: "Génération PDF", en: "PDF generation" }, items: "LaTeX · XeLaTeX / pdfLaTeX" },
+                { label: { fr: "Archivage & suivi", en: "Archiving & tracking" }, items: "Google Drive · Google Sheets" },
+            ],
+        },
+    },
+    {
         slug: "m2covid",
         title: "m2covid",
         category: "web",
@@ -616,6 +663,7 @@ export const otherProjects = allOtherProjects.filter((p) => !RETIRED.has(p.id))
 const SCREEN_DIRS = { m2covid: "m2covid", spheralis: "spheralis", smartattend: "smart_attend", "smart-recruit": "smart_recruit", glaucoma: "glaucoma_detection" }
 // L'ordre de présentation : la capture la plus parlante d'abord ; les doublons écartés.
 const SCREEN_ORDER = {
+    "candidature-whatsapp": [1],
     m2covid: [1],
     spheralis: [1],
     smartattend: [2, 6, 10, 5, 7, 3, 4, 9, 8, 1],
@@ -629,8 +677,8 @@ export function screensFor(key) {
         const i = byN.get(n)
         return i && {
             n, w: i.w, h: i.h,
-            full: `images/projects/${dir}/web/${n}.webp`,
-            page: `images/projects/${dir}/web/${n}-1200.webp`,
+            full: i.full ?? `images/projects/${dir}/web/${n}.webp`,
+            page: i.page ?? `images/projects/${dir}/web/${n}-1200.webp`,
         }
     }).filter(Boolean)
 }
