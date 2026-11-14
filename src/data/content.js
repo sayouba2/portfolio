@@ -277,6 +277,52 @@ export const experiences = [
 
 const allFeaturedProjects = [
     {
+        slug: "boutique-whatsapp",
+        title: "Boutique WhatsApp",
+        category: "ai",
+        accent: "#128C7E",
+        type: { fr: "Agent vendeur IA · n8n & WhatsApp", en: "AI sales agent · n8n & WhatsApp" },
+        oneLiner: {
+            fr: "Un vendeur virtuel qui répond aux clients d'une boutique de mode sur WhatsApp, montre le catalogue, prend les commandes et fait valider les paiements, avec un assistant qui permet au commerçant de gérer sa boutique par message.",
+            en: "A virtual salesperson that answers a fashion shop's customers on WhatsApp, shows the catalogue, takes orders and gets payments approved, plus an assistant that lets the merchant run the shop by message.",
+        },
+        stack: ["n8n", "OpenAI GPT-4.1", "WhatsApp Cloud API", "Data Tables", "Google Drive", "Google Sheets", "JavaScript"],
+        images: ["images/projects/boutique_whatsapp/reception.png"],
+        github: "https://github.com/sayouba2/boutique-whatsapp-n8n",
+        caseStudy: {
+            context: {
+                fr: "Une boutique de mode qui vend au Burkina Faso et au Maroc reçoit ses clients sur WhatsApp. Le commerçant répondait lui-même à chaque message : prix, couleurs, photos, frais de livraison, coordonnées de paiement, vérification des preuves et suivi des commandes. J'ai conçu un système n8n qui prend en charge la vente sur son numéro WhatsApp Business et lui laisse les décisions importantes.",
+                en: "A fashion shop selling in Burkina Faso and Morocco serves its customers on WhatsApp. The merchant used to answer every message personally: prices, colours, photos, delivery fees, payment details, proof checks and order tracking. I designed an n8n system that handles sales on the shop's WhatsApp Business number while leaving the important decisions to the merchant.",
+            },
+            solution: {
+                fr: "Quand un client écrit, ses messages sont regroupés, ses vocaux transcrits, puis la conversation est confiée au vendeur. À chaque message, GPT-4.1 reçoit le catalogue groupé par modèle et par couleur, les informations de la boutique, l'historique et la commande en cours, et rédige une réponse courte et naturelle, en français ou en anglais. Les prix, les légendes et les coordonnées de paiement ne viennent jamais du modèle : le code les lit dans les tables. Une photo envoyée par le client est comparée aux photos de référence du catalogue pour retrouver l'article, et un « celui-ci » en réponse à une photo de la boutique est compris. Quand le client est prêt, le code vérifie le stock, le pays et la zone, calcule le total avec la livraison et envoie le récapitulatif et les coordonnées de paiement. La preuve de paiement part chez le commerçant avec deux boutons, « Paiement reçu » ou « Pas reçu » : sa réponse met à jour la commande, le stock et la feuille de suivi, et le client est prévenu. Le commerçant écrit au même numéro pour gérer sa boutique : un second assistant GPT-4.1 comprend ses demandes, le code valide chaque changement avant de l'écrire, et chaque soir à 21 h un rapport lui résume les conversations de la journée.",
+                en: "When a customer writes, their messages are grouped, voice notes transcribed, and the conversation handed to the seller. On every message, GPT-4.1 receives the catalogue grouped by model and colour, the shop's information, the history and the current order, and writes a short, natural reply in French or English. Prices, captions and payment details never come from the model: code reads them from the tables. A photo sent by the customer is compared with the catalogue's reference photos to identify the item, and a “this one” in reply to one of the shop's photos is understood. When the customer is ready, code checks stock, country and delivery area, computes the total with delivery and sends the summary and payment details. The payment proof goes to the merchant with two buttons, “Payment received” or “Not received”: the answer updates the order, the stock and the tracking sheet, and the customer is notified. The merchant writes to the same number to manage the shop: a second GPT-4.1 assistant understands the requests, code validates every change before writing it, and every evening at 9 pm a report sums up the day's conversations.",
+            },
+            features: [
+                { fr: "Une conversation naturelle en français ou en anglais : catalogue groupé par modèle, photos à la demande, prix et coordonnées toujours lus dans les tables.", en: "Natural conversations in French or English: catalogue grouped by model, photos on request, prices and payment details always read from the tables." },
+                { fr: "Lecture des photos des clients avec la vision de GPT-4.1 et une photo de référence par modèle ; messages vocaux transcrits ; réponses à une photo précise comprises.", en: "Customer photos read with GPT-4.1 vision and one reference photo per model; voice notes transcribed; replies to a specific photo understood." },
+                { fr: "Commande et paiement de bout en bout : contrôle du stock et de la zone de livraison, total calculé, preuve validée par le commerçant en un bouton, stock et Google Sheets mis à jour.", en: "End-to-end ordering and payment: stock and delivery-area checks, computed totals, one-tap proof approval by the merchant, stock and Google Sheets updated." },
+                { fr: "Un assistant de gestion sur WhatsApp : prix, stock, nouveaux articles, import CSV ou Excel, photos rangées dans Drive, livraisons et rapports PDF générés dans n8n.", en: "A management assistant on WhatsApp: prices, stock, new items, CSV or Excel import, photos filed in Drive, deliveries and PDF reports generated inside n8n." },
+                { fr: "Des pubs d'arrivage envoyées par modèle Meta aux seuls clients qui ont accepté, avec désinscription en un bouton et confirmation par code admin.", en: "New-arrival promotions sent through Meta templates only to customers who opted in, with one-tap unsubscribe and admin-code confirmation." },
+                { fr: "Le suivi des conversations par message : résumé du jour ou d'un client, preuves de paiement retrouvées sur demande, rapport automatique chaque soir.", en: "Conversation follow-up by message: daily or per-customer summaries, payment proofs retrieved on request and an automatic nightly report." },
+            ],
+            architecture: {
+                fr: "Quatre workflows n8n se partagent le travail. La Réception reçoit les webhooks de l'API WhatsApp Cloud, écarte les doublons, transcrit les vocaux avec OpenAI et attend quelques secondes la suite d'un message, puis appelle le Vendeur ou l'Admin comme sous-workflows et envoie leurs réponses et leurs photos. Le Vendeur prépare le contexte dans des nœuds Code, interroge GPT-4.1 avec des consignes détaillées et lit les photos par l'API Responses d'OpenAI ; un nœud de décision transforme sa sortie en réponse, photos, commande ou relais vers le commerçant. L'Admin interprète les demandes du commerçant en JSON strict, valide chaque changement avant de l'écrire et construit les rapports PDF directement en JavaScript, sans service externe. Le Rapport du soir choisit entre un message libre et un modèle Meta selon la fenêtre de 24 h de WhatsApp. Les produits, infos, clients, messages et commandes vivent dans les Data Tables de n8n ; Google Drive garde les photos et les preuves, Google Sheets le suivi des commandes.",
+                en: "Four n8n workflows share the work. Reception receives WhatsApp Cloud API webhooks, filters duplicates, transcribes voice notes with OpenAI and waits a few seconds for follow-up messages, then calls the Seller or Admin sub-workflows and sends their replies and photos. The Seller builds the context in Code nodes, queries GPT-4.1 with detailed instructions and reads photos through OpenAI's Responses API; a decision node turns its output into a reply, photos, an order or a hand-off to the merchant. Admin interprets the merchant's requests as strict JSON, validates every change before writing it and builds PDF reports directly in JavaScript, with no external service. The nightly report picks a free-form message or a Meta template depending on WhatsApp's 24-hour window. Products, shop info, customers, messages and orders live in n8n Data Tables; Google Drive stores photos and proofs, and Google Sheets tracks orders.",
+            },
+            takeaway: {
+                fr: "Mettre un agent IA face à de vrais clients demande surtout un cadre clair : la conversation au modèle, les prix, le stock, les paiements et les envois au code, les décisions importantes au commerçant. Ce projet relie messagerie, vision, données et validation humaine dans un système que le commerçant pilote entièrement depuis WhatsApp.",
+                en: "Putting an AI agent in front of real customers is mostly about clear boundaries: conversation to the model; prices, stock, payments and sending to code; key decisions to the merchant. This project connects messaging, vision, data and human approval in a system the merchant runs entirely from WhatsApp.",
+            },
+            stackGroups: [
+                { label: { fr: "Orchestration", en: "Orchestration" }, items: "n8n · Data Tables · JavaScript" },
+                { label: { fr: "IA", en: "AI" }, items: "OpenAI GPT-4.1 · Vision · Speech-to-text" },
+                { label: { fr: "Messagerie", en: "Messaging" }, items: "WhatsApp Cloud API · Message templates" },
+                { label: { fr: "Fichiers & suivi", en: "Files & tracking" }, items: "Google Drive · Google Sheets · PDF" },
+            ],
+        },
+    },
+    {
         slug: "assistant-juridique",
         title: "Assistant juridique",
         category: "ai",
@@ -749,6 +795,7 @@ export const otherProjects = allOtherProjects.filter((p) => !RETIRED.has(p.id))
 const SCREEN_DIRS = { m2covid: "m2covid", "metric-2026": "metric", harmonai: "spheralis", smartattend: "smart_attend", "smart-recruit": "smart_recruit", glaucoma: "glaucoma_detection" }
 // L'ordre de présentation : la capture la plus parlante d'abord ; les doublons écartés.
 const SCREEN_ORDER = {
+    "boutique-whatsapp": [1, 2, 3, 4],
     "assistant-juridique": [1, 2, 3, 4, 5],
     "candidature-whatsapp": [1],
     m2covid: [1],

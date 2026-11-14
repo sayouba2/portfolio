@@ -7,7 +7,7 @@ import "./work.css"
 
 const copy = {
     title: { fr: "Projets", en: "Work" },
-    description: { fr: "Une sélection de mes projets web et IA : assistant juridique RAG, candidatures automatisées via WhatsApp, simulation épidémiologique, applications web et vision par ordinateur.", en: "A selection of my web and AI projects: a legal RAG assistant, automated applications via WhatsApp, epidemiological simulation, web applications and computer vision." },
+    description: { fr: "Une sélection de mes projets web et IA : agent vendeur WhatsApp, assistant juridique RAG, candidatures automatisées via WhatsApp, simulation épidémiologique, applications web et vision par ordinateur.", en: "A selection of my web and AI projects: a WhatsApp sales agent, a legal RAG assistant, automated applications via WhatsApp, epidemiological simulation, web applications and computer vision." },
     filter: { fr: "Filtrer", en: "Filter" },
     filters: { fr: "Filtrer les projets", en: "Filter projects" },
     all: { fr: "Tous", en: "All" },

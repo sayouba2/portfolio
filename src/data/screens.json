@@ -296,5 +296,35 @@
    "full": "images/projects/assistant_juridique/droit-historique.png",
    "page": "images/projects/assistant_juridique/droit-historique.png"
   }
+ ],
+ "boutique-whatsapp": [
+  {
+   "n": 1,
+   "w": 1616,
+   "h": 382,
+   "full": "images/projects/boutique_whatsapp/reception.png",
+   "page": "images/projects/boutique_whatsapp/reception.png"
+  },
+  {
+   "n": 2,
+   "w": 1785,
+   "h": 258,
+   "full": "images/projects/boutique_whatsapp/vendeur.png",
+   "page": "images/projects/boutique_whatsapp/vendeur.png"
+  },
+  {
+   "n": 3,
+   "w": 1596,
+   "h": 535,
+   "full": "images/projects/boutique_whatsapp/admin.png",
+   "page": "images/projects/boutique_whatsapp/admin.png"
+  },
+  {
+   "n": 4,
+   "w": 1641,
+   "h": 565,
+   "full": "images/projects/boutique_whatsapp/rapport-du-soir.png",
+   "page": "images/projects/boutique_whatsapp/rapport-du-soir.png"
+  }
  ]
 }
