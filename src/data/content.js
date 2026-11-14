@@ -277,6 +277,51 @@ export const experiences = [
 
 const allFeaturedProjects = [
     {
+        slug: "assistant-juridique",
+        title: "Assistant juridique",
+        category: "ai",
+        accent: "#28b8ad",
+        type: { fr: "RAG agentique · Recherche juridique", en: "Agentic RAG · Legal research" },
+        oneLiner: {
+            fr: "Un assistant de recherche en droit marocain : recherche sémantique ou par graphe, réponses sourcées, vérification des versions applicables et consultation des passages cités dans les PDF.",
+            en: "A Moroccan legal research assistant: semantic or graph retrieval, sourced answers, checks on applicable versions and direct access to cited passages in PDFs.",
+        },
+        stack: ["React", "TypeScript", "FastAPI", "LangGraph", "OpenAI", "Pinecone", "Neo4j"],
+        images: ["images/projects/assistant_juridique/lecture-pdf.png"],
+        caseStudy: {
+            context: {
+                fr: "Retrouver une règle dans un corpus juridique ne suffit pas : il faut identifier l'article, vérifier la version applicable à la date de la question et pouvoir revenir au texte original. J'ai conçu cet assistant autour d'un corpus de droit marocain pour rendre cette recherche plus accessible, tout en montrant les sources et les limites des réponses.",
+                en: "Finding a rule in a legal corpus is only the first step: the article must be identified, its version checked against the date of the question and the original text kept accessible. I built this assistant around a Moroccan legal corpus to make that research more accessible while showing both the sources and the limits of its answers.",
+            },
+            solution: {
+                fr: "L'utilisateur pose sa question, précise le pays et la date du droit, puis choisit entre une recherche sémantique avec Pinecone et une recherche hybride dans un graphe Neo4j. Un workflow LangGraph recherche les passages pertinents, évalue les preuves et peut reformuler la requête ou compléter la recherche sur des sites officiels. La réponse présente ses références par article ; un clic ouvre le PDF à côté de la conversation et surligne le passage cité. Les citations sont contrôlées dans les extraits retrouvés, puis une seconde vérification évalue l'appui de la réponse sur ces preuves. Si les sources ou les versions historiques manquent, l'interface le signale explicitement.",
+                en: "Users ask a question, set the country and legal reference date, then choose semantic retrieval with Pinecone or hybrid retrieval in a Neo4j graph. A LangGraph workflow retrieves relevant passages, evaluates the evidence and can rewrite the query or extend the search to official websites. Answers reference individual articles; clicking a citation opens the PDF beside the conversation and highlights the cited passage. Quotations are checked against retrieved excerpts, followed by a separate check of whether the evidence supports the answer. Missing sources or historical versions are explicitly reported.",
+            },
+            features: [
+                { fr: "Deux moteurs de recherche : Pinecone pour la recherche sémantique et Neo4j pour combiner recherche vectorielle, plein texte et relations entre articles.", en: "Two retrieval engines: Pinecone for semantic search and Neo4j for vector search, full-text search and relationships between articles." },
+                { fr: "Recherche à une date donnée avec prise en compte, dans le graphe, des versions, modifications et abrogations disponibles.", en: "Research at a specified date, using the versions, amendments and repeals available in the graph." },
+                { fr: "Réponses sourcées avec références cliquables, extraits consultables et lecteur PDF intégré avec surlignage.", en: "Sourced answers with clickable references, browsable excerpts and an integrated PDF reader with highlighting." },
+                { fr: "Contrôle des citations et de leur adéquation à la réponse ; signalement explicite lorsque les preuves sont insuffisantes.", en: "Checks on quotations and their support for the answer, with explicit notices when evidence is insufficient." },
+                { fr: "Questions de suivi tenant compte des échanges récents, historique local des conversations et copie des réponses avec leurs références.", en: "Follow-up questions using recent conversation context, local chat history and answer copying with references." },
+                { fr: "Administration du corpus : import de PDF, fichiers texte et documents Word, OCR optionnel et suivi des imports en arrière-plan.", en: "Corpus administration: PDF, text and Word document imports, optional OCR and background import tracking." },
+            ],
+            architecture: {
+                fr: "Une interface React / TypeScript dialogue avec une API FastAPI. LangGraph orchestre le routage, la recherche, l'évaluation des preuves, la génération OpenAI et les contrôles de citations. Les documents sont segmentés par article avec leurs métadonnées de page, puis indexés dans Pinecone ou dans Neo4j, qui conserve aussi les relations et les versions juridiques. Tavily permet un complément de recherche limité à des domaines officiels et Cohere un reclassement optionnel des résultats. Le lecteur repose sur PDF.js via react-pdf ; SQLite conserve les données d'audit et de quotas.",
+                en: "A React / TypeScript interface communicates with a FastAPI API. LangGraph orchestrates routing, retrieval, evidence evaluation, OpenAI generation and citation checks. Documents are split by article with page metadata, then indexed in Pinecone or Neo4j, which also stores legal relationships and versions. Tavily supports additional searches restricted to official domains, with optional Cohere reranking. The reader uses PDF.js through react-pdf; SQLite stores audit and quota data.",
+            },
+            takeaway: {
+                fr: "Construire un RAG juridique implique autant de travail sur les preuves, les dates et la traçabilité que sur la génération de texte. Ce projet relie recherche vectorielle, graphe de connaissances et lecture des documents pour rendre chaque réponse vérifiable et rendre visibles les lacunes du corpus.",
+                en: "Building legal RAG requires as much attention to evidence, dates and traceability as to text generation. This project connects vector retrieval, a knowledge graph and document reading to make answers verifiable and gaps in the corpus visible.",
+            },
+            stackGroups: [
+                { label: { fr: "Interface & documents", en: "Interface & documents" }, items: "React · TypeScript · Vite · react-pdf / PDF.js" },
+                { label: { fr: "API & orchestration", en: "API & orchestration" }, items: "Python · FastAPI · LangGraph · LangChain" },
+                { label: { fr: "IA & recherche", en: "AI & retrieval" }, items: "OpenAI · Pinecone · Neo4j · Tavily · Cohere" },
+                { label: { fr: "Ingestion & stockage", en: "Ingestion & storage" }, items: "pypdf · python-docx · SQLite" },
+            ],
+        },
+    },
+    {
         slug: "candidature-whatsapp",
         title: "Candidature automatique via WhatsApp",
         category: "ai",
@@ -704,6 +749,7 @@ export const otherProjects = allOtherProjects.filter((p) => !RETIRED.has(p.id))
 const SCREEN_DIRS = { m2covid: "m2covid", "metric-2026": "metric", harmonai: "spheralis", smartattend: "smart_attend", "smart-recruit": "smart_recruit", glaucoma: "glaucoma_detection" }
 // L'ordre de présentation : la capture la plus parlante d'abord ; les doublons écartés.
 const SCREEN_ORDER = {
+    "assistant-juridique": [1, 2, 3, 4, 5],
     "candidature-whatsapp": [1],
     m2covid: [1],
     "metric-2026": [1],

@@ -259,5 +259,42 @@
    "h": 835,
    "barre": 0
   }
+ ],
+ "assistant-juridique": [
+  {
+   "n": 1,
+   "w": 1915,
+   "h": 908,
+   "full": "images/projects/assistant_juridique/lecture-pdf.png",
+   "page": "images/projects/assistant_juridique/lecture-pdf.png"
+  },
+  {
+   "n": 2,
+   "w": 1915,
+   "h": 908,
+   "full": "images/projects/assistant_juridique/accueil.png",
+   "page": "images/projects/assistant_juridique/accueil.png"
+  },
+  {
+   "n": 3,
+   "w": 1915,
+   "h": 908,
+   "full": "images/projects/assistant_juridique/reponse-sourcee.png",
+   "page": "images/projects/assistant_juridique/reponse-sourcee.png"
+  },
+  {
+   "n": 4,
+   "w": 1915,
+   "h": 908,
+   "full": "images/projects/assistant_juridique/recherche-graphe.png",
+   "page": "images/projects/assistant_juridique/recherche-graphe.png"
+  },
+  {
+   "n": 5,
+   "w": 1915,
+   "h": 908,
+   "full": "images/projects/assistant_juridique/droit-historique.png",
+   "page": "images/projects/assistant_juridique/droit-historique.png"
+  }
  ]
 }
